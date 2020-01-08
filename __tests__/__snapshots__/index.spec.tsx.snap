@@ -1,0 +1,1049 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataExplorer composed with Toolbar to the left 1`] = `
+<div>
+  <MetadataWarning
+    metadata={
+      Object {
+        "dx": Object {
+          "areaType": "hexbin",
+          "chart": Object {
+            "dim1": "Region",
+            "dim2": "Country",
+            "dim3": "none",
+            "metric1": "Happiness Rank",
+            "metric2": "Standard Error",
+            "metric3": "Happiness Score",
+            "networkLabel": "none",
+            "timeseriesSort": "array-order",
+          },
+          "colors": Array [
+            "#DA752E",
+            "#E5C209",
+            "#1441A0",
+            "#B86117",
+            "#4D430C",
+            "#1DB390",
+            "#B3331D",
+            "#088EB2",
+            "#417505",
+            "#E479A8",
+            "#F9F39E",
+            "#5782DC",
+            "#EBA97B",
+            "#A2AB60",
+            "#B291CF",
+            "#8DD2C2",
+            "#E6A19F",
+            "#3DC7E0",
+            "#98CE5B",
+          ],
+          "hierarchyType": "dendrogram",
+          "lineType": "line",
+          "networkType": "force",
+          "pieceType": "bar",
+          "selectedDimensions": Array [],
+          "selectedMetrics": Array [],
+          "summaryType": "violin",
+          "view": "scatter",
+        },
+      }
+    }
+  />
+  <styled.div>
+    <Toolbar
+      componentType="toolbar"
+      currentView="scatter"
+      dimensions={
+        Array [
+          Object {
+            "cardinality": 3,
+            "name": "Region",
+            "type": "string",
+          },
+          Object {
+            "cardinality": 9,
+            "name": "Country",
+            "type": "string",
+          },
+        ]
+      }
+      key=".0"
+      largeDataset={false}
+      setGrid={[Function]}
+      setView={[Function]}
+    />
+    <Viz
+      componentType="viz"
+      key=".1"
+    >
+      <styled.div>
+        <ResponsiveXYFrame
+          afterElements={
+            <HTMLLegend
+              colorHash={
+                Object {
+                  "Australia and New Zealand": "#1441A0",
+                  "North America": "#E5C209",
+                  "Other": "grey",
+                  "Western Europe": "#DA752E",
+                }
+              }
+              colors={
+                Array [
+                  "#DA752E",
+                  "#E5C209",
+                  "#1441A0",
+                  "#B86117",
+                  "#4D430C",
+                  "#1DB390",
+                  "#B3331D",
+                  "#088EB2",
+                  "#417505",
+                  "#E479A8",
+                  "#F9F39E",
+                  "#5782DC",
+                  "#EBA97B",
+                  "#A2AB60",
+                  "#B291CF",
+                  "#8DD2C2",
+                  "#E6A19F",
+                  "#3DC7E0",
+                  "#98CE5B",
+                ]
+              }
+              setColor={[Function]}
+              valueHash={Object {}}
+              values={
+                Array [
+                  "Western Europe",
+                  "North America",
+                  "Australia and New Zealand",
+                ]
+              }
+            />
+          }
+          annotationSettings={
+            Object {
+              "layout": Object {
+                "marginOffset": 30,
+                "orient": "right",
+                "type": "marginalia",
+              },
+            }
+          }
+          axes={
+            Array [
+              Object {
+                "baseline": true,
+                "label": "Standard Error",
+                "orient": "left",
+                "tickFormat": [Function],
+                "tickSize": undefined,
+                "ticks": 6,
+              },
+              Object {
+                "baseline": true,
+                "footer": false,
+                "label": "Happiness Rank",
+                "orient": "bottom",
+                "tickFormat": [Function],
+                "tickSize": undefined,
+                "ticks": 6,
+              },
+            ]
+          }
+          canvasPoints={false}
+          debounce={200}
+          hoverAnnotation={true}
+          margin={
+            Object {
+              "bottom": 50,
+              "left": 75,
+              "right": 30,
+              "top": 30,
+            }
+          }
+          pointStyle={[Function]}
+          points={
+            Array [
+              Object {
+                "Country": "Switzerland",
+                "Dystopia Residual": 2.51738,
+                "Economy (GDP per Capita)": 1.39651,
+                "Family": 1.34951,
+                "Freedom": 0.66557,
+                "Generosity": 0.29678,
+                "Happiness Rank": 1,
+                "Happiness Score": 7.587,
+                "Health (Life Expectancy)": 0.94143,
+                "Region": "Western Europe",
+                "Standard Error": 0.03411,
+                "Trust (Government Corruption)": 0.41978,
+                "index": 0,
+              },
+              Object {
+                "Country": "Iceland",
+                "Dystopia Residual": 2.70201,
+                "Economy (GDP per Capita)": 1.30232,
+                "Family": 1.40223,
+                "Freedom": 0.62877,
+                "Generosity": 0.4363,
+                "Happiness Rank": 2,
+                "Happiness Score": 7.561,
+                "Health (Life Expectancy)": 0.94784,
+                "Region": "Western Europe",
+                "Standard Error": 0.04884,
+                "Trust (Government Corruption)": 0.14145,
+                "index": 1,
+              },
+              Object {
+                "Country": "Denmark",
+                "Dystopia Residual": 2.49204,
+                "Economy (GDP per Capita)": 1.32548,
+                "Family": 1.36058,
+                "Freedom": 0.64938,
+                "Generosity": 0.34139,
+                "Happiness Rank": 3,
+                "Happiness Score": 7.527,
+                "Health (Life Expectancy)": 0.87464,
+                "Region": "Western Europe",
+                "Standard Error": 0.03328,
+                "Trust (Government Corruption)": 0.48357,
+                "index": 2,
+              },
+              Object {
+                "Country": "Norway",
+                "Dystopia Residual": 2.46531,
+                "Economy (GDP per Capita)": 1.459,
+                "Family": 1.33095,
+                "Freedom": 0.66973,
+                "Generosity": 0.34699,
+                "Happiness Rank": 4,
+                "Happiness Score": 7.522,
+                "Health (Life Expectancy)": 0.88521,
+                "Region": "Western Europe",
+                "Standard Error": 0.0388,
+                "Trust (Government Corruption)": 0.36503,
+                "index": 3,
+              },
+              Object {
+                "Country": "Canada",
+                "Dystopia Residual": 2.45176,
+                "Economy (GDP per Capita)": 1.32629,
+                "Family": 1.32261,
+                "Freedom": 0.63297,
+                "Generosity": 0.45811,
+                "Happiness Rank": 5,
+                "Happiness Score": 7.427,
+                "Health (Life Expectancy)": 0.90563,
+                "Region": "North America",
+                "Standard Error": 0.03553,
+                "Trust (Government Corruption)": 0.32957,
+                "index": 4,
+              },
+              Object {
+                "Country": "Finland",
+                "Dystopia Residual": 2.61955,
+                "Economy (GDP per Capita)": 1.29025,
+                "Family": 1.31826,
+                "Freedom": 0.64169,
+                "Generosity": 0.23351,
+                "Happiness Rank": 6,
+                "Happiness Score": 7.406,
+                "Health (Life Expectancy)": 0.88911,
+                "Region": "Western Europe",
+                "Standard Error": 0.0314,
+                "Trust (Government Corruption)": 0.41372,
+                "index": 5,
+              },
+              Object {
+                "Country": "Netherlands",
+                "Dystopia Residual": 2.4657,
+                "Economy (GDP per Capita)": 1.32944,
+                "Family": 1.28017,
+                "Freedom": 0.61576,
+                "Generosity": 0.4761,
+                "Happiness Rank": 7,
+                "Happiness Score": 7.378,
+                "Health (Life Expectancy)": 0.89284,
+                "Region": "Western Europe",
+                "Standard Error": 0.02799,
+                "Trust (Government Corruption)": 0.31814,
+                "index": 6,
+              },
+              Object {
+                "Country": "Sweden",
+                "Dystopia Residual": 2.37119,
+                "Economy (GDP per Capita)": 1.33171,
+                "Family": 1.28907,
+                "Freedom": 0.6598,
+                "Generosity": 0.36262,
+                "Happiness Rank": 8,
+                "Happiness Score": 7.364,
+                "Health (Life Expectancy)": 0.91087,
+                "Region": "Western Europe",
+                "Standard Error": 0.03157,
+                "Trust (Government Corruption)": 0.43844,
+                "index": 7,
+              },
+              Object {
+                "Country": "New Zealand",
+                "Dystopia Residual": 2.26425,
+                "Economy (GDP per Capita)": 1.25018,
+                "Family": 1.31967,
+                "Freedom": 0.63938,
+                "Generosity": 0.47501,
+                "Happiness Rank": 9,
+                "Happiness Score": 7.286,
+                "Health (Life Expectancy)": 0.90837,
+                "Region": "Australia and New Zealand",
+                "Standard Error": 0.03371,
+                "Trust (Government Corruption)": 0.42922,
+                "index": 8,
+              },
+            ]
+          }
+          responsiveWidth={false}
+          size={
+            Array [
+              455,
+              430,
+            ]
+          }
+          summaryStyle={[Function]}
+          tooltipContent={[Function]}
+          xAccessor="Happiness Rank"
+          yAccessor="Standard Error"
+        />
+        <Component
+          areaType="hexbin"
+          barGrouping="Clustered"
+          chart={
+            Object {
+              "dim1": "Region",
+              "dim2": "Country",
+              "dim3": "none",
+              "metric1": "Happiness Rank",
+              "metric2": "Standard Error",
+              "metric3": "Happiness Score",
+              "networkLabel": "none",
+              "timeseriesSort": "array-order",
+            }
+          }
+          data={
+            Array [
+              Object {
+                "Country": "Switzerland",
+                "Dystopia Residual": 2.51738,
+                "Economy (GDP per Capita)": 1.39651,
+                "Family": 1.34951,
+                "Freedom": 0.66557,
+                "Generosity": 0.29678,
+                "Happiness Rank": 1,
+                "Happiness Score": 7.587,
+                "Health (Life Expectancy)": 0.94143,
+                "Region": "Western Europe",
+                "Standard Error": 0.03411,
+                "Trust (Government Corruption)": 0.41978,
+                "index": 0,
+              },
+              Object {
+                "Country": "Iceland",
+                "Dystopia Residual": 2.70201,
+                "Economy (GDP per Capita)": 1.30232,
+                "Family": 1.40223,
+                "Freedom": 0.62877,
+                "Generosity": 0.4363,
+                "Happiness Rank": 2,
+                "Happiness Score": 7.561,
+                "Health (Life Expectancy)": 0.94784,
+                "Region": "Western Europe",
+                "Standard Error": 0.04884,
+                "Trust (Government Corruption)": 0.14145,
+                "index": 1,
+              },
+              Object {
+                "Country": "Denmark",
+                "Dystopia Residual": 2.49204,
+                "Economy (GDP per Capita)": 1.32548,
+                "Family": 1.36058,
+                "Freedom": 0.64938,
+                "Generosity": 0.34139,
+                "Happiness Rank": 3,
+                "Happiness Score": 7.527,
+                "Health (Life Expectancy)": 0.87464,
+                "Region": "Western Europe",
+                "Standard Error": 0.03328,
+                "Trust (Government Corruption)": 0.48357,
+                "index": 2,
+              },
+              Object {
+                "Country": "Norway",
+                "Dystopia Residual": 2.46531,
+                "Economy (GDP per Capita)": 1.459,
+                "Family": 1.33095,
+                "Freedom": 0.66973,
+                "Generosity": 0.34699,
+                "Happiness Rank": 4,
+                "Happiness Score": 7.522,
+                "Health (Life Expectancy)": 0.88521,
+                "Region": "Western Europe",
+                "Standard Error": 0.0388,
+                "Trust (Government Corruption)": 0.36503,
+                "index": 3,
+              },
+              Object {
+                "Country": "Canada",
+                "Dystopia Residual": 2.45176,
+                "Economy (GDP per Capita)": 1.32629,
+                "Family": 1.32261,
+                "Freedom": 0.63297,
+                "Generosity": 0.45811,
+                "Happiness Rank": 5,
+                "Happiness Score": 7.427,
+                "Health (Life Expectancy)": 0.90563,
+                "Region": "North America",
+                "Standard Error": 0.03553,
+                "Trust (Government Corruption)": 0.32957,
+                "index": 4,
+              },
+              Object {
+                "Country": "Finland",
+                "Dystopia Residual": 2.61955,
+                "Economy (GDP per Capita)": 1.29025,
+                "Family": 1.31826,
+                "Freedom": 0.64169,
+                "Generosity": 0.23351,
+                "Happiness Rank": 6,
+                "Happiness Score": 7.406,
+                "Health (Life Expectancy)": 0.88911,
+                "Region": "Western Europe",
+                "Standard Error": 0.0314,
+                "Trust (Government Corruption)": 0.41372,
+                "index": 5,
+              },
+              Object {
+                "Country": "Netherlands",
+                "Dystopia Residual": 2.4657,
+                "Economy (GDP per Capita)": 1.32944,
+                "Family": 1.28017,
+                "Freedom": 0.61576,
+                "Generosity": 0.4761,
+                "Happiness Rank": 7,
+                "Happiness Score": 7.378,
+                "Health (Life Expectancy)": 0.89284,
+                "Region": "Western Europe",
+                "Standard Error": 0.02799,
+                "Trust (Government Corruption)": 0.31814,
+                "index": 6,
+              },
+              Object {
+                "Country": "Sweden",
+                "Dystopia Residual": 2.37119,
+                "Economy (GDP per Capita)": 1.33171,
+                "Family": 1.28907,
+                "Freedom": 0.6598,
+                "Generosity": 0.36262,
+                "Happiness Rank": 8,
+                "Happiness Score": 7.364,
+                "Health (Life Expectancy)": 0.91087,
+                "Region": "Western Europe",
+                "Standard Error": 0.03157,
+                "Trust (Government Corruption)": 0.43844,
+                "index": 7,
+              },
+              Object {
+                "Country": "New Zealand",
+                "Dystopia Residual": 2.26425,
+                "Economy (GDP per Capita)": 1.25018,
+                "Family": 1.31967,
+                "Freedom": 0.63938,
+                "Generosity": 0.47501,
+                "Happiness Rank": 9,
+                "Happiness Score": 7.286,
+                "Health (Life Expectancy)": 0.90837,
+                "Region": "Australia and New Zealand",
+                "Standard Error": 0.03371,
+                "Trust (Government Corruption)": 0.42922,
+                "index": 8,
+              },
+            ]
+          }
+          dimensions={
+            Array [
+              Object {
+                "cardinality": 3,
+                "name": "Region",
+                "type": "string",
+              },
+              Object {
+                "cardinality": 9,
+                "name": "Country",
+                "type": "string",
+              },
+            ]
+          }
+          hierarchyType="dendrogram"
+          lineType="line"
+          marginalGraphics="none"
+          metrics={
+            Array [
+              Object {
+                "name": "Happiness Rank",
+                "type": "integer",
+              },
+              Object {
+                "name": "Happiness Score",
+                "type": "number",
+              },
+              Object {
+                "name": "Standard Error",
+                "type": "number",
+              },
+              Object {
+                "name": "Economy (GDP per Capita)",
+                "type": "number",
+              },
+              Object {
+                "name": "Family",
+                "type": "number",
+              },
+              Object {
+                "name": "Health (Life Expectancy)",
+                "type": "number",
+              },
+              Object {
+                "name": "Freedom",
+                "type": "number",
+              },
+              Object {
+                "name": "Trust (Government Corruption)",
+                "type": "number",
+              },
+              Object {
+                "name": "Generosity",
+                "type": "number",
+              },
+              Object {
+                "name": "Dystopia Residual",
+                "type": "number",
+              },
+            ]
+          }
+          networkType="force"
+          selectedDimensions={Array []}
+          selectedMetrics={Array []}
+          setAreaType={[Function]}
+          setLineType={[Function]}
+          summaryType="violin"
+          trendLine="none"
+          updateChart={[Function]}
+          updateDimensions={[Function]}
+          updateMetrics={[Function]}
+          view="scatter"
+        />
+      </styled.div>
+    </Viz>
+  </styled.div>
+</div>
+`;
+
+exports[`Default DataExplorer export with metadata 1`] = `
+<DataExplorer
+  data={
+    Object {
+      "data": Array [
+        Object {
+          "Country": "Switzerland",
+          "Dystopia Residual": 2.51738,
+          "Economy (GDP per Capita)": 1.39651,
+          "Family": 1.34951,
+          "Freedom": 0.66557,
+          "Generosity": 0.29678,
+          "Happiness Rank": 1,
+          "Happiness Score": 7.587,
+          "Health (Life Expectancy)": 0.94143,
+          "Region": "Western Europe",
+          "Standard Error": 0.03411,
+          "Trust (Government Corruption)": 0.41978,
+          "index": 0,
+        },
+        Object {
+          "Country": "Iceland",
+          "Dystopia Residual": 2.70201,
+          "Economy (GDP per Capita)": 1.30232,
+          "Family": 1.40223,
+          "Freedom": 0.62877,
+          "Generosity": 0.4363,
+          "Happiness Rank": 2,
+          "Happiness Score": 7.561,
+          "Health (Life Expectancy)": 0.94784,
+          "Region": "Western Europe",
+          "Standard Error": 0.04884,
+          "Trust (Government Corruption)": 0.14145,
+          "index": 1,
+        },
+        Object {
+          "Country": "Denmark",
+          "Dystopia Residual": 2.49204,
+          "Economy (GDP per Capita)": 1.32548,
+          "Family": 1.36058,
+          "Freedom": 0.64938,
+          "Generosity": 0.34139,
+          "Happiness Rank": 3,
+          "Happiness Score": 7.527,
+          "Health (Life Expectancy)": 0.87464,
+          "Region": "Western Europe",
+          "Standard Error": 0.03328,
+          "Trust (Government Corruption)": 0.48357,
+          "index": 2,
+        },
+        Object {
+          "Country": "Norway",
+          "Dystopia Residual": 2.46531,
+          "Economy (GDP per Capita)": 1.459,
+          "Family": 1.33095,
+          "Freedom": 0.66973,
+          "Generosity": 0.34699,
+          "Happiness Rank": 4,
+          "Happiness Score": 7.522,
+          "Health (Life Expectancy)": 0.88521,
+          "Region": "Western Europe",
+          "Standard Error": 0.0388,
+          "Trust (Government Corruption)": 0.36503,
+          "index": 3,
+        },
+        Object {
+          "Country": "Canada",
+          "Dystopia Residual": 2.45176,
+          "Economy (GDP per Capita)": 1.32629,
+          "Family": 1.32261,
+          "Freedom": 0.63297,
+          "Generosity": 0.45811,
+          "Happiness Rank": 5,
+          "Happiness Score": 7.427,
+          "Health (Life Expectancy)": 0.90563,
+          "Region": "North America",
+          "Standard Error": 0.03553,
+          "Trust (Government Corruption)": 0.32957,
+          "index": 4,
+        },
+        Object {
+          "Country": "Finland",
+          "Dystopia Residual": 2.61955,
+          "Economy (GDP per Capita)": 1.29025,
+          "Family": 1.31826,
+          "Freedom": 0.64169,
+          "Generosity": 0.23351,
+          "Happiness Rank": 6,
+          "Happiness Score": 7.406,
+          "Health (Life Expectancy)": 0.88911,
+          "Region": "Western Europe",
+          "Standard Error": 0.0314,
+          "Trust (Government Corruption)": 0.41372,
+          "index": 5,
+        },
+        Object {
+          "Country": "Netherlands",
+          "Dystopia Residual": 2.4657,
+          "Economy (GDP per Capita)": 1.32944,
+          "Family": 1.28017,
+          "Freedom": 0.61576,
+          "Generosity": 0.4761,
+          "Happiness Rank": 7,
+          "Happiness Score": 7.378,
+          "Health (Life Expectancy)": 0.89284,
+          "Region": "Western Europe",
+          "Standard Error": 0.02799,
+          "Trust (Government Corruption)": 0.31814,
+          "index": 6,
+        },
+        Object {
+          "Country": "Sweden",
+          "Dystopia Residual": 2.37119,
+          "Economy (GDP per Capita)": 1.33171,
+          "Family": 1.28907,
+          "Freedom": 0.6598,
+          "Generosity": 0.36262,
+          "Happiness Rank": 8,
+          "Happiness Score": 7.364,
+          "Health (Life Expectancy)": 0.91087,
+          "Region": "Western Europe",
+          "Standard Error": 0.03157,
+          "Trust (Government Corruption)": 0.43844,
+          "index": 7,
+        },
+        Object {
+          "Country": "New Zealand",
+          "Dystopia Residual": 2.26425,
+          "Economy (GDP per Capita)": 1.25018,
+          "Family": 1.31967,
+          "Freedom": 0.63938,
+          "Generosity": 0.47501,
+          "Happiness Rank": 9,
+          "Happiness Score": 7.286,
+          "Health (Life Expectancy)": 0.90837,
+          "Region": "Australia and New Zealand",
+          "Standard Error": 0.03371,
+          "Trust (Government Corruption)": 0.42922,
+          "index": 8,
+        },
+      ],
+      "schema": Object {
+        "fields": Array [
+          Object {
+            "name": "index",
+            "type": "integer",
+          },
+          Object {
+            "name": "Country",
+            "type": "string",
+          },
+          Object {
+            "name": "Region",
+            "type": "string",
+          },
+          Object {
+            "name": "Happiness Rank",
+            "type": "integer",
+          },
+          Object {
+            "name": "Happiness Score",
+            "type": "number",
+          },
+          Object {
+            "name": "Standard Error",
+            "type": "number",
+          },
+          Object {
+            "name": "Economy (GDP per Capita)",
+            "type": "number",
+          },
+          Object {
+            "name": "Family",
+            "type": "number",
+          },
+          Object {
+            "name": "Health (Life Expectancy)",
+            "type": "number",
+          },
+          Object {
+            "name": "Freedom",
+            "type": "number",
+          },
+          Object {
+            "name": "Trust (Government Corruption)",
+            "type": "number",
+          },
+          Object {
+            "name": "Generosity",
+            "type": "number",
+          },
+          Object {
+            "name": "Dystopia Residual",
+            "type": "number",
+          },
+        ],
+        "pandas_version": "0.20.0",
+        "primaryKey": Array [
+          "index",
+        ],
+      },
+    }
+  }
+  height={500}
+  initialView="grid"
+  mediaType="application/vnd.dataresource+json"
+  metadata={
+    Object {
+      "dx": Object {
+        "areaType": "hexbin",
+        "chart": Object {
+          "dim1": "Region",
+          "dim2": "Country",
+          "dim3": "none",
+          "metric1": "Happiness Rank",
+          "metric2": "Standard Error",
+          "metric3": "Happiness Score",
+          "networkLabel": "none",
+          "timeseriesSort": "array-order",
+        },
+        "colors": Array [
+          "#DA752E",
+          "#E5C209",
+          "#1441A0",
+          "#B86117",
+          "#4D430C",
+          "#1DB390",
+          "#B3331D",
+          "#088EB2",
+          "#417505",
+          "#E479A8",
+          "#F9F39E",
+          "#5782DC",
+          "#EBA97B",
+          "#A2AB60",
+          "#B291CF",
+          "#8DD2C2",
+          "#E6A19F",
+          "#3DC7E0",
+          "#98CE5B",
+        ],
+        "hierarchyType": "dendrogram",
+        "lineType": "line",
+        "networkType": "force",
+        "pieceType": "bar",
+        "selectedDimensions": Array [],
+        "selectedMetrics": Array [],
+        "summaryType": "violin",
+        "view": "scatter",
+      },
+    }
+  }
+  models={Object {}}
+  theme="light"
+>
+  <Viz
+    componentType="viz"
+  >
+    <PlaceHolder />
+  </Viz>
+  <Toolbar
+    componentType="toolbar"
+    currentView=""
+    dimensions={Array []}
+    setGrid={[Function]}
+    setView={[Function]}
+  />
+</DataExplorer>
+`;
+
+exports[`Default DataExplorer export without metadata 1`] = `
+<DataExplorer
+  data={
+    Object {
+      "data": Array [
+        Object {
+          "Country": "Switzerland",
+          "Dystopia Residual": 2.51738,
+          "Economy (GDP per Capita)": 1.39651,
+          "Family": 1.34951,
+          "Freedom": 0.66557,
+          "Generosity": 0.29678,
+          "Happiness Rank": 1,
+          "Happiness Score": 7.587,
+          "Health (Life Expectancy)": 0.94143,
+          "Region": "Western Europe",
+          "Standard Error": 0.03411,
+          "Trust (Government Corruption)": 0.41978,
+          "index": 0,
+        },
+        Object {
+          "Country": "Iceland",
+          "Dystopia Residual": 2.70201,
+          "Economy (GDP per Capita)": 1.30232,
+          "Family": 1.40223,
+          "Freedom": 0.62877,
+          "Generosity": 0.4363,
+          "Happiness Rank": 2,
+          "Happiness Score": 7.561,
+          "Health (Life Expectancy)": 0.94784,
+          "Region": "Western Europe",
+          "Standard Error": 0.04884,
+          "Trust (Government Corruption)": 0.14145,
+          "index": 1,
+        },
+        Object {
+          "Country": "Denmark",
+          "Dystopia Residual": 2.49204,
+          "Economy (GDP per Capita)": 1.32548,
+          "Family": 1.36058,
+          "Freedom": 0.64938,
+          "Generosity": 0.34139,
+          "Happiness Rank": 3,
+          "Happiness Score": 7.527,
+          "Health (Life Expectancy)": 0.87464,
+          "Region": "Western Europe",
+          "Standard Error": 0.03328,
+          "Trust (Government Corruption)": 0.48357,
+          "index": 2,
+        },
+        Object {
+          "Country": "Norway",
+          "Dystopia Residual": 2.46531,
+          "Economy (GDP per Capita)": 1.459,
+          "Family": 1.33095,
+          "Freedom": 0.66973,
+          "Generosity": 0.34699,
+          "Happiness Rank": 4,
+          "Happiness Score": 7.522,
+          "Health (Life Expectancy)": 0.88521,
+          "Region": "Western Europe",
+          "Standard Error": 0.0388,
+          "Trust (Government Corruption)": 0.36503,
+          "index": 3,
+        },
+        Object {
+          "Country": "Canada",
+          "Dystopia Residual": 2.45176,
+          "Economy (GDP per Capita)": 1.32629,
+          "Family": 1.32261,
+          "Freedom": 0.63297,
+          "Generosity": 0.45811,
+          "Happiness Rank": 5,
+          "Happiness Score": 7.427,
+          "Health (Life Expectancy)": 0.90563,
+          "Region": "North America",
+          "Standard Error": 0.03553,
+          "Trust (Government Corruption)": 0.32957,
+          "index": 4,
+        },
+        Object {
+          "Country": "Finland",
+          "Dystopia Residual": 2.61955,
+          "Economy (GDP per Capita)": 1.29025,
+          "Family": 1.31826,
+          "Freedom": 0.64169,
+          "Generosity": 0.23351,
+          "Happiness Rank": 6,
+          "Happiness Score": 7.406,
+          "Health (Life Expectancy)": 0.88911,
+          "Region": "Western Europe",
+          "Standard Error": 0.0314,
+          "Trust (Government Corruption)": 0.41372,
+          "index": 5,
+        },
+        Object {
+          "Country": "Netherlands",
+          "Dystopia Residual": 2.4657,
+          "Economy (GDP per Capita)": 1.32944,
+          "Family": 1.28017,
+          "Freedom": 0.61576,
+          "Generosity": 0.4761,
+          "Happiness Rank": 7,
+          "Happiness Score": 7.378,
+          "Health (Life Expectancy)": 0.89284,
+          "Region": "Western Europe",
+          "Standard Error": 0.02799,
+          "Trust (Government Corruption)": 0.31814,
+          "index": 6,
+        },
+        Object {
+          "Country": "Sweden",
+          "Dystopia Residual": 2.37119,
+          "Economy (GDP per Capita)": 1.33171,
+          "Family": 1.28907,
+          "Freedom": 0.6598,
+          "Generosity": 0.36262,
+          "Happiness Rank": 8,
+          "Happiness Score": 7.364,
+          "Health (Life Expectancy)": 0.91087,
+          "Region": "Western Europe",
+          "Standard Error": 0.03157,
+          "Trust (Government Corruption)": 0.43844,
+          "index": 7,
+        },
+        Object {
+          "Country": "New Zealand",
+          "Dystopia Residual": 2.26425,
+          "Economy (GDP per Capita)": 1.25018,
+          "Family": 1.31967,
+          "Freedom": 0.63938,
+          "Generosity": 0.47501,
+          "Happiness Rank": 9,
+          "Happiness Score": 7.286,
+          "Health (Life Expectancy)": 0.90837,
+          "Region": "Australia and New Zealand",
+          "Standard Error": 0.03371,
+          "Trust (Government Corruption)": 0.42922,
+          "index": 8,
+        },
+      ],
+      "schema": Object {
+        "fields": Array [
+          Object {
+            "name": "index",
+            "type": "integer",
+          },
+          Object {
+            "name": "Country",
+            "type": "string",
+          },
+          Object {
+            "name": "Region",
+            "type": "string",
+          },
+          Object {
+            "name": "Happiness Rank",
+            "type": "integer",
+          },
+          Object {
+            "name": "Happiness Score",
+            "type": "number",
+          },
+          Object {
+            "name": "Standard Error",
+            "type": "number",
+          },
+          Object {
+            "name": "Economy (GDP per Capita)",
+            "type": "number",
+          },
+          Object {
+            "name": "Family",
+            "type": "number",
+          },
+          Object {
+            "name": "Health (Life Expectancy)",
+            "type": "number",
+          },
+          Object {
+            "name": "Freedom",
+            "type": "number",
+          },
+          Object {
+            "name": "Trust (Government Corruption)",
+            "type": "number",
+          },
+          Object {
+            "name": "Generosity",
+            "type": "number",
+          },
+          Object {
+            "name": "Dystopia Residual",
+            "type": "number",
+          },
+        ],
+        "pandas_version": "0.20.0",
+        "primaryKey": Array [
+          "index",
+        ],
+      },
+    }
+  }
+  height={500}
+  initialView="grid"
+  mediaType="application/vnd.dataresource+json"
+  metadata={
+    Object {
+      "dx": Object {},
+    }
+  }
+  models={Object {}}
+  theme="light"
+>
+  <Viz
+    componentType="viz"
+  >
+    <PlaceHolder />
+  </Viz>
+  <Toolbar
+    componentType="toolbar"
+    currentView=""
+    dimensions={Array []}
+    setGrid={[Function]}
+    setView={[Function]}
+  />
+</DataExplorer>
+`;
