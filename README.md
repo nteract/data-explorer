@@ -1,5 +1,5 @@
 [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/nteract/examples/master?urlpath=%2Fnteract%2Fedit%2Fpython%2Fhappiness.ipynb)
-
+[![<ORG_NAME>](https://circleci.com/gh/nteract/data-explorer.svg?style=svg)](<LINK>)
 # nteract Data Explorer
 
 ![Data Explorer Examples](https://user-images.githubusercontent.com/1863892/55675008-07632e80-5871-11e9-9dac-0a71450faf7b.gif)
