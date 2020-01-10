@@ -1,10 +1,10 @@
 import { scaleLinear } from "d3-scale";
 import * as React from "react";
 
-import HTMLLegend from "../HTMLLegend";
-import TooltipContent from "../tooltip-content";
-import * as Dx from "../types";
-import { numeralFormatting } from "../utilities";
+import HTMLLegend from "../components/HTMLLegend";
+import TooltipContent from "../utilities/tooltip-content";
+import * as Dx from "../utilities/types";
+import { numeralFormatting } from "../utilities/utilities";
 
 interface SummaryOptions {
   chart: Dx.Chart;
@@ -81,14 +81,14 @@ export const semioticSummaryChart = (
       uniqueValues.length > 30
         ? false
         : (columnName: string) => (
-            <text
-              textAnchor="end"
-              fontSize={`${(columnName && fontScale(columnName.length)) ||
-                12}px`}
-            >
-              {columnName}
-            </text>
-          ),
+          <text
+            textAnchor="end"
+            fontSize={`${(columnName && fontScale(columnName.length)) ||
+              12}px`}
+          >
+            {columnName}
+          </text>
+        ),
     margin: { top: 25, right: 10, bottom: 50, left: 100 },
     axis: {
       orient: "bottom",

@@ -3,7 +3,7 @@ import ReactTable from "react-table";
 import withFixedColumns from "react-table-hoc-fixed-columns";
 
 import CustomReactTableStyles from "../css/";
-import * as Dx from "../types";
+import * as Dx from "../utilities/types";
 
 import styled from "styled-components";
 
@@ -206,8 +206,9 @@ class DataResourceTransformGrid extends React.PureComponent<Props, State> {
         return {
           Header: field.name,
           id: field.name,
-          accessor: (rowValue:{ [key: string]: any }) => {
-            return field.type === "boolean" ? rowValue[field.name].toString() : rowValue[field.name]},
+          accessor: (rowValue: { [key: string]: any }) => {
+            return field.type === "boolean" ? rowValue[field.name].toString() : rowValue[field.name]
+          },
           fixed: primaryKey.indexOf(field.name) !== -1 && "left"
         };
       }

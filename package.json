@@ -16,6 +16,7 @@
     "access": "public"
   },
   "peerDependencies": {
+    "numeral": "^2.0.6",
     "react": "^16.3.2",
     "styled-components": ">= 4"
   },
@@ -57,11 +58,14 @@
     "@types/numeral": "^0.0.26",
     "@types/react-color": "^3.0.0",
     "@types/react-table": "^7.0.0",
+    "acorn": "^7.1.0",
+    "acorn-jsx": "^5.1.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.4.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.4.3",
+    "numeral": "^2.0.6",
     "react": "^16.3.2",
     "react-docgen-typescript": "^1.16.2",
     "react-dom": "^16.12.0",

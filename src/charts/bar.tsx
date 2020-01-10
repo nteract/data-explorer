@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import HTMLLegend from "../HTMLLegend";
-import TooltipContent from "../tooltip-content";
-import { numeralFormatting } from "../utilities";
+import HTMLLegend from "../components/HTMLLegend";
+import TooltipContent from "../utilities/tooltip-content";
+import { numeralFormatting } from "../utilities/utilities";
 
-import * as Dx from "../types";
+import * as Dx from "../utilities/types";
 import { sortByOrdinalRange } from "./shared";
 
 interface BarOptions {
@@ -29,9 +29,9 @@ export const semioticBarChart = (
     selectedDimensions.length === 0
       ? dim1
       : (datapoint: Dx.Datapoint) =>
-          selectedDimensions
-            .map(selectedDim => datapoint[selectedDim])
-            .join(",");
+        selectedDimensions
+          .map(selectedDim => datapoint[selectedDim])
+          .join(",");
 
   const rAccessor = metric1;
 
@@ -86,7 +86,7 @@ export const semioticBarChart = (
           <g
             transform={`translate(${xy.width / 2},${
               d.negative ? xy.height : 0
-            })`}
+              })`}
             stroke="#333"
             strokeWidth="1"
             opacity="0.75"
@@ -203,8 +203,8 @@ export const semioticBarChart = (
       uniqueValues.length > 30
         ? false
         : (columnLabel: object) => {
-            return <text transform="rotate(90)">{columnLabel}</text>;
-          },
+          return <text transform="rotate(90)">{columnLabel}</text>;
+        },
     hoverAnnotation: true,
     margin: { top: 10, right: 10, bottom: 100, left: 70 },
     axis: {

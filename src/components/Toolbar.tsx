@@ -11,9 +11,9 @@ import {
   ParallelCoordinatesIcon,
   ScatterplotIcon,
   TreeIcon
-} from "../icons";
+} from "../utilities/icons";
 
-import { View } from "../types";
+import { View } from "../utilities/types";
 
 import { IconButton } from "./IconButton";
 

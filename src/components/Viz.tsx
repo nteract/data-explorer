@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import * as Dx from "../types";
+import * as Dx from "../utilities/types";
 
 const FlexItem = styled.div`
   flex: 1;

@@ -4,10 +4,10 @@ import { Axis, ResponsiveOrdinalFrame } from "semiotic";
 
 import HTMLLegend from "./HTMLLegend";
 
-import TooltipContent from "./tooltip-content";
-import { numeralFormatting } from "./utilities";
+import TooltipContent from "../utilities/tooltip-content";
+import { numeralFormatting } from "../utilities/utilities";
 
-import * as Dx from "./types";
+import * as Dx from "../utilities/types";
 
 import styled from "styled-components";
 
@@ -230,8 +230,8 @@ class ParallelCoordinatesController extends React.Component<Props, State> {
             setColor={setColor}
           />
         ) : (
-          <NumberOfItemsP>{filteredData.length} items</NumberOfItemsP>
-        );
+            <NumberOfItemsP>{filteredData.length} items</NumberOfItemsP>
+          );
     }
 
     if (!filterMode) {
@@ -315,10 +315,10 @@ class ParallelCoordinatesController extends React.Component<Props, State> {
           interaction={
             filterMode
               ? {
-                  columnsBrush: true,
-                  during: this.brushing,
-                  extent: Object.keys(this.state.columnExtent)
-                }
+                columnsBrush: true,
+                during: this.brushing,
+                extent: Object.keys(this.state.columnExtent)
+              }
               : null
           }
           pieceHoverAnnotation={!filterMode}

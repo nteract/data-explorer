@@ -4,7 +4,7 @@ import {
   ResponsiveXYFrame
 } from "semiotic";
 
-import ParallelCoordinatesController from "../ParallelCoordinatesController";
+import ParallelCoordinatesController from "../components/ParallelCoordinatesController";
 
 import { semioticBarChart } from "./bar";
 import { semioticHierarchicalChart } from "./hierarchical";
@@ -13,7 +13,7 @@ import { semioticNetwork } from "./network";
 import { semioticSummaryChart } from "./summary";
 import { semioticHexbin, semioticScatterplot } from "./xyplot";
 
-import * as Dx from "../types";
+import * as Dx from "../utilities/types";
 
 const semioticParallelCoordinates = (
   data: Dx.Datapoint[],

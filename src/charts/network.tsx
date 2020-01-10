@@ -1,8 +1,8 @@
 import { scaleLinear } from "d3-scale";
 import * as React from "react";
 
-import TooltipContent from "../tooltip-content";
-import * as Dx from "../types";
+import TooltipContent from "../utilities/tooltip-content";
+import * as Dx from "../utilities/types";
 
 interface NodeObject {
   id: string;

@@ -52,7 +52,7 @@ const HTMLLegend = ({
     <LegendWrapper>
       {(values.length > 18
         ? // limit the displayed values to the top 18 and bin everything else into Other
-          [...values.filter((d, index) => index < 18), "Other"]
+        [...values.filter((d, index) => index < 18), "Other"]
         : values
       ).map(
         (value, index) =>
