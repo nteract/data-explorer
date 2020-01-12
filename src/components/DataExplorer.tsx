@@ -237,7 +237,7 @@ export class DataExplorer extends React.PureComponent<Partial<Props>, State> {
 
         // Handle case of metadata being empty yet dx not set
         const dx = metadata.dx || {};
-        const chart = dx.chart || {};
+        const { chart = {}, ...nonChartDXSettings } = dx
 
         let { fields = [], primaryKey = [] } = props.data.schema;
         // Provide a default primaryKey if none provided
@@ -305,6 +305,21 @@ export class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                 field => !primaryKey.find(pkey => pkey === field.name)
             ) as Dx.Metric[];
 
+        const finalChartSettings = {
+            metric1: (metrics[0] && metrics[0].name) || "none",
+            metric2: (metrics[1] && metrics[1].name) || "none",
+            metric3: "none",
+            metric4: "none",
+            dim1: (dimensions[0] && dimensions[0].name) || "none",
+            dim2: (dimensions[1] && dimensions[1].name) || "none",
+            dim3: "none",
+            timeseriesSort: "array-order",
+            networkLabel: "none",
+            ...chart
+        }
+
+        console.log("nonChartDXSettings", nonChartDXSettings)
+
         const displayChart: DisplayChart = {};
         this.state = {
             largeDataset,
@@ -324,22 +339,13 @@ export class DataExplorer extends React.PureComponent<Partial<Props>, State> {
             metrics,
             colors,
             // ui: {},
-            chart: {
-                metric1: (metrics[0] && metrics[0].name) || "none",
-                metric2: (metrics[1] && metrics[1].name) || "none",
-                metric3: "none",
-                metric4: "none",
-                dim1: (dimensions[0] && dimensions[0].name) || "none",
-                dim2: (dimensions[1] && dimensions[1].name) || "none",
-                dim3: "none",
-                timeseriesSort: "array-order",
-                networkLabel: "none",
-                ...chart
-            },
+            chart: finalChartSettings,
             displayChart,
             primaryKey,
             data,
-            ...dx
+            editable: true,
+            showLegend: true,
+            ...nonChartDXSettings
         };
     }
 
@@ -351,7 +357,6 @@ export class DataExplorer extends React.PureComponent<Partial<Props>, State> {
     }
 
     updateChart = (updatedState: Partial<State>) => {
-        console.log("update")
         const {
             view,
             dimensions,
@@ -370,8 +375,11 @@ export class DataExplorer extends React.PureComponent<Partial<Props>, State> {
             barGrouping,
             colors,
             primaryKey,
+            editable,
+            showLegend,
             data: stateData
         } = { ...this.state, ...updatedState };
+
 
         if (!this.props.data && !this.props.metadata && !this.props.initialView) {
             return;
@@ -415,8 +423,11 @@ export class DataExplorer extends React.PureComponent<Partial<Props>, State> {
             trendLine,
             marginalGraphics,
             barGrouping,
-            setColor: this.setColor
+            setColor: this.setColor,
+            showLegend
         });
+
+
 
         const display: React.ReactNode = (
             <SemioticWrapper>
@@ -425,7 +436,7 @@ export class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                     size={defaultResponsiveSize}
                     {...frameSettings}
                 />
-                <VizControls
+                {editable && <VizControls
                     {...{
                         data: stateData,
                         view,
@@ -448,7 +459,7 @@ export class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                         setAreaType: this.setAreaType,
                         areaType
                     }}
-                />
+                />}
             </SemioticWrapper>
         );
 
@@ -470,8 +481,6 @@ export class DataExplorer extends React.PureComponent<Partial<Props>, State> {
             colors,
             chart
         });
-
-        console.log("display", display)
 
         this.setState(
             (prevState): any => {
@@ -621,8 +630,7 @@ export class DataExplorer extends React.PureComponent<Partial<Props>, State> {
 
             display = this.state.displayChart[chartKey];
         }
-        console.log("this.state", this.state)
-        console.log(" React.Children", React.Children)
+
         const children = React.Children.map(this.props.children, child => {
             if (!React.isValidElement(child)) {
                 return;

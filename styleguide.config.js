@@ -69,6 +69,7 @@ module.exports = {
         // Allow us to use {...props}
         objectAssign: "Object.assign",
         transforms: {
+            modules: false,
             // whether template strings get transpiled (we don't want it to, so that we can use the native functionality)
             templateString: false
         }

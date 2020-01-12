@@ -27,8 +27,9 @@ export const semioticSummaryChart = (
   const additionalSettings: { afterElements?: JSX.Element } = {};
   const colorHash: { [index: string]: string } = {};
 
-  const { chart, summaryType, primaryKey, colors, setColor } = options;
+  const { chart, summaryType, primaryKey, colors, setColor, showLegend } = options;
 
+  console.log("showLegend", showLegend)
   const { dim1, metric1 } = chart;
 
   const oAccessor = dim1;
@@ -48,16 +49,17 @@ export const semioticSummaryChart = (
     uniqueValues.forEach((dimValue, index) => {
       colorHash[dimValue] = colors[index % colors.length];
     });
-
-    additionalSettings.afterElements = (
-      <HTMLLegend
-        valueHash={{}}
-        values={uniqueValues}
-        colorHash={colorHash}
-        setColor={setColor}
-        colors={colors}
-      />
-    );
+    if (showLegend) {
+      additionalSettings.afterElements = (
+        <HTMLLegend
+          valueHash={{}}
+          values={uniqueValues}
+          colorHash={colorHash}
+          setColor={setColor}
+          colors={colors}
+        />
+      );
+    }
   }
 
   const summarySettings = {
