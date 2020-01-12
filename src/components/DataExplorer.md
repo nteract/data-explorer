@@ -15,49 +15,24 @@ import { Toolbar } from "./Toolbar";
 </DataExplorer>
 ```
 
-### Multiple Views
-By turnng off legends and controls, you can create a simple dashboard.
+### No Toolbar
+If you want your Data Explorer to be set to a particular view and not be able to be switched, you can leave out the toolbar.
 
 ```jsx
 import { largeVizData } from "../../doc_data/viz_data.js";
 import { Viz } from "./Viz";
 import { Toolbar } from "./Toolbar";
 
-<div>
-<div style={{ display: "flex", height: "350px" }}>
-<div style={{ width: "50%"}}>
-<DataExplorer
-    data={largeVizData}
-    initialView="summary"
-    metadata={{ dx: 
-        { editable: false,
-        showLegend: false }
-        }
-    }
->
-    <Viz />
-</DataExplorer>
-</div>
-<div style={{ width: "50%"}}>
 <DataExplorer
     data={largeVizData}
     initialView="hierarchy"
     metadata={{ dx: 
-        { editable: false,
-        hierarchyType: "sunburst",
+        { 
+        hierarchyType: "treemap",
         metric1: "Economy (GDP per Capita)" }
         }
     }
 >
     <Viz />
 </DataExplorer>
-</div>
-</div>
-<DataExplorer
-    data={largeVizData}
->
-    <Viz />
-</DataExplorer>
-
-</div>
 ```

@@ -108,14 +108,15 @@ class ParallelCoordinatesController extends React.Component<Props, State> {
   };
 
   constructor(props: Props) {
+
     super(props);
 
     const { options, data, schema } = this.props;
-    const { primaryKey } = options;
+    const { primaryKey, metrics } = options;
 
     const parallelizeResults = parallelizeData(
       data,
-      options.metrics,
+      metrics,
       schema.fields,
       primaryKey
     );
@@ -124,7 +125,7 @@ class ParallelCoordinatesController extends React.Component<Props, State> {
       filterMode: true,
       data: parallelizeResults.dataPieces,
       dataScales: parallelizeResults.scales,
-      columnExtent: options.metrics.reduce(
+      columnExtent: metrics.reduce(
         (
           metricHash: { [index: string]: number[] },
           metric: { name: string }

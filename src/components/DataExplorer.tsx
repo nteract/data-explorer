@@ -78,6 +78,8 @@ interface State {
     trendLine: Dx.TrendLineType;
     marginalGraphics: Dx.SummaryType;
     barGrouping: Dx.BarGroupingType;
+    editable: boolean;
+    showLegend: boolean;
 }
 
 const generateChartKey = ({
@@ -256,7 +258,7 @@ export class DataExplorer extends React.PureComponent<Partial<Props>, State> {
             .map(field => ({ ...field, cardinality: 0 })) as Dx.Dimension[];
 
         // Should datetime data types be transformed into js dates before getting to this resource?
-        console.log("props", props)
+
         const data = props.data.data.map((datapoint, datapointIndex) => {
             const mappedDatapoint: Dx.Datapoint = {
                 ...datapoint
@@ -317,8 +319,6 @@ export class DataExplorer extends React.PureComponent<Partial<Props>, State> {
             networkLabel: "none",
             ...chart
         }
-
-        console.log("nonChartDXSettings", nonChartDXSettings)
 
         const displayChart: DisplayChart = {};
         this.state = {

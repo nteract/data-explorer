@@ -150,7 +150,7 @@ export const semioticHierarchicalChart = (
       return index;
     },
     baseMarkProps: { forceUpdate: true },
-    margin: { left: 100, right: 100, top: 10, bottom: 10 },
+    margin: { left: 10, right: 10, top: 10, bottom: 10 },
     hoverAnnotation: [
       { type: "frame-hover" },
       {

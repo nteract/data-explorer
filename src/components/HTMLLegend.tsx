@@ -40,7 +40,7 @@ const HTMLLegend = ({
   values,
   colorHash,
   valueHash,
-  colors = [],
+  colors = Object.values(colorHash),
   setColor
 }: HTMLLegendProps) => {
   const updateColorFn: (newColorArray: string[]) => void = (

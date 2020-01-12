@@ -12,6 +12,7 @@ interface SummaryOptions {
   primaryKey: string[];
   setColor: Dx.ChartOptions["setColor"];
   summaryType: Dx.SummaryType;
+  showLegend: boolean;
 }
 
 const fontScale = scaleLinear()
@@ -29,7 +30,6 @@ export const semioticSummaryChart = (
 
   const { chart, summaryType, primaryKey, colors, setColor, showLegend } = options;
 
-  console.log("showLegend", showLegend)
   const { dim1, metric1 } = chart;
 
   const oAccessor = dim1;
