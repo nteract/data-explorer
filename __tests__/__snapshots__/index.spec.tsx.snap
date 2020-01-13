@@ -327,6 +327,7 @@ exports[`DataExplorer composed with Toolbar to the left 1`] = `
               "metric1": "Happiness Rank",
               "metric2": "Standard Error",
               "metric3": "Happiness Score",
+              "metric4": "none",
               "networkLabel": "none",
               "timeseriesSort": "array-order",
             }

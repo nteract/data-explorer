@@ -13,58 +13,18 @@ module.exports = {
     defaultExample: false,
     propsParser: typescriptPropsParser,
     resolver: require("react-docgen").resolver.findAllComponentDefinitions,
-    getComponentPathLine: componentPath => {
-        const toPascalCase = string =>
-            string
-                .match(/[A-Z]+/gi)
-                .map(word => word.charAt(0).toUpperCase() + word.substr(1).toLowerCase())
-                .join("");
-        const name = path.basename(componentPath, ".tsx");
-        const from = componentPath
-            //.replace(/^packages\//, "@nteract/")
-            .replace(/\.tsx?$/, "");
-        return `import ${toPascalCase(name)} from '${from}';`;
-    },
-    /*  sections: [
+    skipComponentsWithoutExample: true,
+    exampleMode: "expand",
+    usageMode: "expand",
+    sections: [
+        { name: "Basic Usage", components: "src/components/DataExplorerDefault.tsx" },
         {
-          name: "Introduction",
-          content: "styleguide-components/intro.md"
-        },
-        {
-          name: "@nteract/presentational-components",
-          components: "packages/presentational-components/src/components/*.tsx"
-        },
-        {
-          name: "@nteract/outputs",
-          components: "packages/outputs/src/components/*.tsx"
-        },
-        {
-          name: "@nteract/outputs/media",
-          components: "packages/outputs/src/components/media/*.tsx",
-          content: "packages/outputs/src/components/media/index.md",
-          ignore: "packages/outputs/src/components/media/index.tsx"
-        },
-        // {
-        //   name: "@mybinder/host-cache",
-        //   components: "packages/host-cache/src/components/*.tsx"
-        // },
-        {
-          name: "@nteract/directory-listing",
-          components: "packages/directory-listing/src/components/*.tsx"
-        },
-        {
-          name: "@nteract/markdown",
-          content: "packages/markdown/examples.md"
-        },
-        {
-          name: "@nteract/mathjax",
-          content: "packages/mathjax/examples.md"
+            name: "Customized Usage",
+            components: "src/components/*.tsx",
+            ignore: "src/components/DataExplorerDefault.tsx",
+            content: "src/components/customization.md"
         }
-      ], */
-    // For overriding the components styleguidist uses
-    /*  styleguideComponents: {
-        LogoRenderer: path.join(__dirname, "styleguide-components", "logo.tsx")
-      }, */
+    ],
     compilerConfig: {
         // Allow us to use {...props}
         objectAssign: "Object.assign",

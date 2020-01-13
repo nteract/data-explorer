@@ -2,24 +2,24 @@ import * as React from "react";
 
 import { Toolbar } from "./Toolbar";
 import { Viz } from "./Viz";
-import { DataExplorer } from "./DataExplorer";
-import { Props } from "./DataExplorer"
+import DataExplorer from "./DataExplorer";
+import { Props } from "./DataExplorer";
 
 const mediaType: Props["mediaType"] = "application/vnd.dataresource+json";
 
 export const DataExplorerDefault: React.FunctionComponent<Props> & {
-    MIMETYPE: Props["mediaType"];
+  MIMETYPE: Props["mediaType"];
 } = (props: Partial<Props>) => {
-    return (
-        <DataExplorer {...props}>
-            <Viz />
-            <Toolbar />
-        </DataExplorer>
-    );
+  return (
+    <DataExplorer {...props}>
+      <Viz />
+      <Toolbar />
+    </DataExplorer>
+  );
 };
 
 DataExplorerDefault.defaultProps = {
-    mediaType
+  mediaType
 };
 DataExplorerDefault.displayName = "DataExplorerDefault";
 
