@@ -1,4 +1,4 @@
-import numeral from "numeral";
+import * as numeral from "numeral";
 
 export function numeralFormatting(tickValue: number): string {
   let format = "0.[00]a";

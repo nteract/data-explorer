@@ -3,13 +3,9 @@ import toJson from "enzyme-to-json";
 import React from "react";
 
 import { getDxProps } from "../__mocks__/dx-props";
-import DataExplorerDefault, {
-  DataExplorer,
-  Props,
-  Toolbar,
-  Viz
-} from "../src/index";
-import * as Dx from "../src/types";
+import DataExplorerDefault, { DataExplorer, Toolbar, Viz } from "../src/index";
+import { Props } from "../src/components/DataExplorer";
+import * as Dx from "../src/utilities/types";
 
 describe("Default DataExplorer export", () => {
   let dataExplorerProps: Props;

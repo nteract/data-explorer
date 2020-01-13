@@ -2,9 +2,9 @@ import { scaleLinear, scaleTime } from "d3-scale";
 import { curveMonotoneX } from "d3-shape";
 import * as React from "react";
 
-import TooltipContent from "../tooltip-content";
-import * as Dx from "../types";
-import { numeralFormatting } from "../utilities";
+import TooltipContent from "../utilities/tooltip-content";
+import * as Dx from "../utilities/types";
+import { numeralFormatting } from "../utilities/utilities";
 
 interface LineOptions {
   chart: Dx.Chart;
@@ -41,8 +41,8 @@ export const semioticLineChart = (
     timeseriesSort === "array-order"
       ? "integer"
       : timeSeriesFields && timeSeriesFields.type
-      ? timeSeriesFields.type
-      : null;
+        ? timeSeriesFields.type
+        : null;
 
   const formatting = (tickValue: Date | number) =>
     sortType === "datetime"
@@ -57,10 +57,10 @@ export const semioticLineChart = (
           timeseriesSort === "array-order"
             ? data
             : data.sort(
-                // Using some questionable type assertions here
-                (datapointA, datapointB) =>
-                  datapointA[timeseriesSort] - datapointB[timeseriesSort]
-              );
+              // Using some questionable type assertions here
+              (datapointA, datapointB) =>
+                datapointA[timeseriesSort] - datapointB[timeseriesSort]
+            );
         return {
           color: colors[index % colors.length],
           label: metric.name,
@@ -84,7 +84,7 @@ export const semioticLineChart = (
         selectedMetrics.some(selectedMetric => selectedMetric === metric.label)
     );
 
-  const canvasRender:boolean = lineData[0].coordinates.length > 250
+  const canvasRender: boolean = lineData[0].coordinates.length > 250
 
   return {
     lineType: { type: lineType, interpolator: curveMonotoneX },

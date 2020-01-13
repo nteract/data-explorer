@@ -4,10 +4,10 @@ import { Axis, ResponsiveOrdinalFrame } from "semiotic";
 
 import HTMLLegend from "./HTMLLegend";
 
-import TooltipContent from "./tooltip-content";
-import { numeralFormatting } from "./utilities";
+import TooltipContent from "../utilities/tooltip-content";
+import { numeralFormatting } from "../utilities/utilities";
 
-import * as Dx from "./types";
+import * as Dx from "../utilities/types";
 
 import styled from "styled-components";
 
@@ -108,14 +108,15 @@ class ParallelCoordinatesController extends React.Component<Props, State> {
   };
 
   constructor(props: Props) {
+
     super(props);
 
     const { options, data, schema } = this.props;
-    const { primaryKey } = options;
+    const { primaryKey, metrics } = options;
 
     const parallelizeResults = parallelizeData(
       data,
-      options.metrics,
+      metrics,
       schema.fields,
       primaryKey
     );
@@ -124,7 +125,7 @@ class ParallelCoordinatesController extends React.Component<Props, State> {
       filterMode: true,
       data: parallelizeResults.dataPieces,
       dataScales: parallelizeResults.scales,
-      columnExtent: options.metrics.reduce(
+      columnExtent: metrics.reduce(
         (
           metricHash: { [index: string]: number[] },
           metric: { name: string }
@@ -230,8 +231,8 @@ class ParallelCoordinatesController extends React.Component<Props, State> {
             setColor={setColor}
           />
         ) : (
-          <NumberOfItemsP>{filteredData.length} items</NumberOfItemsP>
-        );
+            <NumberOfItemsP>{filteredData.length} items</NumberOfItemsP>
+          );
     }
 
     if (!filterMode) {
@@ -315,10 +316,10 @@ class ParallelCoordinatesController extends React.Component<Props, State> {
           interaction={
             filterMode
               ? {
-                  columnsBrush: true,
-                  during: this.brushing,
-                  extent: Object.keys(this.state.columnExtent)
-                }
+                columnsBrush: true,
+                during: this.brushing,
+                extent: Object.keys(this.state.columnExtent)
+              }
               : null
           }
           pieceHoverAnnotation={!filterMode}

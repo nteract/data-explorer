@@ -2,11 +2,11 @@ import { scaleLinear, ScaleLinear, scaleThreshold } from "d3-scale";
 import * as React from "react";
 import { heatmapping, hexbinning } from "semiotic";
 
-import HTMLLegend from "../HTMLLegend";
-import TooltipContent from "../tooltip-content";
-import { numeralFormatting } from "../utilities";
+import HTMLLegend from "../components/HTMLLegend";
+import TooltipContent from "../utilities/tooltip-content";
+import { numeralFormatting } from "../utilities/utilities";
 
-import * as Dx from "../types";
+import * as Dx from "../utilities/types";
 import { sortByOrdinalRange } from "./shared";
 
 import styled from "styled-components";
@@ -279,7 +279,7 @@ export const semioticScatterplot = (
         .reduce(
           (thresholdArray: number[], thresholdValue: number) =>
             thresholdValue === 0 ||
-            thresholdArray.indexOf(thresholdValue) !== -1
+              thresholdArray.indexOf(thresholdValue) !== -1
               ? thresholdArray
               : [...thresholdArray, thresholdValue],
           []
@@ -427,8 +427,8 @@ export const semioticScatterplot = (
           type !== "contour"
             ? undefined
             : dim3 === "none"
-            ? "#BBB"
-            : areaDatapoint.parentSummary.color,
+              ? "#BBB"
+              : areaDatapoint.parentSummary.color,
         strokeWidth: type === "contour" ? 2 : 1
       };
     },
@@ -436,8 +436,8 @@ export const semioticScatterplot = (
       r: renderInCanvas
         ? 2
         : type === "contour"
-        ? 3
-        : sizeScale(datapoint[metric3]),
+          ? 3
+          : sizeScale(datapoint[metric3]),
       fill: colorHash[datapoint[dim1]] || "black",
       fillOpacity: 0.75,
       stroke: renderInCanvas ? "none" : type === "contour" ? "white" : "black",

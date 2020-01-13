@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import { ChartOptionTypes, controlHelpText } from "./docs/chart-docs";
+import { ChartOptionTypes, controlHelpText } from "../docs/chart-docs";
 
 import styled, { css } from "styled-components";
-import * as Dx from "./types";
+import * as Dx from "../utilities/types";
 
 const commonCSS = css`
   h2 {
@@ -82,23 +82,23 @@ const availableLineTypes: Array<{
   type: Dx.LineType;
   label: string;
 }> = [
-  {
-    type: "line",
-    label: "Line Chart"
-  },
-  {
-    type: "stackedarea",
-    label: "Stacked Area Chart"
-  },
-  {
-    type: "stackedpercent",
-    label: "Stacked Area Chart (Percent)"
-  },
-  {
-    type: "bumparea",
-    label: "Ranked Area Chart"
-  }
-];
+    {
+      type: "line",
+      label: "Line Chart"
+    },
+    {
+      type: "stackedarea",
+      label: "Stacked Area Chart"
+    },
+    {
+      type: "stackedpercent",
+      label: "Stacked Area Chart (Percent)"
+    },
+    {
+      type: "bumparea",
+      label: "Ranked Area Chart"
+    }
+  ];
 
 const availableAreaTypes = [
   {

@@ -2,10 +2,10 @@ import { nest } from "d3-collection";
 import { interpolateLab } from "d3-interpolate";
 import * as React from "react";
 
-import TooltipContent from "../tooltip-content";
+import TooltipContent from "../utilities/tooltip-content";
 
 import { chartHelpText } from "../docs/chart-docs";
-import * as Dx from "../types";
+import * as Dx from "../utilities/types";
 
 interface HierarchicalOptions {
   hierarchyType: Dx.HierarchyType;
@@ -31,9 +31,9 @@ const hierarchicalTooltip = (
 ) => {
   const pathString = datapoint.parent
     ? parentPath(
-        datapoint.parent,
-        (datapoint.key && [datapoint.key]) || []
-      ).join("->")
+      datapoint.parent,
+      (datapoint.key && [datapoint.key]) || []
+    ).join("->")
     : "";
   const content = [];
   if (!datapoint.parent) {
@@ -150,7 +150,7 @@ export const semioticHierarchicalChart = (
       return index;
     },
     baseMarkProps: { forceUpdate: true },
-    margin: { left: 100, right: 100, top: 10, bottom: 10 },
+    margin: { left: 10, right: 10, top: 10, bottom: 10 },
     hoverAnnotation: [
       { type: "frame-hover" },
       {
