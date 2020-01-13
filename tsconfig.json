@@ -22,7 +22,6 @@
   ],
   "resolveJsonModule": true,
   "preserveWatchOutput": true,
-  "jsx": "react",
   "typeRoots": [
     "./node_modules/@types",
     "types"
@@ -30,7 +29,8 @@
   "compilerOptions": {
     "outDir": "lib",
     "rootDir": "src",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "jsx": "react"
   },
   "include": [
     "src"
