@@ -220,7 +220,7 @@ const SemioticWrapper = styled.div`
   }
 `;
 
-export class DataExplorer extends React.PureComponent<Partial<Props>, State> {
+export default class DataExplorer extends React.PureComponent<Partial<Props>, State> {
     static MIMETYPE: Props["mediaType"] = mediaType;
 
     static defaultProps = {
@@ -239,7 +239,7 @@ export class DataExplorer extends React.PureComponent<Partial<Props>, State> {
 
         // Handle case of metadata being empty yet dx not set
         const dx = metadata.dx || {};
-        const { chart = {}, ...nonChartDXSettings } = dx
+        const { chart = {}, ...nonChartDXSettings } = dx;
 
         let { fields = [], primaryKey = [] } = props.data.schema;
         // Provide a default primaryKey if none provided
@@ -318,7 +318,7 @@ export class DataExplorer extends React.PureComponent<Partial<Props>, State> {
             timeseriesSort: "array-order",
             networkLabel: "none",
             ...chart
-        }
+        };
 
         const displayChart: DisplayChart = {};
         this.state = {
@@ -661,5 +661,3 @@ export class DataExplorer extends React.PureComponent<Partial<Props>, State> {
         );
     }
 }
-
-export default DataExplorer;
