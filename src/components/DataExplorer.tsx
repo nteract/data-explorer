@@ -20,6 +20,8 @@ import {
     View
 } from "../utilities/types";
 
+import { FacetController } from "semiotic"
+
 interface dxMetaProps {
     view?: View;
     lineType?: LineType;
@@ -55,6 +57,7 @@ export interface Props {
         { dx }: { dx: dxMetaProps },
         mediaType: Props["mediaType"]
     ) => void;
+    facets?: Props[]
 }
 
 interface State {
@@ -80,6 +83,9 @@ interface State {
     barGrouping: Dx.BarGroupingType;
     editable: boolean;
     showLegend: boolean;
+    facetCharts?: Chart[];
+    facets?: Props[];
+    schema: Dx.Schema;
 }
 
 const generateChartKey = ({
@@ -166,6 +172,17 @@ const FlexWrapper = styled.div`
   width: 100%;
 `;
 
+const FacetWrapper = styled.div`
+  display: flex;
+  flex-flow: wrap;
+  width: 100%;
+
+  .responsive-container {
+      width: 50% !important;
+  }
+`;
+
+
 const SemioticWrapper = styled.div`
   width: 100%;
   .html-legend-item {
@@ -217,6 +234,10 @@ const SemioticWrapper = styled.div`
   }
   rect.selection {
     opacity: 0.5;
+  }.
+
+  .facets {
+      display: flex;
   }
 `;
 
@@ -235,7 +256,7 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
     constructor(props: Props) {
         super(props);
 
-        const { metadata, initialView } = props;
+        const { metadata, initialView, facets } = props;
 
         // Handle case of metadata being empty yet dx not set
         const dx = metadata.dx || {};
@@ -345,15 +366,14 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
             data,
             editable: true,
             showLegend: true,
+            facets,
+            schema: props.data.schema,
             ...nonChartDXSettings
         };
     }
 
     componentDidMount() {
-        // This is necessary to render any charts based on passed metadata because the grid doesn't result from the updateChart function but any other view does
-        if (this.state.view !== "grid") {
-            this.updateChart(this.state);
-        }
+        this.updateChart(this.state);
     }
 
     updateChart = (updatedState: Partial<State>) => {
@@ -377,17 +397,18 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
             primaryKey,
             editable,
             showLegend,
-            data: stateData
+            data: stateData,
+            facets
         } = { ...this.state, ...updatedState };
 
 
-        if (!this.props.data && !this.props.metadata && !this.props.initialView) {
+        if (!this.props.data && !this.props.metadata) {
             return;
         }
 
-        const { data, height } = this.props;
+        let instantiatedView
 
-        const { Frame, chartGenerator } = semioticSettings[view];
+        const { data, height } = this.props;
 
         const chartKey = generateChartKey({
             view,
@@ -405,38 +426,102 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
             barGrouping
         });
 
-        const frameSettings = chartGenerator(stateData, data!.schema, {
-            metrics,
-            dimensions,
-            chart,
-            colors,
-            height,
-            lineType,
-            areaType,
-            selectedDimensions,
-            selectedMetrics,
-            pieceType,
-            summaryType,
-            networkType,
-            hierarchyType,
-            primaryKey,
-            trendLine,
-            marginalGraphics,
-            barGrouping,
-            setColor: this.setColor,
-            showLegend
-        });
+        if (!view || view === "grid") {
+            instantiatedView = <DataResourceTransformGrid {...this.props as Props} />
+        } else {
+            const { Frame, chartGenerator } = semioticSettings[view];
+
+      
+            const frameSettings = chartGenerator(stateData, data!.schema, {
+                metrics,
+                dimensions,
+                chart,
+                colors,
+                height,
+                lineType,
+                areaType,
+                selectedDimensions,
+                selectedMetrics,
+                pieceType,
+                summaryType,
+                networkType,
+                hierarchyType,
+                primaryKey,
+                trendLine,
+                marginalGraphics,
+                barGrouping,
+                setColor: this.setColor,
+                showLegend
+            });
+            
+            instantiatedView = <Frame
+            responsiveWidth
+            size={defaultResponsiveSize}
+            {...frameSettings}
+            />
+        }
+
+        const facetFrames = []
+
+        if (facets) {
+            facets
+                .forEach(baseDXSettings => {
+
+                    const { initialView = view, data: facetDataSettings = this.state, metadata: facetMetadata = { dx: {} } } = baseDXSettings
+
+                    if (initialView === "grid") {
+                        const facetGridProps = { ...this.props, ...baseDXSettings }
+
+                        facetFrames.push(<DataResourceTransformGrid {...facetGridProps as Props} />)
+                    } else {
+                        const { dx: facetDX } = facetMetadata
+
+                        const { Frame: FacetFrame, chartGenerator: facetChartGenerator } = semioticSettings[initialView];
+    
+                        const { data: facetData, schema: facetSchema } = facetDataSettings
+    
+                        const facetFrameSettings = facetChartGenerator(facetData, facetSchema, {
+                            metrics,
+                            dimensions,
+                            chart,
+                            colors,
+                            height,
+                            lineType,
+                            areaType,
+                            selectedDimensions,
+                            selectedMetrics,
+                            pieceType,
+                            summaryType,
+                            networkType,
+                            hierarchyType,
+                            primaryKey,
+                            trendLine,
+                            marginalGraphics,
+                            barGrouping,
+                            setColor: this.setColor,
+                            showLegend
+                        })
+    
+                        facetFrames.push(<FacetFrame
+                            {...facetFrameSettings}
+                            size={defaultResponsiveSize}
+                            afterElements={null}
+                            />)
+    
+                    }
 
 
+                })
+        }
+
+        const activeFacets = facetFrames.length > 0
+
+        const wrapStyle = activeFacets ? { display: "flex", flexWrap: "wrap" } : {}
 
         const display: React.ReactNode = (
             <SemioticWrapper>
-                <Frame
-                    responsiveWidth
-                    size={defaultResponsiveSize}
-                    {...frameSettings}
-                />
-                {editable && <VizControls
+                {instantiatedView}
+                {editable && !activeFacets && <VizControls
                     {...{
                         data: stateData,
                         view,
@@ -460,6 +545,11 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
                         areaType
                     }}
                 />}
+                <FacetWrapper>
+                <FacetController>
+                {facetFrames}
+                </FacetController>
+                </FacetWrapper>
             </SemioticWrapper>
         );
 
@@ -598,10 +688,9 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
 
         let display: React.ReactNode = null;
 
-        if (view === "grid") {
-            display = <DataResourceTransformGrid {...this.props as Props} />;
-        } else if (
+        if (
             [
+                "grid",
                 "line",
                 "scatter",
                 "bar",

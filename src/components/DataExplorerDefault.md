@@ -26,8 +26,8 @@ const basicData = {
     },
         data: [
             {valueA: 3, valueB: 5, valueC: 1, label: "first"},
-            {valueA: 10, valueB: 1, valueC: 3, label: "second"},
-            {valueA: 5, valueB: 8, valueC: 2, label: "third"}
+            {valueA: 10, valueB: 1, valueC: 12, label: "second"},
+            {valueA: -5, valueB: 8, valueC: 6, label: "third"}
         ]
 };
 
@@ -49,7 +49,16 @@ import { largeVizData } from "../../doc_data/viz_data.js";
     metadata={{ dx: 
         { 
             summaryType: "boxplot",
-            colors: ["orange", "lightgreen", "steelblue", "purple", "LightCoral", "MediumAquamarine", "Turquoise", "MidnightBlue", "Maroon", "Thistle"],
+            colors: [
+                "rgb(50,150,77)",
+                "rgb(174,210,132)",
+                "rgb(11,82,46)",
+                "rgb(116,238,101)",
+                "rgb(62,142,157)",
+                "rgb(145,206,244)",
+                "rgb(28,75,180)",
+                "rgb(82,233,230)"
+            ],
             chart: 
             {
                 metric1:  "Happiness Score"

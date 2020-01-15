@@ -1,3 +1,37 @@
+export const smallVizData = {
+    schema: {
+        fields: [{
+            name: "valueA",
+            type: "integer"
+        },
+        {
+            name: "valueB",
+            type: "integer"
+        },
+        {
+            name: "valueC",
+            type: "integer"
+        },
+        {
+            name: "label",
+            type: "string"
+        }],
+        primaryKey: []
+    },
+        data: [
+            {valueA: 3, valueB: 5, valueC: 1, label: "first"},
+            {valueA: 10, valueB: 1, valueC: 12, label: "second"},
+            {valueA: -5, valueB: 8, valueC: 6, label: "third"},
+            {valueA: -8, valueB: 5, valueC: 4, label: "fourth"},
+            {valueA: 9, valueB: 1, valueC: 3, label: "fifth"},
+            {valueA: -5, valueB: 8, valueC: 6, label: "sixth"},
+            {valueA: 4, valueB: 5, valueC: 1, label: "seventh"},
+            {valueA: 8, valueB: 1, valueC: 3, label: "eighth"},
+            {valueA: 2, valueB: 8, valueC: 2, label: "ninth"}
+        ]
+};
+
+
 export const largeVizData = {
     data: [
         {

@@ -36,3 +36,36 @@ import { Toolbar } from "./Toolbar";
     <Viz />
 </DataExplorer>
 ```
+
+### Faceting
+You can turn on faceting by sending multiple DataExplorer prop objects to the DataExplorer's `facets` property.
+
+```jsx
+import { largeVizData, smallVizData } from "../../doc_data/viz_data.js";
+import { Viz } from "./Viz";
+import { Toolbar } from "./Toolbar";
+
+<DataExplorer
+    data={largeVizData}
+    initialView="summary"
+    facets={[{
+        initialView: "bar",
+        metadata: { dx: 
+            {
+                hierarchyType: "treemap",
+                metric1: "Economy (GDP per Capita)"
+            }
+        }
+    },
+    {
+        initialView: "hierarchy",
+        metadata: { dx: 
+        { 
+        hierarchyType: "treemap",
+        metric1: "Economy (GDP per Capita)" }
+        }
+    }]}
+>
+    <Viz />
+</DataExplorer>
+```
