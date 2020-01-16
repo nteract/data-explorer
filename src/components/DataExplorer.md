@@ -48,7 +48,16 @@ import { Toolbar } from "./Toolbar";
 <DataExplorer
     data={largeVizData}
     initialView="summary"
-    facets={[{
+    facets={[
+    {
+        initialView: "bar",
+        metadata: { dx: 
+        { 
+            hierarchyType: "treemap",
+            metric1: "Generosity" }
+        }
+    },
+    {
         initialView: "bar",
         dimFacet: { dim: "Region", value: "Western Europe" },
         metadata: { dx: 
@@ -74,23 +83,30 @@ import { Toolbar } from "./Toolbar";
     },
     {
         initialView: "bar",
+        dimFacet: { dim: "Region", value: "Southeastern Asia" },
         metadata: { dx: 
         { 
-            hierarchyType: "treemap",
-            metric1: "Freedom"
+            dim1: "Country",
+            selectedDimensions: ["Country"],
+            metric1: "Generosity"
+
         }
         }
     },
     {
         initialView: "bar",
+        dimFacet: { dim: "Region", value: "Latin America and Caribbean" },
         metadata: { dx: 
         { 
-            hierarchyType: "treemap",
-            metric1: "Generosity" }
+            dim1: "Country",
+            selectedDimensions: ["Country"],
+            metric1: "Generosity"
+
+        }
         }
     },
     {
-        initialView: "bar",
+        initialView: "hierarchy",
         metadata: { dx: 
         { 
             hierarchyType: "treemap",

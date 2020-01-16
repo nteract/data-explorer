@@ -86,7 +86,7 @@ export const semioticLineChart = (
 
   const canvasRender: boolean = lineData[0].coordinates.length > 250
 
-  return {
+  const lineSettings = {
     lineType: { type: lineType, interpolator: curveMonotoneX },
     lines: lineData,
     xScaleType: xScale,
@@ -174,5 +174,8 @@ export const semioticLineChart = (
         </TooltipContent>
       );
     }
-  };
+  }
+
+  return { frameSettings: lineSettings, colorDim: "none", colorHash: {} }
+
 };

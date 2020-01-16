@@ -431,7 +431,7 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
         } else {
             const { Frame, chartGenerator } = semioticSettings[view];
       
-            const frameSettings = chartGenerator(stateData, data!.schema, {
+            const baseFrameSettings = chartGenerator(stateData, data!.schema, {
                 metrics,
                 dimensions,
                 chart,
@@ -453,6 +453,8 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
                 showLegend
             });
             
+            const { frameSettings } = baseFrameSettings
+
             instantiatedView = <Frame
             responsiveWidth
             size={defaultResponsiveSize}
@@ -463,6 +465,8 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
         let finalRenderedViz
 
         if (facets) {
+            let colorHashOverride
+            let colorDimOverride
             const facetFrames = []
             facets
                 .forEach(baseDXSettings => {
@@ -481,6 +485,8 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
                         const { data: facetData, schema: facetSchema } = facetDataSettings
 
                         const filteredFacetData = dimFacet ? facetData.filter(d => d[dimFacet.dim] === dimFacet.value) : facetData
+
+                        const title = dimFacet ? `${dimFacet.dim}=${dimFacet.value}` : ""
 
                         const facetFrameSettings = facetChartGenerator(filteredFacetData, facetSchema, {
                             metrics,
@@ -503,14 +509,20 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
                             setColor: this.setColor,
                             showLegend,
                             ...facetDX
-                        })
-    
+                        }, colorHashOverride, colorDimOverride)
+
+                        const { colorHash, frameSettings, colorDim } = facetFrameSettings
+
+                        colorHashOverride = colorHashOverride || colorHash
+                        colorDimOverride = colorDimOverride || colorDim
+
                         facetFrames.push(<FacetFrame
-                            {...facetFrameSettings}
+                            {...frameSettings}
                             size={defaultResponsiveSize}
                             afterElements={null}
                             gridDisplay={true}
-                            margin={{...facetFrameSettings.margin, ...{ left: 70, right: 40 }}}
+                            margin={{...frameSettings.margin, ...{ left: 70, right: 40, top: 35 }}}
+                            title={title}
                             />)
     
                     }
