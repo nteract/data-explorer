@@ -38,7 +38,7 @@ import { Toolbar } from "./Toolbar";
 ```
 
 ### Faceting
-You can turn on faceting by sending multiple DataExplorer prop objects to the DataExplorer's `facets` property.
+You can turn on faceting by sending multiple DataExplorer prop objects to the DataExplorer's `facets` property. When you do so, the properties of each object sent to faceting will be extended onto the properties sent to the data explorer, resulting in multiple views (one for each object sent to `facets`).
 
 ```jsx
 import { largeVizData, smallVizData } from "../../doc_data/viz_data.js";
@@ -50,19 +50,51 @@ import { Toolbar } from "./Toolbar";
     initialView="summary"
     facets={[{
         initialView: "bar",
+        dimFacet: { dim: "Region", value: "Western Europe" },
         metadata: { dx: 
-            {
-                hierarchyType: "treemap",
-                metric1: "Economy (GDP per Capita)"
-            }
+        { 
+            dim1: "Country",
+            selectedDimensions: ["Country"],
+            metric1: "Generosity"
+        }
+
+    }
+    },
+    {
+        initialView: "bar",
+        dimFacet: { dim: "Region", value: "North America" },
+        metadata: { dx: 
+        { 
+            dim1: "Country",
+            selectedDimensions: ["Country"],
+            metric1: "Generosity"
+
+        }
         }
     },
     {
-        initialView: "hierarchy",
+        initialView: "bar",
         metadata: { dx: 
         { 
-        hierarchyType: "treemap",
-        metric1: "Economy (GDP per Capita)" }
+            hierarchyType: "treemap",
+            metric1: "Freedom"
+        }
+        }
+    },
+    {
+        initialView: "bar",
+        metadata: { dx: 
+        { 
+            hierarchyType: "treemap",
+            metric1: "Generosity" }
+        }
+    },
+    {
+        initialView: "bar",
+        metadata: { dx: 
+        { 
+            hierarchyType: "treemap",
+            metric1: "Health (Life Expectancy)" }
         }
     }]}
 >

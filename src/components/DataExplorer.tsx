@@ -430,7 +430,6 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
             instantiatedView = <DataResourceTransformGrid {...this.props as Props} />
         } else {
             const { Frame, chartGenerator } = semioticSettings[view];
-
       
             const frameSettings = chartGenerator(stateData, data!.schema, {
                 metrics,
@@ -461,29 +460,32 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
             />
         }
 
-        const facetFrames = []
+        let finalRenderedViz
 
         if (facets) {
+            const facetFrames = []
             facets
                 .forEach(baseDXSettings => {
 
-                    const { initialView = view, data: facetDataSettings = this.state, metadata: facetMetadata = { dx: {} } } = baseDXSettings
+                    const { dimFacet, initialView = view, data: facetDataSettings = this.state, metadata: facetMetadata = { dx: {} } } = baseDXSettings
 
                     if (initialView === "grid") {
                         const facetGridProps = { ...this.props, ...baseDXSettings }
 
                         facetFrames.push(<DataResourceTransformGrid {...facetGridProps as Props} />)
                     } else {
-                        const { dx: facetDX } = facetMetadata
+                        const { dx: facetDX = {} } = facetMetadata
 
                         const { Frame: FacetFrame, chartGenerator: facetChartGenerator } = semioticSettings[initialView];
     
                         const { data: facetData, schema: facetSchema } = facetDataSettings
-    
-                        const facetFrameSettings = facetChartGenerator(facetData, facetSchema, {
+
+                        const filteredFacetData = dimFacet ? facetData.filter(d => d[dimFacet.dim] === dimFacet.value) : facetData
+
+                        const facetFrameSettings = facetChartGenerator(filteredFacetData, facetSchema, {
                             metrics,
                             dimensions,
-                            chart,
+                            chart: {...chart, ...facetDX},
                             colors,
                             height,
                             lineType,
@@ -499,29 +501,31 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
                             marginalGraphics,
                             barGrouping,
                             setColor: this.setColor,
-                            showLegend
+                            showLegend,
+                            ...facetDX
                         })
     
                         facetFrames.push(<FacetFrame
                             {...facetFrameSettings}
                             size={defaultResponsiveSize}
                             afterElements={null}
+                            gridDisplay={true}
+                            margin={{...facetFrameSettings.margin, ...{ left: 70, right: 40 }}}
                             />)
     
                     }
 
 
                 })
-        }
 
-        const activeFacets = facetFrames.length > 0
-
-        const wrapStyle = activeFacets ? { display: "flex", flexWrap: "wrap" } : {}
-
-        const display: React.ReactNode = (
-            <SemioticWrapper>
-                {instantiatedView}
-                {editable && !activeFacets && <VizControls
+                finalRenderedViz = <FacetWrapper>
+                <FacetController>
+                {facetFrames}
+                </FacetController>
+                </FacetWrapper>            
+        } else {
+            finalRenderedViz = <React.Fragment>{instantiatedView}
+                {editable && <VizControls
                     {...{
                         data: stateData,
                         view,
@@ -543,13 +547,12 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
                         lineType,
                         setAreaType: this.setAreaType,
                         areaType
-                    }}
-                />}
-                <FacetWrapper>
-                <FacetController>
-                {facetFrames}
-                </FacetController>
-                </FacetWrapper>
+        }} />}</React.Fragment>
+        }
+
+        const display: React.ReactNode = (
+            <SemioticWrapper>
+                {finalRenderedViz}
             </SemioticWrapper>
         );
 
