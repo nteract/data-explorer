@@ -4,6 +4,8 @@ import DataResourceTransformGrid from "../charts/grid";
 import { semioticSettings } from "../charts/settings";
 import { colors } from "../utilities/settings";
 import VizControls from "./VizControls";
+import { Viz } from "./Viz";
+import { Toolbar } from "./Toolbar";
 
 const mediaType: Props["mediaType"] = "application/vnd.dataresource+json";
 
@@ -722,8 +724,16 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
 
             display = this.state.displayChart[chartKey];
         }
+        
+        const toolbarProps = {
+            dimensions,
+            currentView: view,
+            setGrid: this.setGrid,
+            setView: this.setView,
+            largeDataset
+        };
 
-        const children = React.Children.map(this.props.children, child => {
+        let children = React.Children.map(this.props.children, child => {
             if (!React.isValidElement(child)) {
                 return;
             }
@@ -732,13 +742,6 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
                 const newProps = { children: display };
                 return React.cloneElement(child, newProps);
             } else if (componentType === "toolbar") {
-                const toolbarProps = {
-                    dimensions,
-                    currentView: view,
-                    setGrid: this.setGrid,
-                    setView: this.setView,
-                    largeDataset
-                };
                 return React.cloneElement(child, toolbarProps);
             }
 
@@ -748,7 +751,12 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
         return (
             <div>
                 <MetadataWarning metadata={this.props.metadata!} />
-                <FlexWrapper>{children}</FlexWrapper>
+                <FlexWrapper>{
+                    children ? children : 
+                    [<Viz>{display}</Viz>,
+                    <Toolbar {...toolbarProps} />]
+                    
+                }</FlexWrapper>
             </div>
         );
     }
