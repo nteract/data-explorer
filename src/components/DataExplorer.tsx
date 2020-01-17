@@ -752,10 +752,13 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
             <div>
                 <MetadataWarning metadata={this.props.metadata!} />
                 <FlexWrapper>{
-                    children ? children : 
-                    [<Viz>{display}</Viz>,
-                    <Toolbar {...toolbarProps} />]
-                    
+
+                    children ? children :
+                        <>
+                            <Viz>{display}</Viz>
+                            <Toolbar {...toolbarProps} />
+                        </>
+
                 }</FlexWrapper>
             </div>
         );

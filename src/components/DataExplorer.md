@@ -1,8 +1,8 @@
-### Basic Usage
+### Toolbar Position
 This component is a wrapper that can hold multiple (or no) Viz and Toolbar components. Here it is with `Toolbar` & `Viz` components. This allows you to compose it, for instance putting a `Toolbar` on the left and the right.
 
 ```jsx
-import { largeVizData } from "../../doc_data/viz_data.js";
+import DataExplorer from './DataExplorer';
 import { Viz } from "./Viz";
 import { Toolbar } from "./Toolbar";
 
@@ -19,7 +19,7 @@ import { Toolbar } from "./Toolbar";
 If you want your Data Explorer to be set to a particular view and not be able to be switched, you can leave out the toolbar.
 
 ```jsx
-import { largeVizData } from "../../doc_data/viz_data.js";
+import DataExplorer from './DataExplorer';
 import { Viz } from "./Viz";
 import { Toolbar } from "./Toolbar";
 
@@ -41,7 +41,7 @@ import { Toolbar } from "./Toolbar";
 You can turn on faceting by sending multiple DataExplorer prop objects to the DataExplorer's `facets` property. When you do so, the properties of each object sent to faceting will be extended onto the properties sent to the data explorer, resulting in multiple views (one for each object sent to `facets`).
 
 ```jsx
-import { largeVizData, smallVizData } from "../../doc_data/viz_data.js";
+import DataExplorer from './DataExplorer';
 import { Viz } from "./Viz";
 import { Toolbar } from "./Toolbar";
 

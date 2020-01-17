@@ -1,7 +1,6 @@
 Because parallel coordinates is a very involved chart mode, there's a component for it.
 
 ```jsx
-import { largeVizData } from "../../doc_data/viz_data.js";
 
 const { data, schema } = largeVizData;
 
