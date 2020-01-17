@@ -19,12 +19,11 @@ module.exports = {
     usageMode: "colapse",
     pagePerSection: true,
     sections: [
-        { name: "Usage", content: "src/components/DataExplorer.md" },
+        { name: "Documentation", content: "src/Documentation.md" },
         {
             name: "Components",
             description: "DataExplorer component documentation",
             components: "src/components/*.tsx",
-            ignore: "src/components/DataExplorer.tsx"
 
         }
     ],
@@ -76,6 +75,6 @@ module.exports = {
         }
     },
     moduleAliases: {
-        '@nteract/data-explorer': path.resolve(__dirname, 'src')
+        '@nteract/data-explorer': path.resolve(__dirname, 'src/index')
     }
 };
