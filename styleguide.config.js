@@ -19,7 +19,7 @@ module.exports = {
     usageMode: "colapse",
     pagePerSection: true,
     sections: [
-        { name: "DataExplorer Usage", content: "src/components/DataExplorer.md" },
+        { name: "Usage", content: "src/components/DataExplorer.md" },
         {
             name: "Components",
             description: "DataExplorer component documentation",

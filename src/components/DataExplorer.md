@@ -1,4 +1,4 @@
-### The Default Export
+### Exports
 
 The simplest way to use the DataExplorer component is in its default configuration with controls and viz integrated. The only prop requirement is a dataset.
 
