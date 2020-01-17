@@ -20,7 +20,9 @@ interface BarOptions {
 export const semioticBarChart = (
   data: Dx.Datapoint[],
   schema: Dx.Schema,
-  options: BarOptions
+  options: BarOptions,
+  colorHashOverride?: Object,
+  colorDimOverride?: string
 ) => {
   const { selectedDimensions, chart, colors, setColor, barGrouping } = options;
   const { dim1, metric1, metric3, metric4 } = chart;
@@ -47,7 +49,7 @@ export const semioticBarChart = (
     pieceHoverAnnotation?: boolean;
   } = {};
 
-  const colorHash: { [key: string]: string; Other: "grey" } = { Other: "grey" };
+  const colorHash: { [key: string]: string; Other: "grey" } = colorHashOverride || { Other: "grey" };
 
   const sortedData = sortByOrdinalRange(
     oAccessor,
@@ -120,7 +122,7 @@ export const semioticBarChart = (
     []
   );
 
-  if (dim1 && dim1 !== "none") {
+  if (!colorHashOverride && dim1 && dim1 !== "none") {
     uniqueValues.forEach((value: string, index: number) => {
       // Color the first 18 values after that everything gets grey because more than 18 colors is unreadable no matter what you want
       colorHash[value] = index > 18 ? "grey" : colors[index % colors.length];
@@ -171,21 +173,6 @@ export const semioticBarChart = (
     }
   }
 
-  // replace with incoming cardinality when df.describe metadata is implemented
-  const cardinality =
-    (selectedDimensions.length > 0 &&
-      !(selectedDimensions.length === 1 && dim1 === selectedDimensions[0]) &&
-      sortedData
-        .map(datapoint => datapoint[dim1])
-        .reduce(
-          (uniqueDimValues, dimName) =>
-            uniqueDimValues.indexOf(dimName) === -1
-              ? [...uniqueDimValues, dimName]
-              : uniqueDimValues,
-          []
-        ).length) ||
-    0;
-
   const barSettings = {
     type:
       barGrouping === "Clustered"
@@ -195,8 +182,8 @@ export const semioticBarChart = (
     oAccessor,
     rAccessor,
     style: (datapoint: Dx.Datapoint) => ({
-      fill: colorHash[datapoint[dim1]] || colors[0],
-      stroke: colorHash[datapoint[dim1]] || colors[0]
+      fill: colorHash[datapoint[colorDimOverride || dim1]] || colors[0],
+      stroke: colorHash[datapoint[colorDimOverride || dim1]] || colors[0]
     }),
     oPadding: uniqueValues.length > 30 ? 1 : 5,
     oLabel:
@@ -245,5 +232,5 @@ export const semioticBarChart = (
     ...additionalSettings
   };
 
-  return barSettings;
+  return { frameSettings: barSettings, colorDim: dim1, colorHash }
 };

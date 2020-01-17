@@ -87,16 +87,20 @@ function combineTopAnnotations(
 export const semioticHexbin = (
   data: Dx.DataProps["data"],
   schema: Dx.DataProps["schema"],
-  options: XYPlotOptions
+  options: XYPlotOptions,
+  colorHashOverride?: Object,
+  colorDimOverride?: string
 ) => {
-  return semioticScatterplot(data, schema, options, options.areaType);
+  return semioticScatterplot(data, schema, options, options.areaType, colorHashOverride, colorDimOverride);
 };
 
 export const semioticScatterplot = (
   data: Dx.DataProps["data"],
   schema: Dx.DataProps["schema"],
   options: XYPlotOptions,
-  type: string = "scatterplot"
+  type: string = "scatterplot",
+  colorHashOverride?: object,
+  colorDimOverride?: string
 ) => {
   const height = options.height - 150 || 500;
 
@@ -178,7 +182,7 @@ export const semioticScatterplot = (
   };
 
   let sizeScale: (() => number) | ScaleLinear<number, number> = () => 5;
-  const colorHash: { [index: string]: string } = { Other: "grey" };
+  const colorHash: { [index: string]: string } = colorHashOverride || { Other: "grey" };
   const additionalSettings: { afterElements?: JSX.Element } = {};
 
   let annotations;
@@ -234,9 +238,11 @@ export const semioticScatterplot = (
       []
     );
 
-    uniqueValues.forEach((dimValue: string, index: number) => {
-      colorHash[dimValue] = index > 18 ? "grey" : colors[index % colors.length];
-    });
+    if (!colorHashOverride) {
+      uniqueValues.forEach((dimValue: string, index: number) => {
+        colorHash[dimValue] = index > 18 ? "grey" : colors[index % colors.length];
+      });  
+    }
 
     additionalSettings.afterElements = (
       <HTMLLegend
@@ -438,7 +444,7 @@ export const semioticScatterplot = (
         : type === "contour"
           ? 3
           : sizeScale(datapoint[metric3]),
-      fill: colorHash[datapoint[dim1]] || "black",
+      fill: colorHash[datapoint[colorDimOverride || dim1]] || "black",
       fillOpacity: 0.75,
       stroke: renderInCanvas ? "none" : type === "contour" ? "white" : "black",
       strokeWidth: type === "contour" ? 0.5 : 1,
@@ -462,5 +468,6 @@ export const semioticScatterplot = (
     xyPlotSettings.areas = areas;
   }
 
-  return xyPlotSettings;
+  return { frameSettings: xyPlotSettings, colorDim: dim1, colorHash }
+
 };

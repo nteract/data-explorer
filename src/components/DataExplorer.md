@@ -139,6 +139,15 @@ import DataExplorer, { Viz, Toolbar } from "@nteract/data-explorer";
   facets={[
     {
       initialView: "bar",
+      metadata: {
+        dx: {
+          hierarchyType: "treemap",
+          metric1: "Generosity"
+        }
+      }
+    },
+    {
+      initialView: "bar",
       dimFacet: { dim: "Region", value: "Western Europe" },
       metadata: {
         dx: {
@@ -161,24 +170,28 @@ import DataExplorer, { Viz, Toolbar } from "@nteract/data-explorer";
     },
     {
       initialView: "bar",
+      dimFacet: { dim: "Region", value: "Southeastern Asia" },
       metadata: {
         dx: {
-          hierarchyType: "treemap",
-          metric1: "Freedom"
-        }
-      }
-    },
-    {
-      initialView: "bar",
-      metadata: {
-        dx: {
-          hierarchyType: "treemap",
+          dim1: "Country",
+          selectedDimensions: ["Country"],
           metric1: "Generosity"
         }
       }
     },
     {
       initialView: "bar",
+      dimFacet: { dim: "Region", value: "Latin America and Caribbean" },
+      metadata: {
+        dx: {
+          dim1: "Country",
+          selectedDimensions: ["Country"],
+          metric1: "Generosity"
+        }
+      }
+    },
+    {
+      initialView: "hierarchy",
       metadata: {
         dx: {
           hierarchyType: "treemap",
