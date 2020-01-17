@@ -18,11 +18,11 @@ module.exports = {
     exampleMode: "expand",
     usageMode: "colapse",
     sections: [
-        { name: "Basic Usage", content: 'src/components/intro.md' },
+        { name: "DataExplorer Usage", content: "src/components/DataExplorer.md" },
         {
-            name: "Customized Usage",
+            name: "Components",
+            description: "DataExplorer component documentation",
             components: "src/components/*.tsx",
-            content: "src/components/DataExplorer.md",
             ignore: "src/components/DataExplorer.tsx"
 
         }
@@ -73,5 +73,8 @@ module.exports = {
                 },
             ]
         }
+    },
+    moduleAliases: {
+        '@nteract/data-explorer': path.resolve(__dirname, 'src')
     }
 };
