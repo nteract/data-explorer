@@ -17,6 +17,7 @@ module.exports = {
     skipComponentsWithoutExample: true,
     exampleMode: "expand",
     usageMode: "colapse",
+    pagePerSection: true,
     sections: [
         { name: "DataExplorer Usage", content: "src/components/DataExplorer.md" },
         {
