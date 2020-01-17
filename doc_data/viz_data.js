@@ -1,4 +1,4 @@
-export const smallVizData = {
+global.smallVizData = {
     schema: {
         fields: [{
             name: "valueA",
@@ -32,7 +32,7 @@ export const smallVizData = {
 };
 
 
-export const largeVizData = {
+global.largeVizData = {
     data: [
         {
             "Country": "Switzerland",
@@ -2468,6 +2468,6 @@ export const largeVizData = {
 }
 
 
-export const basicVizSettings = {
+global.basicVizSettings = {
 
 }

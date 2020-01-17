@@ -1,11 +1,5 @@
 import * as React from "react";
 
-import { Toolbar } from "./components/Toolbar";
-import { Viz } from "./components/Viz";
-import DataExplorer from "./components/DataExplorer";
-import DataExplorerDefault from "./components/DataExplorerDefault";
-
-export { DataExplorer, Toolbar, Viz };
-export default DataExplorerDefault
-
-
+export { DataExplorer as default, DataExplorer } from "./components/DataExplorer";
+export { Toolbar } from "./components/Toolbar";
+export { Viz } from "./components/Viz";

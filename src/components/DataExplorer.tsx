@@ -4,6 +4,8 @@ import DataResourceTransformGrid from "../charts/grid";
 import { semioticSettings } from "../charts/settings";
 import { colors } from "../utilities/settings";
 import VizControls from "./VizControls";
+import { Viz } from "./Viz";
+import { Toolbar } from "./Toolbar";
 
 const mediaType: Props["mediaType"] = "application/vnd.dataresource+json";
 
@@ -241,7 +243,7 @@ const SemioticWrapper = styled.div`
   }
 `;
 
-export default class DataExplorer extends React.PureComponent<Partial<Props>, State> {
+class DataExplorer extends React.PureComponent<Partial<Props>, State> {
     static MIMETYPE: Props["mediaType"] = mediaType;
 
     static defaultProps = {
@@ -430,7 +432,7 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
             instantiatedView = <DataResourceTransformGrid {...this.props as Props} />
         } else {
             const { Frame, chartGenerator } = semioticSettings[view];
-      
+
             const baseFrameSettings = chartGenerator(stateData, data!.schema, {
                 metrics,
                 dimensions,
@@ -452,13 +454,13 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
                 setColor: this.setColor,
                 showLegend
             });
-            
+
             const { frameSettings } = baseFrameSettings
 
             instantiatedView = <Frame
-            responsiveWidth
-            size={defaultResponsiveSize}
-            {...frameSettings}
+                responsiveWidth
+                size={defaultResponsiveSize}
+                {...frameSettings}
             />
         }
 
@@ -481,7 +483,7 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
                         const { dx: facetDX = {} } = facetMetadata
 
                         const { Frame: FacetFrame, chartGenerator: facetChartGenerator } = semioticSettings[initialView];
-    
+
                         const { data: facetData, schema: facetSchema } = facetDataSettings
 
                         const filteredFacetData = dimFacet ? facetData.filter(d => d[dimFacet.dim] === dimFacet.value) : facetData
@@ -491,7 +493,7 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
                         const facetFrameSettings = facetChartGenerator(filteredFacetData, facetSchema, {
                             metrics,
                             dimensions,
-                            chart: {...chart, ...facetDX},
+                            chart: { ...chart, ...facetDX },
                             colors,
                             height,
                             lineType,
@@ -521,20 +523,20 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
                             size={defaultResponsiveSize}
                             afterElements={null}
                             gridDisplay={true}
-                            margin={{...frameSettings.margin, ...{ left: 70, right: 40, top: 35 }}}
+                            margin={{ ...frameSettings.margin, ...{ left: 70, right: 40, top: 35 } }}
                             title={title}
-                            />)
-    
+                        />)
+
                     }
 
 
                 })
 
-                finalRenderedViz = <FacetWrapper>
+            finalRenderedViz = <FacetWrapper>
                 <FacetController>
-                {facetFrames}
+                    {facetFrames}
                 </FacetController>
-                </FacetWrapper>            
+            </FacetWrapper>
         } else {
             finalRenderedViz = <React.Fragment>{instantiatedView}
                 {editable && <VizControls
@@ -559,7 +561,7 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
                         lineType,
                         setAreaType: this.setAreaType,
                         areaType
-        }} />}</React.Fragment>
+                    }} />}</React.Fragment>
         }
 
         const display: React.ReactNode = (
@@ -735,7 +737,15 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
             display = this.state.displayChart[chartKey];
         }
 
-        const children = React.Children.map(this.props.children, child => {
+        const toolbarProps = {
+            dimensions,
+            currentView: view,
+            setGrid: this.setGrid,
+            setView: this.setView,
+            largeDataset
+        };
+
+        let children = React.Children.map(this.props.children, child => {
             if (!React.isValidElement(child)) {
                 return;
             }
@@ -744,13 +754,6 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
                 const newProps = { children: display };
                 return React.cloneElement(child, newProps);
             } else if (componentType === "toolbar") {
-                const toolbarProps = {
-                    dimensions,
-                    currentView: view,
-                    setGrid: this.setGrid,
-                    setView: this.setView,
-                    largeDataset
-                };
                 return React.cloneElement(child, toolbarProps);
             }
 
@@ -760,8 +763,18 @@ export default class DataExplorer extends React.PureComponent<Partial<Props>, St
         return (
             <div>
                 <MetadataWarning metadata={this.props.metadata!} />
-                <FlexWrapper>{children}</FlexWrapper>
+                <FlexWrapper>{
+
+                    children ? children :
+                        <>
+                            <Viz>{display}</Viz>
+                            <Toolbar {...toolbarProps} />
+                        </>
+
+                }</FlexWrapper>
             </div>
         );
     }
 }
+
+export { DataExplorer as default, DataExplorer }
