@@ -4,6 +4,7 @@ import DataResourceTransformGrid from "../charts/grid";
 import { semioticSettings } from "../charts/settings";
 import { colors } from "../utilities/settings";
 import VizControls from "./VizControls";
+import HTMLLegend from "./HTMLLegend";
 import { Viz } from "./Viz";
 import { Toolbar } from "./Toolbar";
 
@@ -526,16 +527,19 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                             margin={{ ...frameSettings.margin, ...{ left: 70, right: 40, top: 35 } }}
                             title={title}
                         />)
-
                     }
-
-
                 })
 
             finalRenderedViz = <FacetWrapper>
                 <FacetController>
                     {facetFrames}
                 </FacetController>
+                <HTMLLegend
+                    valueHash={{}}
+                    colorHash={colorHashOverride}
+                    setColor={this.setColor}
+                    colors={colors}
+                />
             </FacetWrapper>
         } else {
             finalRenderedViz = <React.Fragment>{instantiatedView}

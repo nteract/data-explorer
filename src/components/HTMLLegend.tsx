@@ -4,7 +4,7 @@ import styled from "styled-components";
 import PalettePicker from "./PalettePicker";
 
 interface HTMLLegendProps {
-  values: string[];
+  values?: string[];
   colorHash: { [index: string]: string };
   valueHash: { [index: string]: number };
   colors?: string[];
@@ -37,8 +37,8 @@ const LegendWrapper = styled.div`
 `;
 
 const HTMLLegend = ({
-  values,
   colorHash,
+  values = Object.keys(colorHash),
   valueHash,
   colors = Object.values(colorHash),
   setColor
