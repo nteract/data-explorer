@@ -91,10 +91,19 @@ export const semioticHexbin = (
   colorHashOverride?: Object,
   colorDimOverride?: string
 ) => {
-  return semioticScatterplot(data, schema, options, options.areaType, colorHashOverride, colorDimOverride);
+  return semioticXYPlot(data, schema, options, options.areaType, colorHashOverride, colorDimOverride);
 };
 
 export const semioticScatterplot = (
+  data: Dx.DataProps["data"],
+  schema: Dx.DataProps["schema"],
+  options: XYPlotOptions,
+  colorHashOverride?: object,
+  colorDimOverride?: string) => {
+  return semioticXYPlot(data, schema, options, "scatterplot", colorHashOverride, colorDimOverride)
+}
+
+export const semioticXYPlot = (
   data: Dx.DataProps["data"],
   schema: Dx.DataProps["schema"],
   options: XYPlotOptions,
@@ -115,12 +124,16 @@ export const semioticScatterplot = (
   } = options;
 
   const { dim1, dim2, dim3, metric1, metric2, metric3 } = chart;
+
+  console.log("data", data)
   const filteredData: Dx.Datapoint[] = data.filter(
     (datapoint: Dx.Datapoint) =>
       datapoint[metric1] &&
       datapoint[metric2] &&
       (!metric3 || metric3 === "none" || datapoint[metric3])
   );
+
+  console.log("filteredData", filteredData)
 
   const pointTooltip = (hoveredDatapoint: Dx.Datapoint) => {
     return (
@@ -241,7 +254,7 @@ export const semioticScatterplot = (
     if (!colorHashOverride) {
       uniqueValues.forEach((dimValue: string, index: number) => {
         colorHash[dimValue] = index > 18 ? "grey" : colors[index % colors.length];
-      });  
+      });
     }
 
     additionalSettings.afterElements = (
@@ -393,6 +406,9 @@ export const semioticScatterplot = (
     };
   }
 
+  console.log("type", type)
+  console.log("data2", (type === "scatterplot" || type === "contour") && data)
+
   const xyPlotSettings: { [key: string]: any } = {
     xAccessor: type === "hexbin" || type === "heatmap" ? "x" : metric1,
     yAccessor: type === "hexbin" || type === "heatmap" ? "y" : metric2,
@@ -467,6 +483,8 @@ export const semioticScatterplot = (
   if (type !== "scatterplot") {
     xyPlotSettings.areas = areas;
   }
+
+  console.log("WTF", xyPlotSettings)
 
   return { frameSettings: xyPlotSettings, colorDim: dim1, colorHash }
 

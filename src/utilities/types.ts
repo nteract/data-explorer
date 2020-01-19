@@ -1,3 +1,13 @@
+
+export interface Metric extends Field {
+  type: "integer" | "datetime" | "number";
+}
+
+export interface Dimension extends Field {
+  type: "string" | "boolean" | "datetime";
+  cardinality: number;
+}
+
 export interface ChartOptions {
   metrics: Metric[];
   dimensions: Dimension[];
@@ -21,6 +31,42 @@ export interface DataProps {
   data: Datapoint[];
 }
 
+interface sharedProps {
+  data: DataProps;
+  metadata: Metadata;
+  initialView: View;
+}
+
+export interface facetProps extends sharedProps {
+  dimFacet?: { dim: string, value: string };
+}
+
+
+export interface dxMetaProps {
+  view?: View;
+  lineType?: LineType;
+  areaType?: AreaType;
+  selectedDimensions?: string[];
+  selectedMetrics?: string[];
+  pieceType?: PieceType;
+  summaryType?: SummaryType;
+  networkType?: NetworkType;
+  hierarchyType?: HierarchyType;
+  trendLine?: TrendLineType;
+  marginalGraphics?: SummaryType;
+  barGrouping?: BarGroupingType;
+  colors?: string[];
+  chart?: Chart;
+  facets: facetProps[]
+}
+
+export interface Metadata {
+  dx: dxMetaProps;
+  sampled?: boolean;
+}
+
+export interface FacetSharedProps extends sharedProps { }
+
 export interface Schema {
   fields: Field[];
   pandas_version?: string;
@@ -35,14 +81,6 @@ export interface Field {
   type: string;
 }
 
-export interface Metric extends Field {
-  type: "integer" | "datetime" | "number";
-}
-
-export interface Dimension extends Field {
-  type: "string" | "boolean" | "datetime";
-  cardinality: number;
-}
 
 export interface Datapoint {
   [fieldName: string]: any;
@@ -114,7 +152,7 @@ export type JSONType = PrimitiveImmutable | JSONObject | JSONArray;
 export interface JSONObject {
   [key: string]: JSONType;
 }
-export interface JSONArray extends Array<JSONType> {}
+export interface JSONArray extends Array<JSONType> { }
 
 /**
  *

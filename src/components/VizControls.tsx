@@ -39,7 +39,8 @@ const metricDimSelector = (
   title: string,
   required: boolean,
   selectedValue: string,
-  contextTooltip = "Help me help you help yourself"
+  contextTooltip = "Help me help you help yourself",
+  facetingFunction?: (onWhat: "dimension" | "metric" | "vizType", which?: string) => void
 ) => {
   const metricsList = required ? values : ["none", ...values];
   let displayMetrics;
@@ -68,12 +69,20 @@ const metricDimSelector = (
     displayMetrics = <p style={{ margin: 0 }}>{metricsList[0]}</p>;
   }
 
+  let generateFacetButton
+  if (facetingFunction) {
+    generateFacetButton = <button
+      onClick={() => { facetingFunction("metric", title) }}
+    >Facet</button>
+  }
+
   return (
     <ControlWrapper title={contextTooltip}>
       <div>
         <h3>{title}</h3>
       </div>
       {displayMetrics}
+      {generateFacetButton}
     </ControlWrapper>
   );
 };
@@ -130,6 +139,7 @@ interface VizControlParams {
   networkType: string;
   setLineType: (lineType: Dx.LineType) => void;
   updateMetrics: (name: string) => void;
+  generateFacets: (metricName: string) => (onWhat: "dimension" | "metric" | "vizType", which?: string) => void;
   updateDimensions: (name: string) => void;
   lineType: Dx.LineType;
   areaType: Dx.AreaType;
@@ -159,7 +169,8 @@ export default ({
   lineType,
   areaType,
   setAreaType,
-  data
+  data,
+  generateFacets
 }: VizControlParams) => {
   const metricNames = metrics.map(metric => metric.name);
   const dimensionNames = dimensions.map(dim => dim.name);
@@ -204,7 +215,8 @@ export default ({
             view === "scatter" || view === "hexbin" ? "X" : "Metric",
             true,
             chart.metric1,
-            getControlHelpText(view, "metric1")
+            getControlHelpText(view, "metric1"),
+            generateFacets("metric1")
           )}
         {(view === "scatter" || view === "hexbin") &&
           metricDimSelector(
@@ -213,7 +225,8 @@ export default ({
             "Y",
             true,
             chart.metric2,
-            getControlHelpText(view, "metric2")
+            getControlHelpText(view, "metric2"),
+            generateFacets("metric2")
           )}
         {((view === "scatter" && data.length < 1000) || view === "bar") &&
           metricDimSelector(
@@ -222,7 +235,8 @@ export default ({
             view === "bar" ? "Width" : "Size",
             false,
             chart.metric3,
-            getControlHelpText(view, "metric3")
+            getControlHelpText(view, "metric3"),
+            generateFacets("metric3")
           )}
         {view === "bar" &&
           metricDimSelector(
@@ -231,7 +245,8 @@ export default ({
             "Error Bars",
             false,
             chart.metric4,
-            getControlHelpText(view, "metric4")
+            getControlHelpText(view, "metric4"),
+            generateFacets("metric4")
           )}
         {view === "bar" &&
           metricDimSelector(

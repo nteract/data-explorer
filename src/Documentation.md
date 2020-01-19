@@ -134,9 +134,9 @@ You can turn on faceting by sending multiple DataExplorer prop objects to the Da
 import DataExplorer, { Viz, Toolbar } from "@nteract/data-explorer";
 
 <DataExplorer
-  data={largeVizData}
-  initialView="summary"
-  facets={[
+  data={{...largeVizData}}
+  metadata={{ dx: {
+    facets: [
     {
       initialView: "bar",
       metadata: {
@@ -199,7 +199,11 @@ import DataExplorer, { Viz, Toolbar } from "@nteract/data-explorer";
         }
       }
     }
-  ]}
+  ]
+  }
+  } 
+  }
+  initialView="summary"
 >
   <Viz />
 </DataExplorer>;

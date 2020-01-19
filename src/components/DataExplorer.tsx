@@ -25,42 +25,16 @@ import {
 
 import { FacetController } from "semiotic"
 
-interface dxMetaProps {
-    view?: View;
-    lineType?: LineType;
-    areaType?: AreaType;
-    selectedDimensions?: string[];
-    selectedMetrics?: string[];
-    pieceType?: PieceType;
-    summaryType?: SummaryType;
-    networkType?: NetworkType;
-    hierarchyType?: HierarchyType;
-    trendLine?: Dx.TrendLineType;
-    marginalGraphics?: SummaryType;
-    barGrouping?: Dx.BarGroupingType;
-    colors?: string[];
-    chart?: Chart;
-}
-
-interface Metadata {
-    dx: dxMetaProps;
-    sampled?: boolean;
-}
-
-export interface Props {
-    data: Dx.DataProps;
-    metadata: Metadata;
-    theme?: string;
-    expanded?: boolean;
-    height?: number;
+export interface Props extends Dx.FacetSharedProps {
     models?: {};
+    expanded?: boolean;
+    theme?: string;
+    height?: number;
     mediaType: "application/vnd.dataresource+json";
-    initialView: View;
     onMetadataChange?: (
-        { dx }: { dx: dxMetaProps },
+        { dx }: { dx: Dx.dxMetaProps },
         mediaType: Props["mediaType"]
     ) => void;
-    facets?: Props[]
 }
 
 interface State {
@@ -87,7 +61,7 @@ interface State {
     editable: boolean;
     showLegend: boolean;
     facetCharts?: Chart[];
-    facets?: Props[];
+    facets?: Dx.facetProps[];
     schema: Dx.Schema;
 }
 
@@ -152,7 +126,7 @@ const MetadataWarningContent = styled.div`
   }
 `;
 
-const MetadataWarning = ({ metadata }: { metadata: Metadata }) => {
+const MetadataWarning = ({ metadata }: { metadata: Dx.Metadata }) => {
     const warning =
         metadata && metadata.sampled ? (
             <span>
@@ -259,11 +233,11 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
     constructor(props: Props) {
         super(props);
 
-        const { metadata, initialView, facets } = props;
+        const { metadata, initialView } = props;
 
         // Handle case of metadata being empty yet dx not set
-        const dx = metadata.dx || {};
-        const { chart = {}, ...nonChartDXSettings } = dx;
+        const dx = metadata.dx || { chart: {}, facets: undefined };
+        const { chart = {}, facets, ...nonChartDXSettings } = dx;
 
         let { fields = [], primaryKey = [] } = props.data.schema;
         // Provide a default primaryKey if none provided
@@ -485,6 +459,9 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
 
                         const { Frame: FacetFrame, chartGenerator: facetChartGenerator } = semioticSettings[initialView];
 
+                        console.log("facetChartGenerator", facetChartGenerator)
+                        console.log("initialView", initialView)
+
                         const { data: facetData, schema: facetSchema } = facetDataSettings
 
                         const filteredFacetData = dimFacet ? facetData.filter(d => d[dimFacet.dim] === dimFacet.value) : facetData
@@ -518,6 +495,8 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
 
                         colorHashOverride = colorHashOverride || colorHash
                         colorDimOverride = colorDimOverride || colorDim
+
+                        console.log("frameSettings", frameSettings)
 
                         facetFrames.push(<FacetFrame
                             {...frameSettings}
@@ -562,6 +541,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                         updateDimensions: this.updateDimensions,
                         setLineType: this.setLineType,
                         updateMetrics: this.updateMetrics,
+                        generateFacets: this.generateFacets,
                         lineType,
                         setAreaType: this.setAreaType,
                         areaType
@@ -610,6 +590,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
     };
 
     updateMetadata = (overrideProps: object) => {
+
         const { onMetadataChange, metadata } = this.props;
         const {
             view,
@@ -625,7 +606,8 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
             marginalGraphics,
             barGrouping,
             colors,
-            chart
+            chart,
+            facets
         } = this.state;
         if (onMetadataChange) {
             onMetadataChange(
@@ -646,6 +628,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                         barGrouping,
                         colors,
                         chart,
+                        facets,
                         ...overrideProps
                     }
                 },
@@ -679,6 +662,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                 : oldDims.filter(dimension => dimension !== selectedDimension);
         this.updateChart({ selectedDimensions: newDimensions });
     };
+
     updateMetrics = (selectedMetric: string) => {
         const oldMetrics = this.state.selectedMetrics;
         const newMetrics =
@@ -686,6 +670,30 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                 ? [...oldMetrics, selectedMetric]
                 : oldMetrics.filter(metric => metric !== selectedMetric);
         this.updateChart({ selectedMetrics: newMetrics });
+    };
+
+    generateFacets = (name: string) => (onWhat: "dimension" | "metric" | "vizType", which?: string) => {
+        if (onWhat === "metric") {
+            console.log("metrics", name, this.state.metrics)
+            const generatedFacets = this.state.metrics.map(metric => {
+                return {
+                    metadata: {
+                        dx: {
+                            [name]: metric.name
+                        }
+                    }
+                }
+            })
+            console.log("generatedFacets", generatedFacets)
+            this.updateMetadata({ facets: generatedFacets })
+            this.updateChart({ facets: generatedFacets });
+
+        } else if (onWhat === "dimension") {
+            console.log("dimension", name, this.state.dimensions)
+        } {
+            console.log("which", name, which)
+        }
+        //        this.updateChart({ selectedMetrics: newMetrics });
     };
 
     render() {
