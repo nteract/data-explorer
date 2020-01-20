@@ -5,8 +5,10 @@ import { semioticSettings } from "../charts/settings";
 import { colors } from "../utilities/settings";
 import VizControls from "./VizControls";
 import HTMLLegend from "./HTMLLegend";
+import FacetControls from "./FacetControls";
 import { Viz } from "./Viz";
 import { Toolbar } from "./Toolbar";
+
 
 const mediaType: Props["mediaType"] = "application/vnd.dataresource+json";
 
@@ -25,7 +27,10 @@ import {
 
 import { FacetController } from "semiotic"
 
-export interface Props extends Dx.FacetSharedProps {
+export interface Props {
+    data: Dx.DataProps;
+    metadata: Dx.Metadata;
+    initialView: Dx.View;
     models?: {};
     expanded?: boolean;
     theme?: string;
@@ -378,7 +383,6 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
             facets
         } = { ...this.state, ...updatedState };
 
-
         if (!this.props.data && !this.props.metadata) {
             return;
         }
@@ -441,12 +445,12 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
 
         let finalRenderedViz
 
-        if (facets) {
+        if (facets && facets.length > 0) {
             let colorHashOverride
             let colorDimOverride
             const facetFrames = []
             facets
-                .forEach(baseDXSettings => {
+                .forEach((baseDXSettings, facetIndex) => {
 
                     const { dimFacet, initialView = view, data: facetDataSettings = this.state, metadata: facetMetadata = { dx: {} } } = baseDXSettings
 
@@ -458,9 +462,6 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                         const { dx: facetDX = {} } = facetMetadata
 
                         const { Frame: FacetFrame, chartGenerator: facetChartGenerator } = semioticSettings[initialView];
-
-                        console.log("facetChartGenerator", facetChartGenerator)
-                        console.log("initialView", initialView)
 
                         const { data: facetData, schema: facetSchema } = facetDataSettings
 
@@ -496,10 +497,16 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                         colorHashOverride = colorHashOverride || colorHash
                         colorDimOverride = colorDimOverride || colorDim
 
-                        console.log("frameSettings", frameSettings)
-
                         facetFrames.push(<FacetFrame
                             {...frameSettings}
+                            beforeElements={<FacetControls
+                                focusFunction={dxSettings => {
+                                    this.updateChart({ chart: { ...chart, ...dxSettings.dx }, view: initialView, facets: [] });
+                                }}
+                                removeFunction={facetIndex => { this.updateChart({ facets: facets.filter((d, i) => i !== facetIndex) }) }}
+                                dxSettings={facetMetadata}
+                                facetIndex={facetIndex}
+                            />}
                             size={defaultResponsiveSize}
                             afterElements={null}
                             gridDisplay={true}
@@ -585,6 +592,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
             }
         );
     };
+
     setView = (view: View) => {
         this.updateChart({ view });
     };
@@ -638,8 +646,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
     };
 
     setGrid = () => {
-        this.updateMetadata({ view: "grid" });
-        this.setState({ view: "grid" });
+        this.updateChart({ view: "grid" });
     };
 
     setColor = (newColorArray: string[]) => {
@@ -674,7 +681,6 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
 
     generateFacets = (name: string) => (onWhat: "dimension" | "metric" | "vizType", which?: string) => {
         if (onWhat === "metric") {
-            console.log("metrics", name, this.state.metrics)
             const generatedFacets = this.state.metrics.map(metric => {
                 return {
                     metadata: {
@@ -684,16 +690,10 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                     }
                 }
             })
-            console.log("generatedFacets", generatedFacets)
-            this.updateMetadata({ facets: generatedFacets })
+
             this.updateChart({ facets: generatedFacets });
 
-        } else if (onWhat === "dimension") {
-            console.log("dimension", name, this.state.dimensions)
-        } {
-            console.log("which", name, which)
         }
-        //        this.updateChart({ selectedMetrics: newMetrics });
     };
 
     render() {
@@ -712,7 +712,8 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
             trendLine,
             marginalGraphics,
             barGrouping,
-            largeDataset
+            largeDataset,
+            facets
         } = this.state;
 
         let display: React.ReactNode = null;
@@ -780,7 +781,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                     children ? children :
                         <>
                             <Viz>{display}</Viz>
-                            <Toolbar {...toolbarProps} />
+                            {(!facets || facets.length === 0) && <Toolbar {...toolbarProps} />}
                         </>
 
                 }</FlexWrapper>

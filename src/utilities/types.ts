@@ -31,14 +31,11 @@ export interface DataProps {
   data: Datapoint[];
 }
 
-interface sharedProps {
-  data: DataProps;
-  metadata: Metadata;
-  initialView: View;
-}
-
-export interface facetProps extends sharedProps {
+export interface facetProps {
   dimFacet?: { dim: string, value: string };
+  data?: DataProps;
+  metadata?: Metadata;
+  initialView?: View;
 }
 
 
@@ -57,15 +54,13 @@ export interface dxMetaProps {
   barGrouping?: BarGroupingType;
   colors?: string[];
   chart?: Chart;
-  facets: facetProps[]
+  facets?: facetProps[]
 }
 
 export interface Metadata {
   dx: dxMetaProps;
   sampled?: boolean;
 }
-
-export interface FacetSharedProps extends sharedProps { }
 
 export interface Schema {
   fields: Field[];

@@ -141,60 +141,47 @@ import DataExplorer, { Viz, Toolbar } from "@nteract/data-explorer";
       initialView: "bar",
       metadata: {
         dx: {
-          hierarchyType: "treemap",
           metric1: "Generosity"
         }
       }
     },
     {
       initialView: "bar",
-      dimFacet: { dim: "Region", value: "Western Europe" },
+//      dimFacet: { dim: "Region", value: "Western Europe" },
       metadata: {
         dx: {
-          dim1: "Country",
-          selectedDimensions: ["Country"],
-          metric1: "Generosity"
+          metric1: "Dystopia Residual"
         }
       }
     },
     {
       initialView: "bar",
-      dimFacet: { dim: "Region", value: "North America" },
       metadata: {
         dx: {
-          dim1: "Country",
-          selectedDimensions: ["Country"],
-          metric1: "Generosity"
+          metric1: "Happiness Score"
         }
       }
     },
     {
       initialView: "bar",
-      dimFacet: { dim: "Region", value: "Southeastern Asia" },
       metadata: {
         dx: {
-          dim1: "Country",
-          selectedDimensions: ["Country"],
-          metric1: "Generosity"
+          metric1: "Economy (GDP per Capita)"
         }
       }
     },
     {
       initialView: "bar",
-      dimFacet: { dim: "Region", value: "Latin America and Caribbean" },
       metadata: {
         dx: {
-          dim1: "Country",
-          selectedDimensions: ["Country"],
-          metric1: "Generosity"
+          metric1: "Trust (Government Corruption)"
         }
       }
     },
     {
-      initialView: "hierarchy",
+      initialView: "bar",
       metadata: {
         dx: {
-          hierarchyType: "treemap",
           metric1: "Health (Life Expectancy)"
         }
       }
