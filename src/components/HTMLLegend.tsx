@@ -49,13 +49,12 @@ const HTMLLegend = ({
     setColor(newColorArray);
   };
 
-  const sortedValues = Object.keys(valueHash).length > 0 ? values : values.sort()
   return (
     <LegendWrapper>
-      {(sortedValues.length > 18
-        ? // limit the displayed sortedValues to the top 18 and bin everything else into Other
-        [...sortedValues.filter((d, index) => index < 18), "Other"]
-        : sortedValues
+      {(values.length > 18
+        ? // limit the displayed values to the top 18 and bin everything else into Other
+        [...values.filter((d, index) => index < 18), "Other"]
+        : values
       ).map(
         (value, index) =>
           colorHash[value] && (

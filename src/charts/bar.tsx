@@ -131,7 +131,6 @@ export const semioticBarChart = (
     additionalSettings.afterElements = (
       <HTMLLegend
         valueHash={{}}
-        values={uniqueValues}
         colorHash={colorHash}
         setColor={setColor}
         colors={colors}

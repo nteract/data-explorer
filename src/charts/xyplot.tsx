@@ -250,7 +250,7 @@ export const semioticXYPlot = (
     );
 
     if (!colorHashOverride) {
-      uniqueValues.forEach((dimValue: string, index: number) => {
+      uniqueValues.sort().forEach((dimValue: string, index: number) => {
         colorHash[dimValue] = index > 18 ? "grey" : colors[index % colors.length];
       });
     }
@@ -258,7 +258,6 @@ export const semioticXYPlot = (
     additionalSettings.afterElements = (
       <HTMLLegend
         valueHash={{}}
-        values={uniqueValues}
         colorHash={colorHash}
         setColor={setColor}
         colors={colors}

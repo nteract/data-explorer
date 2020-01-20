@@ -48,14 +48,13 @@ export const semioticSummaryChart = (
   );
 
   if (!colorHashOverride && dim1 && dim1 !== "none") {
-    uniqueValues.forEach((dimValue, index) => {
+    uniqueValues.sort().forEach((dimValue, index) => {
       colorHash[dimValue] = colors[index % colors.length];
     });
     if (showLegend) {
       additionalSettings.afterElements = (
         <HTMLLegend
           valueHash={{}}
-          values={uniqueValues}
           colorHash={colorHash}
           setColor={setColor}
           colors={colors}
