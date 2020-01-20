@@ -49,7 +49,7 @@ export const semioticBarChart = (
     pieceHoverAnnotation?: boolean;
   } = {};
 
-  const colorHash: { [key: string]: string; Other: "grey" } = colorHashOverride || { Other: "grey" };
+  const colorHash: {} = colorHashOverride || { Other: "grey" };
 
   const sortedData = sortByOrdinalRange(
     oAccessor,

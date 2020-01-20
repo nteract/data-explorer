@@ -28,7 +28,7 @@ export const semioticSummaryChart = (
   colorDimOverride?: string
 ) => {
   const additionalSettings: { afterElements?: JSX.Element } = {};
-  const colorHash: { [index: string]: string } = colorHashOverride || {};
+  const colorHash: {} = colorHashOverride || {};
 
   const { chart, summaryType, primaryKey, colors, setColor, showLegend } = options;
 

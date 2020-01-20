@@ -112,7 +112,7 @@ export const semioticHierarchicalChart = (
     nestingParams.key((param: { [index: string]: string }) => param[dim]);
   });
 
-  const colorHash: { [index: string]: string } = colorHashOverride || {};
+  const colorHash: {} = colorHashOverride || {};
   const sanitizedData: Array<{}> = [];
 
   data.forEach((datapoint: Dx.Datapoint) => {

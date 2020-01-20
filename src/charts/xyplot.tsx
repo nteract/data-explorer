@@ -88,7 +88,7 @@ export const semioticHexbin = (
   data: Dx.DataProps["data"],
   schema: Dx.DataProps["schema"],
   options: XYPlotOptions,
-  colorHashOverride?: Object,
+  colorHashOverride?: object,
   colorDimOverride?: string
 ) => {
   return semioticXYPlot(data, schema, options, options.areaType, colorHashOverride, colorDimOverride);
@@ -192,7 +192,7 @@ export const semioticXYPlot = (
   };
 
   let sizeScale: (() => number) | ScaleLinear<number, number> = () => 5;
-  const colorHash: { [index: string]: string } = colorHashOverride || { Other: "grey" };
+  const colorHash: {} = colorHashOverride || { Other: "grey" };
   const additionalSettings: { afterElements?: JSX.Element } = {};
 
   let annotations;
