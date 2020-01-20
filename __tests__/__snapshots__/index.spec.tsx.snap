@@ -83,10 +83,10 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
             <HTMLLegend
               colorHash={
                 Object {
-                  "Australia and New Zealand": "#1441A0",
+                  "Australia and New Zealand": "#DA752E",
                   "North America": "#E5C209",
                   "Other": "grey",
-                  "Western Europe": "#DA752E",
+                  "Western Europe": "#1441A0",
                 }
               }
               colors={
@@ -114,13 +114,6 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
               }
               setColor={[Function]}
               valueHash={Object {}}
-              values={
-                Array [
-                  "Western Europe",
-                  "North America",
-                  "Australia and New Zealand",
-                ]
-              }
             />
           }
           annotationSettings={
@@ -485,6 +478,7 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
               },
             ]
           }
+          generateFacets={[Function]}
           hierarchyType="dendrogram"
           lineType="line"
           marginalGraphics="none"
@@ -610,10 +604,10 @@ exports[`Default DataExplorer export with metadata 1`] = `
             <HTMLLegend
               colorHash={
                 Object {
-                  "Australia and New Zealand": "#1441A0",
+                  "Australia and New Zealand": "#DA752E",
                   "North America": "#E5C209",
                   "Other": "grey",
-                  "Western Europe": "#DA752E",
+                  "Western Europe": "#1441A0",
                 }
               }
               colors={
@@ -641,13 +635,6 @@ exports[`Default DataExplorer export with metadata 1`] = `
               }
               setColor={[Function]}
               valueHash={Object {}}
-              values={
-                Array [
-                  "Western Europe",
-                  "North America",
-                  "Australia and New Zealand",
-                ]
-              }
             />
           }
           annotationSettings={
@@ -1012,6 +999,7 @@ exports[`Default DataExplorer export with metadata 1`] = `
               },
             ]
           }
+          generateFacets={[Function]}
           hierarchyType="dendrogram"
           lineType="line"
           marginalGraphics="none"
@@ -1494,6 +1482,7 @@ exports[`Default DataExplorer export without metadata 1`] = `
               },
             ]
           }
+          generateFacets={[Function]}
           hierarchyType="dendrogram"
           lineType="line"
           marginalGraphics="none"
