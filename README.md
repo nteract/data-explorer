@@ -2,6 +2,8 @@
 [![<ORG_NAME>](https://circleci.com/gh/nteract/data-explorer.svg?style=svg)](<LINK>)
 # nteract Data Explorer
 
+## [Interactive Documentation](https://data-explorer.nteract.io/)
+
 ![Data Explorer Examples](https://user-images.githubusercontent.com/1863892/55675008-07632e80-5871-11e9-9dac-0a71450faf7b.gif)
 
 [Read @emeek's post on designing the data explorer](https://blog.nteract.io/designing-the-nteract-data-explorer-f4476d53f897).
