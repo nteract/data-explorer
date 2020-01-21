@@ -17,7 +17,7 @@ type Data = {
     }
 ```
 
-Below is an example of a data explorer with an example of a valid data object.
+Below is an example of a data explorer with a valid data object.
 Notice, though, that network visualization is not available, that's because that button is disabled if your data (like this data) only has one dimension (because network data requires some way of defining source & target).
 
 By default the initial view is a grid. Click on the chart icons on the right to see different views.
