@@ -3,7 +3,7 @@ import toJson from "enzyme-to-json";
 import React from "react";
 
 import { getDxProps } from "../__mocks__/dx-props";
-import DataExplorerDefault, { DataExplorer, Toolbar, Viz } from "../src/index";
+import DataExplorer, { Toolbar, Viz } from "../src/index";
 import { Props } from "../src/components/DataExplorer";
 import * as Dx from "../src/utilities/types";
 
@@ -14,25 +14,25 @@ describe("Default DataExplorer export", () => {
   });
 
   test("with metadata", () => {
-    const wrapper = shallow(<DataExplorerDefault {...dataExplorerProps} />);
+    const wrapper = shallow(<DataExplorer {...dataExplorerProps} />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   test("without metadata", () => {
     delete dataExplorerProps.metadata;
-    const wrapper = shallow(<DataExplorerDefault {...dataExplorerProps} />);
+    const wrapper = shallow(<DataExplorer {...dataExplorerProps} />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   test("renders a Viz and a Toolbar", () => {
-    const wrapper = shallow(<DataExplorerDefault {...dataExplorerProps} />);
+    const wrapper = shallow(<DataExplorer {...dataExplorerProps} />);
 
     expect(wrapper.find(Toolbar).exists()).toEqual(true);
     expect(wrapper.find(Viz).exists()).toEqual(true);
   });
 });
 
-describe("DataExplorer composed", () => {
+describe("DataExplorer composed with children", () => {
   let dataExplorerProps: Props;
   beforeEach(() => {
     dataExplorerProps = getDxProps();

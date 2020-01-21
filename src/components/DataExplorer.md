@@ -1,38 +1,16 @@
-### Basic Usage
-This component is a wrapper that can hold multiple (or no) Viz and Toolbar components. Here it is with `Toolbar` & `Viz` components. This allows you to compose it, for instance putting a `Toolbar` on the left and the right.
+The simplest way to use the DataExplorer component is in its default configuration with controls and viz integrated. The only prop requirement is a dataset.
 
 ```jsx
-import { largeVizData } from "../../doc_data/viz_data.js";
-import { Viz } from "./Viz";
-import { Toolbar } from "./Toolbar";
+import DataExplorer from "@nteract/data-explorer";
 
-<DataExplorer
-    data={largeVizData}
->
-    <Toolbar />
-    <Viz />
-    <Toolbar />
-</DataExplorer>
+<DataExplorer data={largeVizData} />;
 ```
 
-### No Toolbar
-If you want your Data Explorer to be set to a particular view and not be able to be switched, you can leave out the toolbar.
+The `data` prop expects a well-formatted data object:
 
-```jsx
-import { largeVizData } from "../../doc_data/viz_data.js";
-import { Viz } from "./Viz";
-import { Toolbar } from "./Toolbar";
-
-<DataExplorer
-    data={largeVizData}
-    initialView="hierarchy"
-    metadata={{ dx: 
-        { 
-        hierarchyType: "treemap",
-        metric1: "Economy (GDP per Capita)" }
-        }
+```ts
+type Data = {
+      schema: { fields: [{ name: string, type: string }...], primaryKey: Array<?string> },
+      data: [{ key: value },...]
     }
->
-    <Viz />
-</DataExplorer>
 ```

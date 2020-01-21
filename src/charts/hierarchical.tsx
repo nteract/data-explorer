@@ -85,7 +85,9 @@ const hierarchicalColor = (
 export const semioticHierarchicalChart = (
   data: Dx.DataProps["data"],
   schema: Dx.DataProps["schema"],
-  options: HierarchicalOptions
+  options: HierarchicalOptions,
+  colorHashOverride?: { key?: string },
+  colorDimOverride?: string
 ) => {
   const {
     hierarchyType: baseHierarchyType = "dendrogram",
@@ -110,11 +112,11 @@ export const semioticHierarchicalChart = (
     nestingParams.key((param: { [index: string]: string }) => param[dim]);
   });
 
-  const colorHash: { [index: string]: string } = {};
+  const colorHash: {} = colorHashOverride || {};
   const sanitizedData: Array<{}> = [];
 
   data.forEach((datapoint: Dx.Datapoint) => {
-    if (!colorHash[datapoint[selectedDimensions[0]]]) {
+    if (!colorDimOverride && !colorHash[datapoint[selectedDimensions[0]]]) {
       colorHash[datapoint[selectedDimensions[0]]] =
         colors[Object.keys(colorHash).length];
     }
@@ -129,7 +131,7 @@ export const semioticHierarchicalChart = (
   const entries = nestingParams.entries(sanitizedData);
   const rootNode = { values: entries };
 
-  return {
+  const hierarchySettings = {
     edges: rootNode,
     edgeStyle: () => ({ fill: "lightgray", stroke: "gray" }),
     nodeStyle: (node: { depth: number }) => {
@@ -171,4 +173,7 @@ export const semioticHierarchicalChart = (
       );
     }
   };
+
+  return { frameSettings: hierarchySettings, colorDim: selectedDimensions[0], colorHash }
+
 };

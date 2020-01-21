@@ -87,16 +87,29 @@ function combineTopAnnotations(
 export const semioticHexbin = (
   data: Dx.DataProps["data"],
   schema: Dx.DataProps["schema"],
-  options: XYPlotOptions
+  options: XYPlotOptions,
+  colorHashOverride?: { key?: string },
+  colorDimOverride?: string
 ) => {
-  return semioticScatterplot(data, schema, options, options.areaType);
+  return semioticXYPlot(data, schema, options, options.areaType, colorHashOverride, colorDimOverride);
 };
 
 export const semioticScatterplot = (
   data: Dx.DataProps["data"],
   schema: Dx.DataProps["schema"],
   options: XYPlotOptions,
-  type: string = "scatterplot"
+  colorHashOverride?: { key?: string },
+  colorDimOverride?: string) => {
+  return semioticXYPlot(data, schema, options, "scatterplot", colorHashOverride, colorDimOverride)
+}
+
+export const semioticXYPlot = (
+  data: Dx.DataProps["data"],
+  schema: Dx.DataProps["schema"],
+  options: XYPlotOptions,
+  type: string = "scatterplot",
+  colorHashOverride?: { key?: string },
+  colorDimOverride?: string
 ) => {
   const height = options.height - 150 || 500;
 
@@ -111,6 +124,7 @@ export const semioticScatterplot = (
   } = options;
 
   const { dim1, dim2, dim3, metric1, metric2, metric3 } = chart;
+
   const filteredData: Dx.Datapoint[] = data.filter(
     (datapoint: Dx.Datapoint) =>
       datapoint[metric1] &&
@@ -178,7 +192,7 @@ export const semioticScatterplot = (
   };
 
   let sizeScale: (() => number) | ScaleLinear<number, number> = () => 5;
-  const colorHash: { [index: string]: string } = { Other: "grey" };
+  const colorHash: {} = colorHashOverride || { Other: "grey" };
   const additionalSettings: { afterElements?: JSX.Element } = {};
 
   let annotations;
@@ -213,6 +227,7 @@ export const semioticScatterplot = (
       .domain([dataMin, dataMax])
       .range([2, 20]);
   }
+
   const sortedData = sortByOrdinalRange(
     metric1,
     (metric3 !== "none" && metric3) || metric2,
@@ -234,14 +249,15 @@ export const semioticScatterplot = (
       []
     );
 
-    uniqueValues.forEach((dimValue: string, index: number) => {
-      colorHash[dimValue] = index > 18 ? "grey" : colors[index % colors.length];
-    });
+    if (!colorHashOverride) {
+      uniqueValues.sort().forEach((dimValue: string, index: number) => {
+        colorHash[dimValue] = index > 18 ? "grey" : colors[index % colors.length];
+      });
+    }
 
     additionalSettings.afterElements = (
       <HTMLLegend
         valueHash={{}}
-        values={uniqueValues}
         colorHash={colorHash}
         setColor={setColor}
         colors={colors}
@@ -438,7 +454,7 @@ export const semioticScatterplot = (
         : type === "contour"
           ? 3
           : sizeScale(datapoint[metric3]),
-      fill: colorHash[datapoint[dim1]] || "black",
+      fill: colorHash[datapoint[colorDimOverride || dim1]] || "black",
       fillOpacity: 0.75,
       stroke: renderInCanvas ? "none" : type === "contour" ? "white" : "black",
       strokeWidth: type === "contour" ? 0.5 : 1,
@@ -462,5 +478,6 @@ export const semioticScatterplot = (
     xyPlotSettings.areas = areas;
   }
 
-  return xyPlotSettings;
+  return { frameSettings: xyPlotSettings, colorDim: dim1, colorHash }
+
 };

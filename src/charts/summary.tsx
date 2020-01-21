@@ -23,10 +23,12 @@ const fontScale = scaleLinear()
 export const semioticSummaryChart = (
   data: Dx.DataProps["data"],
   schema: Dx.DataProps["schema"],
-  options: SummaryOptions
+  options: SummaryOptions,
+  colorHashOverride?: { key?: string },
+  colorDimOverride?: string
 ) => {
   const additionalSettings: { afterElements?: JSX.Element } = {};
-  const colorHash: { [index: string]: string } = {};
+  const colorHash: {} = colorHashOverride || {};
 
   const { chart, summaryType, primaryKey, colors, setColor, showLegend } = options;
 
@@ -45,15 +47,14 @@ export const semioticSummaryChart = (
     []
   );
 
-  if (dim1 && dim1 !== "none") {
-    uniqueValues.forEach((dimValue, index) => {
+  if (!colorHashOverride && dim1 && dim1 !== "none") {
+    uniqueValues.sort().forEach((dimValue, index) => {
       colorHash[dimValue] = colors[index % colors.length];
     });
     if (showLegend) {
       additionalSettings.afterElements = (
         <HTMLLegend
           valueHash={{}}
-          values={uniqueValues}
           colorHash={colorHash}
           setColor={setColor}
           colors={colors}
@@ -70,12 +71,12 @@ export const semioticSummaryChart = (
     oAccessor,
     rAccessor,
     summaryStyle: (summaryDatapoint: Dx.Datapoint) => ({
-      fill: colorHash[summaryDatapoint[dim1]] || colors[0],
+      fill: colorHash[summaryDatapoint[colorDimOverride || dim1]] || colors[0],
       fillOpacity: 0.8,
-      stroke: colorHash[summaryDatapoint[dim1]] || colors[0]
+      stroke: colorHash[summaryDatapoint[colorDimOverride || dim1]] || colors[0]
     }),
     style: (pieceDatapoint: Dx.Datapoint) => ({
-      fill: colorHash[pieceDatapoint[dim1]] || colors[0],
+      fill: colorHash[pieceDatapoint[colorDimOverride || dim1]] || colors[0],
       stroke: "white"
     }),
     oPadding: 5,
@@ -115,5 +116,6 @@ export const semioticSummaryChart = (
     ...additionalSettings
   };
 
-  return summarySettings;
+  return { frameSettings: summarySettings, colorDim: dim1, colorHash }
+
 };

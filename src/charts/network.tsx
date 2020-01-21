@@ -117,7 +117,9 @@ const nodeLabeling: {
 export const semioticNetwork = (
   data: Dx.DataProps["data"],
   schema: Dx.DataProps["schema"],
-  options: NetworkOptions
+  options: NetworkOptions,
+  colorHashOverride?: { key?: string },
+  colorDimOverride?: string
 ) => {
   const { networkType = "force", chart, colors } = options;
   const {
@@ -155,23 +157,25 @@ export const semioticNetwork = (
     edgeHash[`${edge[sourceDimension]}-${edge[targetDimension]}`].weight += 1;
   });
 
-  const colorHash: { [index: string]: string } = {};
-  data.forEach(edge => {
-    if (!colorHash[edge[sourceDimension]]) {
-      colorHash[edge[sourceDimension]] =
-        colors[Object.keys(colorHash).length % colors.length];
-    }
-    if (!colorHash[edge[targetDimension]]) {
-      colorHash[edge[targetDimension]] =
-        colors[Object.keys(colorHash).length % colors.length];
-    }
-  });
+  const colorHash: { [index: string]: string } = colorHashOverride || {};
 
+  if (!colorHashOverride) {
+    data.forEach(edge => {
+      if (!colorHash[edge[sourceDimension]]) {
+        colorHash[edge[sourceDimension]] =
+          colors[Object.keys(colorHash).length % colors.length];
+      }
+      if (!colorHash[edge[targetDimension]]) {
+        colorHash[edge[targetDimension]] =
+          colors[Object.keys(colorHash).length % colors.length];
+      }
+    });
+  }
   networkData.forEach(edge => {
     edge.weight = Math.min(10, edge.weight);
   });
 
-  return {
+  const networkSettings = {
     edges: networkData,
     edgeType: networkType === "force" && "halfarrow",
     edgeStyle: edgeStyles[networkType](colorHash),
@@ -193,5 +197,7 @@ export const semioticNetwork = (
     },
     nodeLabels: networkType === "matrix" ? false : nodeLabeling[networkLabel],
     margin: { left: 100, right: 100, top: 10, bottom: 10 }
-  };
+  }
+  return { frameSettings: networkSettings, colorDim: sourceDimension, colorHash }
+
 };

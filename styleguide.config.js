@@ -9,20 +9,22 @@ const reactDocgenTypescript = require("react-docgen-typescript").withCustomConfi
 const typescriptPropsParser = reactDocgenTypescript.parse;
 
 module.exports = {
+    require: [path.resolve(path.join(__dirname, 'doc_data/viz_data.js'))],
     title: "Data Explorer",
     defaultExample: false,
     propsParser: typescriptPropsParser,
     resolver: require("react-docgen").resolver.findAllComponentDefinitions,
     skipComponentsWithoutExample: true,
     exampleMode: "expand",
-    usageMode: "expand",
+    usageMode: "colapse",
+    pagePerSection: true,
     sections: [
-        { name: "Basic Usage", components: "src/components/DataExplorerDefault.tsx" },
+        { name: "Documentation", content: "src/Documentation.md" },
         {
-            name: "Customized Usage",
+            name: "Components",
+            description: "DataExplorer component documentation",
             components: "src/components/*.tsx",
-            ignore: "src/components/DataExplorerDefault.tsx",
-            content: "src/components/customization.md"
+
         }
     ],
     compilerConfig: {
@@ -71,5 +73,8 @@ module.exports = {
                 },
             ]
         }
+    },
+    moduleAliases: {
+        '@nteract/data-explorer': path.resolve(__dirname, 'src/index')
     }
 };
