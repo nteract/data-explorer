@@ -118,7 +118,7 @@ export const semioticNetwork = (
   data: Dx.DataProps["data"],
   schema: Dx.DataProps["schema"],
   options: NetworkOptions,
-  colorHashOverride?: object,
+  colorHashOverride?: { key?: string },
   colorDimOverride?: string
 ) => {
   const { networkType = "force", chart, colors } = options;
@@ -169,7 +169,7 @@ export const semioticNetwork = (
         colorHash[edge[targetDimension]] =
           colors[Object.keys(colorHash).length % colors.length];
       }
-    });  
+    });
   }
   networkData.forEach(edge => {
     edge.weight = Math.min(10, edge.weight);

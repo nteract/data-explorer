@@ -24,7 +24,7 @@ export const semioticSummaryChart = (
   data: Dx.DataProps["data"],
   schema: Dx.DataProps["schema"],
   options: SummaryOptions,
-  colorHashOverride?: object,
+  colorHashOverride?: { key?: string },
   colorDimOverride?: string
 ) => {
   const additionalSettings: { afterElements?: JSX.Element } = {};

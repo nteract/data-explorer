@@ -88,7 +88,7 @@ export const semioticHexbin = (
   data: Dx.DataProps["data"],
   schema: Dx.DataProps["schema"],
   options: XYPlotOptions,
-  colorHashOverride?: object,
+  colorHashOverride?: { key?: string },
   colorDimOverride?: string
 ) => {
   return semioticXYPlot(data, schema, options, options.areaType, colorHashOverride, colorDimOverride);
@@ -98,7 +98,7 @@ export const semioticScatterplot = (
   data: Dx.DataProps["data"],
   schema: Dx.DataProps["schema"],
   options: XYPlotOptions,
-  colorHashOverride?: object,
+  colorHashOverride?: { key?: string },
   colorDimOverride?: string) => {
   return semioticXYPlot(data, schema, options, "scatterplot", colorHashOverride, colorDimOverride)
 }
@@ -108,7 +108,7 @@ export const semioticXYPlot = (
   schema: Dx.DataProps["schema"],
   options: XYPlotOptions,
   type: string = "scatterplot",
-  colorHashOverride?: object,
+  colorHashOverride?: { key?: string },
   colorDimOverride?: string
 ) => {
   const height = options.height - 150 || 500;

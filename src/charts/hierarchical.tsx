@@ -86,7 +86,7 @@ export const semioticHierarchicalChart = (
   data: Dx.DataProps["data"],
   schema: Dx.DataProps["schema"],
   options: HierarchicalOptions,
-  colorHashOverride?: Object,
+  colorHashOverride?: { key?: string },
   colorDimOverride?: string
 ) => {
   const {

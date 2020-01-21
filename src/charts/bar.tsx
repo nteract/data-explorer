@@ -21,7 +21,7 @@ export const semioticBarChart = (
   data: Dx.Datapoint[],
   schema: Dx.Schema,
   options: BarOptions,
-  colorHashOverride?: Object,
+  colorHashOverride?: { key?: string },
   colorDimOverride?: string
 ) => {
   const { selectedDimensions, chart, colors, setColor, barGrouping } = options;
