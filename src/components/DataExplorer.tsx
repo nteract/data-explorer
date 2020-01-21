@@ -157,13 +157,8 @@ const FlexWrapper = styled.div`
 const FacetWrapper = styled.div`
   display: flex;
   flex-flow: wrap;
-  width: 100%;
-
-  .responsive-container {
-      width: 50% !important;
-  }
+  width: 120%;
 `;
-
 
 const SemioticWrapper = styled.div`
   width: 100%;
