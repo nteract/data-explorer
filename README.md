@@ -47,9 +47,7 @@ import { DataExplorer, Toolbar, Viz } from "@nteract/data-explorer";
 
 ## Hacking on the nteract Data Explorer
 
-For expedited development, we recommend using the [Jupyter Extension](https://github.com/nteract/nteract/tree/master/applications/jupyter-extension) to contribute.
-
-_Note: the desktop app can be used instead, but you'll have to manually reload to see changes_
+For expedited development, you can run `npm run styleguide` and the data explorer documentation will be run live locally and you can experiment with the settings and data.
 
 ## Installation
 

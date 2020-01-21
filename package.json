@@ -10,7 +10,7 @@
     "styleguide": "styleguidist server",
     "styleguide:build": "styleguidist build"
   },
-  "author": "Kyle Kelley <rgbkrk@gmail.com>",
+  "author": "Elijah Meeks <emeeks@gmail.com>",
   "repository": "https://github.com/nteract/data-explorer",
   "publishConfig": {
     "access": "public"
