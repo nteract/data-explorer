@@ -360,7 +360,7 @@ export default ({
           )}
         {view === "summary" &&
           metricDimSelector(
-            ["violin", "boxplot", "joy", "heatmap", "histogram"],
+            ["violin", "boxplot", "ridgeline", "heatmap", "histogram"],
             selectedSummaryType =>
               updateChart({ summaryType: selectedSummaryType }),
             "Type",

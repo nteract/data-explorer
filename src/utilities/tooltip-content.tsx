@@ -9,7 +9,7 @@ interface Props {
 
 // A little "mixin" for picking the :before on a tooltip
 const beforeContent = (props: Props) => {
-  if (props.x < 200) {
+  if (props.x < 200 || props.x > 600) {
     return null;
   }
   if (props.y < 200) {
@@ -48,7 +48,7 @@ const beforeContent = (props: Props) => {
 const TooltipContent = styled.div.attrs((props: Props) => ({
   style: {
     transform: `translate(
-      ${props.x < 200 ? "0px" : "calc(-50% + 7px)"},
+      ${props.x < 200 ? "0px" : props.x > 600 ? "-100%" : "calc(-50% + 7px)"},
       ${props.y < 200 ? "10px" : "calc(-100% - 10px)"}
     )`
   }
@@ -56,7 +56,7 @@ const TooltipContent = styled.div.attrs((props: Props) => ({
   color: black;
   padding: 10px;
   z-index: 999999;
-  min-width: 120px;
+  width: 500px;
   background: white;
   border: 1px solid #888;
   border-radius: 5px;

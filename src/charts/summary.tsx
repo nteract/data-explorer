@@ -13,6 +13,7 @@ interface SummaryOptions {
   setColor: Dx.ChartOptions["setColor"];
   summaryType: Dx.SummaryType;
   showLegend: boolean;
+  dimensions: Dx.Dimension[];
 }
 
 const fontScale = scaleLinear()
@@ -101,12 +102,15 @@ export const semioticSummaryChart = (
     baseMarkProps: { forceUpdate: true },
     pieceHoverAnnotation: summaryType === "violin",
     tooltipContent: (hoveredDatapoint: Dx.Datapoint) => {
+      const dimensions = options.dimensions.filter(dim => dim.name !== dim1)
+    const furtherDims = dimensions.map(dim => <p>{dim.name}: {hoveredDatapoint[dim.name]}</p>)
       return (
         <TooltipContent x={hoveredDatapoint.x} y={hoveredDatapoint.y}>
           <h3>{primaryKey.map(pkey => hoveredDatapoint[pkey]).join(", ")}</h3>
           <p>
             {dim1}: {hoveredDatapoint[dim1]}
           </p>
+          {furtherDims}
           <p>
             {rAccessor}: {hoveredDatapoint[rAccessor]}
           </p>

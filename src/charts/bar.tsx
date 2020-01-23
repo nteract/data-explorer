@@ -142,17 +142,14 @@ export const semioticBarChart = (
       (selectedDimensions.length > 0 && selectedDimensions.join(",") !== dim1)
     ) {
       additionalSettings.pieceHoverAnnotation = true;
-      const combinedOptions = [
-        ...options.dimensions,
-        ...options.metrics
-      ] as Array<{ name: string }>;
       additionalSettings.tooltipContent = hoveredDatapoint => {
         return (
           <TooltipContent x={hoveredDatapoint.x} y={hoveredDatapoint.y}>
             <div
-              style={{ maxHeight: "300px", display: "flex", flexWrap: "wrap" }}
+              style={{ display: "flex", flexWrap: "wrap" }}
             >
-              {combinedOptions.map((dim: { name: string }, index: number) => (
+              <div>
+              {options.dimensions.map((dim: { name: string }, index: number) => (
                 <div
                   style={{
                     margin: "2px 5px 0",
@@ -165,6 +162,22 @@ export const semioticBarChart = (
                   {hoveredDatapoint[dim.name]}
                 </div>
               ))}
+              </div>
+              <div>
+              {options.metrics.map((dim: { name: string }, index: number) => (
+                <div
+                  style={{
+                    margin: "2px 5px 0",
+                    display: "inline-block",
+                    minWidth: "100px"
+                  }}
+                  key={`dim-${index}`}
+                >
+                  <span style={{ fontWeight: 600 }}>{dim.name}</span>:{" "}
+                  {hoveredDatapoint[dim.name]}
+                </div>
+              ))}
+              </div>
             </div>
           </TooltipContent>
         );

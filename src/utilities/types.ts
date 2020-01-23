@@ -123,6 +123,7 @@ export type TrendLineType =
 export type SummaryType =
   | "none"
   | "violin"
+  | "ridgeline"
   | "joy"
   | "histogram"
   | "heatmap"
