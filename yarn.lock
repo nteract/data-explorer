@@ -8252,10 +8252,10 @@ semiotic-mark@0.3.1:
     prop-types "^15.6.0"
     roughjs-es5 "0.1.0"
 
-semiotic@^1.19.8:
-  version "1.20.4"
-  resolved "https://registry.yarnpkg.com/semiotic/-/semiotic-1.20.4.tgz#bedee3fec448e8060354210df89c8df192caeb23"
-  integrity sha512-uu1FkeVRS/zNiUoX4sY5JaT7PvFbMlCrJairIXS+YqkTJv/dfBk8eTltKUtSiQh6vsrrmdMvum/YDQE1BtbKRQ==
+semiotic@^1.20.5:
+  version "1.20.5"
+  resolved "https://npm.apple.com/semiotic/-/semiotic-1.20.5.tgz#326b93b8a5d86b9ddef02c274b00f0ec5e1fd955"
+  integrity sha1-MmuTuKXYa53e8CwnSwDw7F4f2VU=
   dependencies:
     "@mapbox/polylabel" "1"
     d3-array "^1.2.0"

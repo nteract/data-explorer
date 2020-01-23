@@ -448,18 +448,19 @@ export const semioticXYPlot = (
         strokeWidth: type === "contour" ? 2 : 1
       };
     },
-    pointStyle: (datapoint: Dx.Datapoint) => ({
+    pointStyle: (datapoint: Dx.Datapoint) => {
+      return {
       r: renderInCanvas
         ? 2
         : type === "contour"
           ? 3
-          : sizeScale(datapoint[metric3]),
+          : `${sizeScale(datapoint[metric3])}px`,
       fill: colorHash[datapoint[colorDimOverride || dim1]] || "black",
       fillOpacity: 0.75,
       stroke: renderInCanvas ? "none" : type === "contour" ? "white" : "black",
       strokeWidth: type === "contour" ? 0.5 : 1,
       strokeOpacity: 0.9
-    }),
+    }},
     hoverAnnotation: true,
     responsiveWidth: false,
     size: [height + 105, height + 80],

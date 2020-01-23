@@ -20,11 +20,12 @@ const semioticParallelCoordinates = (
   schema: Dx.Schema,
   options: Dx.ChartOptions
 ) => {
-  return {
+  return { frameSettings:  {
     data,
     schema,
     options
-  };
+  }
+};
 };
 
 export const semioticSettings: any = {
