@@ -115,7 +115,7 @@ interface DisplayChart {
   pie is a transform on bar
 */
 
-const defaultResponsiveSize = [500, 300];
+const defaultResponsiveSize = [440, 300];
 
 const MetadataWarningWrapper = styled.div`
   & {
@@ -157,10 +157,11 @@ const FlexWrapper = styled.div`
 const FacetWrapper = styled.div`
   display: flex;
   flex-flow: wrap;
-  width: 100%;
+  min-width: 0;
 
   .responsive-container {
-      width: 50% !important;
+    flex: 1 0 calc(50% - 10px);
+    margin: 5px;
   }
 `;
 
@@ -509,8 +510,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                             />}
                             size={defaultResponsiveSize}
                             afterElements={null}
-                            gridDisplay={true}
-                            margin={{ ...frameSettings.margin, ...{ left: 70, right: 40, top: 35 } }}
+                            margin={{ ...frameSettings.margin, ...{ left: 55, right: 10, top: 35 } }}
                             title={title}
                         />)
                     }
