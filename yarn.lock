@@ -8254,7 +8254,7 @@ semiotic-mark@0.3.1:
 
 semiotic@^1.20.5:
   version "1.20.5"
-  resolved "https://npm.apple.com/semiotic/-/semiotic-1.20.5.tgz#326b93b8a5d86b9ddef02c274b00f0ec5e1fd955"
+  resolved "https://registry.yarnpkg.com/semiotic/-/semiotic-1.20.5.tgz#326b93b8a5d86b9ddef02c274b00f0ec5e1fd955"
   integrity sha1-MmuTuKXYa53e8CwnSwDw7F4f2VU=
   dependencies:
     "@mapbox/polylabel" "1"
