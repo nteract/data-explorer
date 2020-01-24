@@ -111,7 +111,7 @@ class ParallelCoordinatesController extends React.Component<Props, State> {
 
     super(props);
 
-    const { options, data, schema } = this.props;
+    const { options, data, schema } = props;
     const { primaryKey, metrics } = options;
 
     const parallelizeResults = parallelizeData(
