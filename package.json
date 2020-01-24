@@ -57,7 +57,7 @@
     "@types/jest": "^24.0.25",
     "@types/numeral": "^0.0.26",
     "@types/react-color": "^3.0.0",
-    "@types/react-table": "^7.0.0",
+    "@types/react-table": "^6.0.0",
     "acorn": "^7.1.0",
     "acorn-jsx": "^5.1.0",
     "babel-loader": "^8.0.6",
