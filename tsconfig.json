@@ -1,6 +1,5 @@
 {
   "strict": true,
-  "declaration": true,
   "esModuleInterop": true,
   "composite": true,
   "lib": [
@@ -27,6 +26,7 @@
     "types"
   ],
   "compilerOptions": {
+    "declaration": true,
     "outDir": "lib",
     "rootDir": "src",
     "baseUrl": ".",
