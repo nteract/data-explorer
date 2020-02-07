@@ -70,6 +70,13 @@ import DataExplorer from "@nteract/data-explorer";
   initialView="summary"
   metadata={{
     dx: {
+      overrideSettings: {
+        backgroundGraphics: <text
+          fontSize="24px"
+          fontWeight={900}
+          fill="#DDD"
+          y={20}>DX™</text>
+      },
       summaryType: "boxplot",
       colors: [
         "rgb(50,150,77)",
