@@ -54,7 +54,8 @@ export interface dxMetaProps {
   barGrouping?: BarGroupingType;
   colors?: string[];
   chart?: Chart;
-  facets?: facetProps[]
+  facets?: facetProps[];
+  overrideSettings?: object;
 }
 
 export interface Metadata {

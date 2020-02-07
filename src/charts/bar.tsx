@@ -149,34 +149,34 @@ export const semioticBarChart = (
               style={{ display: "flex", flexWrap: "wrap" }}
             >
               <div>
-              {options.dimensions.map((dim: { name: string }, index: number) => (
-                <div
-                  style={{
-                    margin: "2px 5px 0",
-                    display: "inline-block",
-                    minWidth: "100px"
-                  }}
-                  key={`dim-${index}`}
-                >
-                  <span style={{ fontWeight: 600 }}>{dim.name}</span>:{" "}
-                  {hoveredDatapoint[dim.name]}
-                </div>
-              ))}
+                {options.dimensions.map((dim: { name: string }, index: number) => (
+                  <div
+                    style={{
+                      margin: "2px 5px 0",
+                      display: "inline-block",
+                      minWidth: "100px"
+                    }}
+                    key={`dim-${index}`}
+                  >
+                    <span style={{ fontWeight: 600 }}>{dim.name}</span>:{" "}
+                    {hoveredDatapoint[dim.name]}
+                  </div>
+                ))}
               </div>
               <div>
-              {options.metrics.map((dim: { name: string }, index: number) => (
-                <div
-                  style={{
-                    margin: "2px 5px 0",
-                    display: "inline-block",
-                    minWidth: "100px"
-                  }}
-                  key={`dim-${index}`}
-                >
-                  <span style={{ fontWeight: 600 }}>{dim.name}</span>:{" "}
-                  {hoveredDatapoint[dim.name]}
-                </div>
-              ))}
+                {options.metrics.map((dim: { name: string }, index: number) => (
+                  <div
+                    style={{
+                      margin: "2px 5px 0",
+                      display: "inline-block",
+                      minWidth: "100px"
+                    }}
+                    key={`dim-${index}`}
+                  >
+                    <span style={{ fontWeight: 600 }}>{dim.name}</span>:{" "}
+                    {hoveredDatapoint[dim.name]}
+                  </div>
+                ))}
               </div>
             </div>
           </TooltipContent>
@@ -206,11 +206,11 @@ export const semioticBarChart = (
         },
     hoverAnnotation: true,
     margin: { top: 10, right: 10, bottom: 100, left: 70 },
-    axis: {
+    axes: [{
       orient: "left",
       label: rAccessor,
       tickFormat: numeralFormatting
-    },
+    }],
     tooltipContent: (hoveredDatapoint: { [key: string]: any }) => {
       return (
         <TooltipContent
