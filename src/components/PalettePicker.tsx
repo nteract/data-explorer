@@ -112,6 +112,38 @@ class PalettePicker extends React.PureComponent<Props, State> {
     };
   }
 
+  vizPaletteListener = (event: MessageEvent) => {
+    if (event.origin !== "https://projects.susielu.com") {
+      return;
+    }
+
+    const currentColors = this.state.colors.split(",");
+    const newColors = event.data;
+
+    if (
+      !Array.isArray(newColors) ||
+      newColors.filter(el => typeof el !== "string").length > 0
+    ) {
+      return;
+    }
+
+    while (newColors.length < currentColors.length) {
+      // Add random colors in case the new palette doesn't have enough
+      // https://css-tricks.com/snippets/javascript/random-hex-color/
+      newColors.push(Math.floor(Math.random() * 16777215).toString(16));
+    }
+    this.props.updateColor(newColors);
+    this.setState({ colors: newColors.join(",\n") });
+  };
+
+  componentDidMount() {
+    window.addEventListener("message", this.vizPaletteListener);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("message", this.vizPaletteListener);
+  }
+
   openClose = () => {
     this.setState({
       open: !this.state.open,
@@ -213,6 +245,7 @@ class PalettePicker extends React.PureComponent<Props, State> {
         </div>
         <PalettePickerWrapper>
           <a
+            target="_blank"
             href={`http://projects.susielu.com/viz-palette?colors=[${colors
               .map(d => `"${d}"`)
               .join(",")}]&backgroundColor="white"&fontColor="black"`}
