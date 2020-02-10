@@ -40,6 +40,7 @@ export interface Props {
         { dx }: { dx: Dx.dxMetaProps },
         mediaType: Props["mediaType"]
     ) => void;
+    overrideSettings?: object;
 }
 
 interface State {
@@ -234,17 +235,18 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
         },
         height: 500,
         mediaType,
-        initialView: "grid"
+        initialView: "grid",
+        overrideSettings: {}
     };
 
     constructor(props: Props) {
         super(props);
 
-        const { metadata, initialView } = props;
+        const { metadata, initialView, overrideSettings } = props;
 
         // Handle case of metadata being empty yet dx not set
-        const dx = metadata.dx || { chart: {}, facets: undefined, overrideSettings: {} };
-        const { chart = {}, facets, overrideSettings = {}, ...nonChartDXSettings } = dx;
+        const dx = metadata.dx || { chart: {}, facets: undefined };
+        const { chart = {}, facets, ...nonChartDXSettings } = dx;
 
         let { fields = [], primaryKey = [] } = props.data.schema;
         // Provide a default primaryKey if none provided
@@ -644,7 +646,6 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                         colors,
                         chart,
                         facets,
-                        overrideSettings,
                         ...overrideProps
                     }
                 },

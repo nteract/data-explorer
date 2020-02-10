@@ -1311,6 +1311,7 @@ exports[`Default DataExplorer export without metadata 1`] = `
             }
           }
           models={Object {}}
+          overrideSettings={Object {}}
           theme="light"
         />
         <Component

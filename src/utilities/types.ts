@@ -55,7 +55,6 @@ export interface dxMetaProps {
   colors?: string[];
   chart?: Chart;
   facets?: facetProps[];
-  overrideSettings?: object;
 }
 
 export interface Metadata {

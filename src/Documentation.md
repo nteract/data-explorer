@@ -66,17 +66,17 @@ Chart settings refer to the metrics, dimensions and sort order for time series d
 import DataExplorer from "@nteract/data-explorer";
 
 <DataExplorer
-  data={largeVizData}
-  initialView="summary"
-  metadata={{
-    dx: {
-      overrideSettings: {
+overrideSettings={{
         backgroundGraphics: <text
           fontSize="24px"
           fontWeight={900}
           fill="#DDD"
           y={20}>DX™</text>
-      },
+      }}
+  data={largeVizData}
+  initialView="summary"
+  metadata={{
+    dx: {
       summaryType: "boxplot",
       colors: [
         "rgb(50,150,77)",
