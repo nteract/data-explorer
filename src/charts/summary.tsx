@@ -94,16 +94,16 @@ export const semioticSummaryChart = (
           </text>
         ),
     margin: { top: 25, right: 10, bottom: 50, left: 100 },
-    axis: {
+    axes: [{
       orient: "bottom",
       label: rAccessor,
       tickFormat: numeralFormatting
-    },
+    }],
     baseMarkProps: { forceUpdate: true },
     pieceHoverAnnotation: summaryType === "violin",
     tooltipContent: (hoveredDatapoint: Dx.Datapoint) => {
       const dimensions = options.dimensions.filter(dim => dim.name !== dim1)
-    const furtherDims = dimensions.map(dim => <p>{dim.name}: {hoveredDatapoint[dim.name]}</p>)
+      const furtherDims = dimensions.map(dim => <p>{dim.name}: {hoveredDatapoint[dim.name]}</p>)
       return (
         <TooltipContent x={hoveredDatapoint.x} y={hoveredDatapoint.y}>
           <h3>{primaryKey.map(pkey => hoveredDatapoint[pkey]).join(", ")}</h3>

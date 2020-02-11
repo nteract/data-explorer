@@ -40,6 +40,7 @@ export interface Props {
         { dx }: { dx: Dx.dxMetaProps },
         mediaType: Props["mediaType"]
     ) => void;
+    overrideSettings?: object;
 }
 
 interface State {
@@ -68,6 +69,7 @@ interface State {
     facetCharts?: Chart[];
     facets?: Dx.facetProps[];
     schema: Dx.Schema;
+    overrideSettings: object;
 }
 
 const generateChartKey = ({
@@ -233,13 +235,14 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
         },
         height: 500,
         mediaType,
-        initialView: "grid"
+        initialView: "grid",
+        overrideSettings: {}
     };
 
     constructor(props: Props) {
         super(props);
 
-        const { metadata, initialView } = props;
+        const { metadata, initialView, overrideSettings } = props;
 
         // Handle case of metadata being empty yet dx not set
         const dx = metadata.dx || { chart: {}, facets: undefined };
@@ -344,6 +347,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
             colors,
             // ui: {},
             chart: finalChartSettings,
+            overrideSettings,
             displayChart,
             primaryKey,
             data,
@@ -381,7 +385,8 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
             editable,
             showLegend,
             data: stateData,
-            facets
+            facets,
+            overrideSettings
         } = { ...this.state, ...updatedState };
 
         if (!this.props.data && !this.props.metadata) {
@@ -441,6 +446,8 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                 responsiveWidth
                 size={defaultResponsiveSize}
                 {...frameSettings}
+                {...overrideSettings}
+
             />
         }
 
@@ -510,8 +517,9 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                             />}
                             size={defaultResponsiveSize}
                             afterElements={null}
-                            margin={{ ...frameSettings.margin, ...{ left: 55, right: 10, top: 35 } }}
+                            margin={{ ...frameSettings.margin, ...{ left: 55, right: 25, top: 25 } }}
                             title={title}
+                            {...overrideSettings}
                         />)
                     }
                 })
@@ -615,7 +623,8 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
             barGrouping,
             colors,
             chart,
-            facets
+            facets,
+            overrideSettings
         } = this.state;
         if (onMetadataChange) {
             onMetadataChange(

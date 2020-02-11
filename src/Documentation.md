@@ -66,6 +66,13 @@ Chart settings refer to the metrics, dimensions and sort order for time series d
 import DataExplorer from "@nteract/data-explorer";
 
 <DataExplorer
+overrideSettings={{
+        backgroundGraphics: <text
+          fontSize="24px"
+          fontWeight={900}
+          fill="#DDD"
+          y={20}>DX™</text>
+      }}
   data={largeVizData}
   initialView="summary"
   metadata={{
