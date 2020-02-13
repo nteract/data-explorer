@@ -10,10 +10,13 @@ interface ThemeProps {
 export default styled.div<ThemeProps>`
   /* React table style customization */
   width: 100%;
+  font-family: System-UI, -apple-system, BlinkMacSystemFont, "Source Sans Pro", sans-serif;
+  font-size: 0.875rem;
+
 
   .ReactTable .rt-thead.-header .rt-th {
     color: ${props => (props.theme === "dark" ? "#bbb" : "#111")};
-    background-color: ${props => (props.theme === "dark" ? "#1e1e1e" : "#fff")};
+    background-color: ${props => (props.theme === "dark" ? "#1e1e1e" : "#f2f2f2")};
   }
   .ReactTable.-striped .rt-tr.-odd > div {
     color: ${props => (props.theme === "dark" ? "#bbb" : "#111")};
@@ -22,7 +25,7 @@ export default styled.div<ThemeProps>`
 
   .ReactTable.-striped .rt-tr.-even > div {
     color: ${props => (props.theme === "dark" ? "#bbb" : "#111")};
-    background-color: ${props => (props.theme === "dark" ? "#111" : "#f7f7f7")};
+    background-color: ${props => (props.theme === "dark" ? "#111" : "#fff")};
   }
 
   .ReactTable.-highlight .rt-tbody .rt-tr:not(.-padRow):hover {

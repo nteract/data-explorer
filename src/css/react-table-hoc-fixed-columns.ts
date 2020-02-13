@@ -36,7 +36,7 @@ export default `
   .rthfc .-filters .rt-th.rthfc-th-fixed-left-last,
   .rthfc .rt-th.rthfc-th-fixed-left-last,
   .rthfc .rt-td.rthfc-td-fixed-left-last {
-    border-right: solid 1px;
+    border-right: solid #BDBDBD 1px;
   }
 
   .rthfc .rt-th.rthfc-th-fixed-right-first,
