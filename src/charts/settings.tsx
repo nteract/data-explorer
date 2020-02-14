@@ -1,7 +1,10 @@
 import {
   ResponsiveNetworkFrame,
   ResponsiveOrdinalFrame,
-  ResponsiveXYFrame
+  ResponsiveXYFrame,
+  NetworkFrame,
+  OrdinalFrame,
+  XYFrame
 } from "semiotic";
 
 import ParallelCoordinatesController from "../components/ParallelCoordinatesController";
@@ -20,53 +23,62 @@ const semioticParallelCoordinates = (
   schema: Dx.Schema,
   options: Dx.ChartOptions
 ) => {
-  return { frameSettings:  {
-    data,
-    schema,
-    options
-  }
-};
+  return {
+    frameSettings: {
+      data,
+      schema,
+      options
+    }
+  };
 };
 
 export const semioticSettings: any = {
   line: {
     Frame: ResponsiveXYFrame,
     controls: "switch between linetype",
-    chartGenerator: semioticLineChart
+    chartGenerator: semioticLineChart,
+    FacetFrame: XYFrame
   },
   scatter: {
     Frame: ResponsiveXYFrame,
     controls: "switch between modes",
-    chartGenerator: semioticScatterplot
+    chartGenerator: semioticScatterplot,
+    FacetFrame: XYFrame
   },
   hexbin: {
     Frame: ResponsiveXYFrame,
     controls: "switch between modes",
-    chartGenerator: semioticHexbin
+    chartGenerator: semioticHexbin,
+    FacetFrame: XYFrame
   },
   bar: {
     Frame: ResponsiveOrdinalFrame,
     controls: "switch between modes",
-    chartGenerator: semioticBarChart
+    chartGenerator: semioticBarChart,
+    FacetFrame: OrdinalFrame
   },
   summary: {
     Frame: ResponsiveOrdinalFrame,
     controls: "switch between modes",
-    chartGenerator: semioticSummaryChart
+    chartGenerator: semioticSummaryChart,
+    FacetFrame: OrdinalFrame
   },
   network: {
     Frame: ResponsiveNetworkFrame,
     controls: "switch between modes",
-    chartGenerator: semioticNetwork
+    chartGenerator: semioticNetwork,
+    FacetFrame: NetworkFrame
   },
   hierarchy: {
     Frame: ResponsiveNetworkFrame,
     controls: "switch between modes",
-    chartGenerator: semioticHierarchicalChart
+    chartGenerator: semioticHierarchicalChart,
+    FacetFrame: NetworkFrame
   },
   parallel: {
     Frame: ParallelCoordinatesController,
     controls: "switch between modes",
-    chartGenerator: semioticParallelCoordinates
+    chartGenerator: semioticParallelCoordinates,
+    FacetFrame: ParallelCoordinatesController
   }
 };

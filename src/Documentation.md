@@ -202,3 +202,74 @@ import DataExplorer, { Viz, Toolbar } from "@nteract/data-explorer";
   <Viz />
 </DataExplorer>;
 ```
+
+### Custom Styling
+
+You can turn on faceting by sending multiple DataExplorer prop objects to the DataExplorer's `facets` property. When you do so, the properties of each object sent to faceting will be extended onto the properties sent to the data explorer, resulting in multiple views (one for each object sent to `facets`).
+
+```jsx
+import DataExplorer, { Viz, Toolbar } from "@nteract/data-explorer";
+
+<DataExplorer
+  data={{...largeVizData}}
+  overrideSettings={{ size: [150,150], axes: [], oLabel: false, margin: 5 }}
+  metadata={{ dx: {
+    facets: [
+    {
+      initialView: "summary",
+      metadata: {
+        dx: {
+          metric1: "Generosity"
+        }
+      }
+    },
+    {
+      initialView: "summary",
+//      dimFacet: { dim: "Region", value: "Western Europe" },
+      metadata: {
+        dx: {
+          metric1: "Dystopia Residual"
+        }
+      }
+    },
+    {
+      initialView: "summary",
+      metadata: {
+        dx: {
+          metric1: "Happiness Score"
+        }
+      }
+    },
+    {
+      initialView: "summary",
+      metadata: {
+        dx: {
+          metric1: "Economy (GDP per Capita)"
+        }
+      }
+    },
+    {
+      initialView: "summary",
+      metadata: {
+        dx: {
+          metric1: "Trust (Government Corruption)"
+        }
+      }
+    },
+    {
+      initialView: "summary",
+      metadata: {
+        dx: {
+          metric1: "Health (Life Expectancy)"
+        }
+      }
+    }
+  ]
+  }
+  } 
+  }
+  initialView="summary"
+>
+  <Viz />
+</DataExplorer>;
+```
