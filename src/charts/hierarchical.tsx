@@ -15,11 +15,55 @@ interface HierarchicalOptions {
   colors: Dx.ChartOptions["colors"];
 }
 
+const overrideFrameHover = hierarchyType => annotation => {
+  const { d } = annotation
+  if (d.type === "frame-hover" && hierarchyType !== "treemap") {
+    return
+  }
+  return null
+}
+
+const hierarchicalAnnotation = (hierarchyType, selectedDimensions, metric) => annotation => {
+  const { d, networkFrameState, nodes: drawnNodes } = annotation
+  const { type, parent } = d
+  const { networkFrameRender } = networkFrameState
+
+  if (hierarchyType !== "treemap" && parent && type === "highlight") {
+    const { nodes } = networkFrameRender
+    const { customMark, styleFn: baseStyle } = nodes
+
+    const ancestors = parent.ancestors()
+    const parentPlusPieces = [parent, ...ancestors]
+
+    const drawnPieces = parentPlusPieces
+      .map(d => drawnNodes.find(p => p.depth === 0 && d.depth === 0 || (p.hierarchicalID === d.hierarchicalID)))
+
+    const allPieces = [d, ...drawnPieces]
+    const baseMarkProps = { forceUpdate: true }
+
+    const ancestorHighlight = allPieces
+      .map((node, nodei) => {
+        const transform = `translate(${node.x},${node.y})`
+        const styleFn = d => ({ ...baseStyle(d), ...{ fill: "red", opacity: 0.5, stroke: "red", strokeWidth: "4px" } })
+        const customNode = customMark({ d: node, styleFn, transform: transform, baseMarkProps, key: `highlight-${nodei}-parent` })
+
+        const thisLevelName = selectedDimensions[node.depth - 1]
+
+
+        return <g>{customNode}
+          <text transform={transform}>{thisLevelName && `${thisLevelName}: ${node.key}`}{node.depth !== 0 && node[metric] && `${metric}: ${node[metric]}`}</text>
+        </g>
+      })
+    return <g>{ancestorHighlight}</g>
+  }
+  return null
+}
+
 const parentPath = (datapoint: Dx.Datapoint, pathArray: string[]) => {
   if (datapoint.parent) {
     pathArray = parentPath(datapoint.parent, [datapoint.key, ...pathArray]);
   } else {
-    pathArray = ["root", ...pathArray];
+    pathArray = [...pathArray];
   }
   return pathArray;
 };
@@ -27,13 +71,14 @@ const parentPath = (datapoint: Dx.Datapoint, pathArray: string[]) => {
 const hierarchicalTooltip = (
   datapoint: Dx.Datapoint,
   primaryKey: string[],
-  metric: string
+  metric: string,
+  selectedDimensions: string[]
 ) => {
   const pathString = datapoint.parent
     ? parentPath(
       datapoint.parent,
       (datapoint.key && [datapoint.key]) || []
-    ).join("->")
+    ).map((d, i) => <p>{selectedDimensions[i]}: {d}</p>)
     : "";
   const content = [];
   if (!datapoint.parent) {
@@ -46,10 +91,8 @@ const hierarchicalTooltip = (
       <p key="hierarchy-children">Children: {datapoint.children.length}</p>
     );
   } else {
-    content.push(
+    content.push(pathString,
       <p key="leaf-label">
-        {pathString}
-        ->
         {primaryKey.map((pkey: string) => datapoint[pkey]).join(", ")}
       </p>
     );
@@ -128,8 +171,8 @@ export const semioticHierarchicalChart = (
     });
   });
 
-  const entries = nestingParams.entries(sanitizedData);
-  const rootNode = { values: entries };
+  const entries = nestingParams.entries(sanitizedData.sort((a, b) => a[metric1] - b[metric1]));
+  const rootNode = { id: "all", values: entries };
 
   const hierarchySettings = {
     edges: rootNode,
@@ -146,11 +189,13 @@ export const semioticHierarchicalChart = (
       projection: baseHierarchyType === "sunburst" && "radial",
       hierarchySum: (node: { [index: string]: number }) => node[metric1],
       hierarchyChildren: (node: { values: Array<{}> }) => node.values,
-      padding: hierarchyType === "treemap" ? 3 : 0
+      padding: hierarchyType === "treemap" ? 3 : 0,
+      zoom: false
     },
     edgeRenderKey: (edge: object, index: number) => {
       return index;
     },
+    nodeIDAccessor: (d, i) => d.id || d.key || i,
     baseMarkProps: { forceUpdate: true },
     margin: { left: 10, right: 10, top: 10, bottom: 10 },
     hoverAnnotation: [
@@ -165,10 +210,12 @@ export const semioticHierarchicalChart = (
         }
       }
     ],
+    svgAnnotationRules: hierarchicalAnnotation(hierarchyType, selectedDimensions, metric1),
+    htmlAnnotationRules: overrideFrameHover(hierarchyType),
     tooltipContent: (hoveredDatapoint: Dx.Datapoint) => {
       return (
         <TooltipContent x={hoveredDatapoint.x} y={hoveredDatapoint.y}>
-          {hierarchicalTooltip(hoveredDatapoint, primaryKey, metric1)}
+          {hierarchicalTooltip(hoveredDatapoint, primaryKey, metric1, selectedDimensions)}
         </TooltipContent>
       );
     }
