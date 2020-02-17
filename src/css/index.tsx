@@ -17,10 +17,11 @@ export default styled.div<ThemeProps>`
   .ReactTable .rt-thead.-header .rt-th {
     color: ${props => (props.theme === "dark" ? "#bbb" : "#111")};
     background-color: ${props => (props.theme === "dark" ? "#1e1e1e" : "#f2f2f2")};
+    padding: 2.5rem 0.75rem 0.5rem;
   }
   .ReactTable.-striped .rt-tr.-odd > div {
     color: ${props => (props.theme === "dark" ? "#bbb" : "#111")};
-    background-color: ${props => (props.theme === "dark" ? "#1e1e1e" : "#fff")};
+    background-color: ${props => (props.theme === "dark" ? "#111" : "#fff")};
   }
 
   .ReactTable.-striped .rt-tr.-even > div {

@@ -78,10 +78,10 @@ export default `
 
   .ReactTable .rt-thead .rt-tr {
     text-align: center;
+    background: #ffffff;
   }
   .ReactTable .rt-thead .rt-th,
   .ReactTable .rt-thead .rt-td {
-    padding: 2.5rem 0.75rem 0.5rem;
     line-height: normal;
     position: relative;
     border-right: 1px solid rgba(0, 0, 0, 0.05);

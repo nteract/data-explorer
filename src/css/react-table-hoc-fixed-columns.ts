@@ -10,6 +10,7 @@ export default `
   .rthfc .rt-thead.-headerGroups,
   .rthfc .rt-thead.-header {
     z-index: 3;
+    
   }
 
   .rthfc .rt-thead.-filters {
@@ -37,6 +38,7 @@ export default `
   .rthfc .rt-th.rthfc-th-fixed-left-last,
   .rthfc .rt-td.rthfc-td-fixed-left-last {
     border-right: solid #BDBDBD 1px;
+    background: #fff;
   }
 
   .rthfc .rt-th.rthfc-th-fixed-right-first,
