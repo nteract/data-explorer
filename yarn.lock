@@ -8118,10 +8118,10 @@ semiotic-mark@0.4.3:
     d3-selection "^1.4.0"
     d3-transition "^1.2.0"
 
-semiotic@^2.0.0-beta.11:
-  version "2.0.0-beta.11"
-  resolved "https://registry.yarnpkg.com/semiotic/-/semiotic-2.0.0-beta.11.tgz#5a4f60c14dadc11ee3fda3fc6a2d75d3cada47ae"
-  integrity sha512-08i1HfhVY8YWyduAkJbK4eHeqyauinDo/g/KMe0zPdE3W5FlbG9EtofNQ44bTCTkV9ts9Vn5KG5RWdna97XA0w==
+semiotic@^2.0.0-beta.15:
+  version "2.0.0-beta.15"
+  resolved "https://registry.yarnpkg.com/semiotic/-/semiotic-2.0.0-beta.15.tgz#505310496263845638db894fc45898d91816a3d5"
+  integrity sha512-zbY1xVMxebyx25O/eVmaU5Eqn9aMNJ7hroW53qvly9iWQ/gF9Llgl/w7t9bt0mOg3YNdQ9Dp7LFJJj/sD6JM+w==
   dependencies:
     d3-array "^1.2.0"
     d3-brush "^1.0.6"

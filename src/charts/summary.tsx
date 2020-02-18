@@ -66,7 +66,7 @@ export const semioticSummaryChart = (
 
   const summarySettings = {
     summaryType: { type: summaryType, bins: 16, amplitude: 20 },
-    type: summaryType === "violin" && "swarm",
+    type: summaryType === "violin" && data.length < 250 && "swarm",
     projection: "horizontal",
     data,
     oAccessor,

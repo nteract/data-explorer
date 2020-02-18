@@ -418,7 +418,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
         } else {
             const { Frame, chartGenerator } = semioticSettings[view];
 
-            const baseFrameSettings = chartGenerator(stateData, data!.schema, {
+            const chartSettings = {
                 metrics,
                 dimensions,
                 chart,
@@ -438,15 +438,19 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                 barGrouping,
                 setColor: this.setColor,
                 showLegend
-            });
+            }
+
+            const baseFrameSettings = chartGenerator(stateData, data!.schema, chartSettings);
 
             const { frameSettings } = baseFrameSettings
+
+            const frameOverride = typeof overrideSettings === "function" ? overrideSettings(chartSettings) : overrideSettings
 
             instantiatedView = <Frame
                 responsiveWidth
                 size={defaultResponsiveSize}
                 {...frameSettings}
-                {...overrideSettings}
+                {...frameOverride}
 
             />
         }
@@ -469,7 +473,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                     } else {
                         const { dx: facetDX = {} } = facetMetadata
 
-                        const { Frame: FacetFrame, chartGenerator: facetChartGenerator } = semioticSettings[initialView];
+                        const { FacetFrame, chartGenerator: facetChartGenerator } = semioticSettings[initialView];
 
                         const { data: facetData, schema: facetSchema } = facetDataSettings
 
@@ -477,7 +481,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
 
                         const title = dimFacet ? `${dimFacet.dim}=${dimFacet.value}` : ""
 
-                        const facetFrameSettings = facetChartGenerator(filteredFacetData, facetSchema, {
+                        const facetChartSettings = {
                             metrics,
                             dimensions,
                             chart: { ...chart, ...facetDX },
@@ -498,12 +502,17 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                             setColor: this.setColor,
                             showLegend,
                             ...facetDX
-                        }, colorHashOverride, colorDimOverride)
+                        }
+
+                        const facetFrameSettings = facetChartGenerator(filteredFacetData, facetSchema, facetChartSettings, colorHashOverride, colorDimOverride)
 
                         const { colorHash, frameSettings, colorDim } = facetFrameSettings
 
                         colorHashOverride = colorHashOverride || colorHash
                         colorDimOverride = colorDimOverride || colorDim
+
+                        const facetOverride = typeof overrideSettings === "function" ? overrideSettings(facetDX) : overrideSettings
+
 
                         facetFrames.push(<FacetFrame
                             {...frameSettings}
@@ -519,7 +528,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                             afterElements={null}
                             margin={{ ...frameSettings.margin, ...{ left: 55, right: 25, top: 25 } }}
                             title={title}
-                            {...overrideSettings}
+                            {...facetOverride}
                         />)
                     }
                 })
