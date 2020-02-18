@@ -14,7 +14,9 @@ export default `
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid #BDBDBD;
+    border-radius: 8px;
+    overflow: hidden;
   }
   .ReactTable * {
     box-sizing: border-box;
@@ -73,15 +75,13 @@ export default `
   .ReactTable .rt-thead.-filters .rt-th {
     border-right: 1px solid rgba(0, 0, 0, 0.02);
   }
-  .ReactTable .rt-thead.-header {
-    box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.15);
-  }
+
   .ReactTable .rt-thead .rt-tr {
     text-align: center;
+    background: #ffffff;
   }
   .ReactTable .rt-thead .rt-th,
   .ReactTable .rt-thead .rt-td {
-    padding: 5px 5px;
     line-height: normal;
     position: relative;
     border-right: 1px solid rgba(0, 0, 0, 0.05);
@@ -113,6 +113,7 @@ export default `
   .ReactTable .rt-thead .rt-resizable-header-content {
     overflow: hidden;
     text-overflow: ellipsis;
+    text-align: left;
   }
   .ReactTable .rt-thead .rt-header-pivot {
     border-right-color: #f7f7f7;
@@ -152,9 +153,6 @@ export default `
     -ms-flex-direction: column;
     flex-direction: column;
     overflow: auto;
-  }
-  .ReactTable .rt-tbody .rt-tr-group {
-    border-bottom: solid 1px rgba(0, 0, 0, 0.05);
   }
   .ReactTable .rt-tbody .rt-tr-group:last-child {
     border-bottom: 0;
@@ -199,7 +197,7 @@ export default `
     flex: 1 0 0;
     white-space: nowrap;
     text-overflow: ellipsis;
-    padding: 7px 5px;
+    padding: 0.5625rem 0.75rem;
     overflow: hidden;
     transition: 0.3s ease;
     transition-property: width, min-width, padding, opacity;
@@ -284,7 +282,6 @@ export default `
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     padding: 3px;
-    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.1);
     border-top: 2px solid rgba(0, 0, 0, 0.1);
   }
   .ReactTable .-pagination input,
