@@ -219,10 +219,6 @@ const SemioticWrapper = styled.div`
   }
   rect.selection {
     opacity: 0.5;
-  }.
-
-  .facets {
-      display: flex;
   }
 `;
 
