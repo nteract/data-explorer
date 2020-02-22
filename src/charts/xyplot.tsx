@@ -192,7 +192,7 @@ export const semioticXYPlot = (
   };
 
   let sizeScale: (() => number) | ScaleLinear<number, number> = () => 5;
-  const colorHash: {} = colorHashOverride || { Other: "grey" };
+  const colorHash: any = colorHashOverride || { Other: "grey" };
   const additionalSettings: { afterElements?: JSX.Element } = {};
 
   let annotations;
