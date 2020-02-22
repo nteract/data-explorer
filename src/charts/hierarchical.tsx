@@ -15,7 +15,7 @@ interface HierarchicalOptions {
   colors: Dx.ChartOptions["colors"];
 }
 
-const overrideFrameHover = hierarchyType => annotation => {
+const overrideFrameHover = (hierarchyType: Dx.HierarchyType) => (annotation: any) => {
   const { d } = annotation
   if (d.type === "frame-hover" && hierarchyType !== "treemap") {
     return
@@ -23,7 +23,7 @@ const overrideFrameHover = hierarchyType => annotation => {
   return null
 }
 
-const hierarchicalAnnotation = (hierarchyType, selectedDimensions, metric) => annotation => {
+const hierarchicalAnnotation = (hierarchyType: Dx.HierarchyType, selectedDimensions: string[], metric: string) => (annotation: any) => {
   const { d, networkFrameState, nodes: drawnNodes } = annotation
   const { type, parent } = d
   const { networkFrameRender } = networkFrameState
@@ -36,7 +36,7 @@ const hierarchicalAnnotation = (hierarchyType, selectedDimensions, metric) => an
     const parentPlusPieces = [parent, ...ancestors]
 
     const drawnPieces = parentPlusPieces
-      .map(d => drawnNodes.find(p => p.depth === 0 && d.depth === 0 || (p.hierarchicalID === d.hierarchicalID)))
+      .map(d => drawnNodes.find((p: any) => p.depth === 0 && d.depth === 0 || (p.hierarchicalID === d.hierarchicalID)))
 
     const allPieces = [d, ...drawnPieces]
     const baseMarkProps = { forceUpdate: true }
@@ -44,7 +44,7 @@ const hierarchicalAnnotation = (hierarchyType, selectedDimensions, metric) => an
     const ancestorHighlight = allPieces
       .map((node, nodei) => {
         const transform = `translate(${node.x},${node.y})`
-        const styleFn = d => ({ ...baseStyle(d), ...{ fill: "red", opacity: 0.5, stroke: "red", strokeWidth: "4px" } })
+        const styleFn = (d: any) => ({ ...baseStyle(d), ...{ fill: "red", opacity: 0.5, stroke: "red", strokeWidth: "4px" } })
         const customNode = customMark({ d: node, styleFn, transform: transform, baseMarkProps, key: `highlight-${nodei}-parent` })
 
         const thisLevelName = selectedDimensions[node.depth - 1]
@@ -155,8 +155,8 @@ export const semioticHierarchicalChart = (
     nestingParams.key((param: { [index: string]: string }) => param[dim]);
   });
 
-  const colorHash: {} = colorHashOverride || {};
-  const sanitizedData: Array<{}> = [];
+  const colorHash: any = colorHashOverride || {};
+  const sanitizedData: Array<any> = [];
 
   data.forEach((datapoint: Dx.Datapoint) => {
     if (!colorDimOverride && !colorHash[datapoint[selectedDimensions[0]]]) {
@@ -195,7 +195,7 @@ export const semioticHierarchicalChart = (
     edgeRenderKey: (edge: object, index: number) => {
       return index;
     },
-    nodeIDAccessor: (d, i) => d.id || d.key || i,
+    nodeIDAccessor: (d: any, i: any) => d.id || d.key || i,
     baseMarkProps: { forceUpdate: true },
     margin: { left: 10, right: 10, top: 10, bottom: 10 },
     hoverAnnotation: [
