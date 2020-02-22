@@ -458,9 +458,9 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
         let finalRenderedViz
 
         if (facets && facets.length > 0) {
-            let colorHashOverride
-            let colorDimOverride
-            const facetFrames = []
+            let colorHashOverride: any;
+            let colorDimOverride: any;
+            const facetFrames: React.ReactElement[] = [];
             facets
                 .forEach((baseDXSettings, facetIndex) => {
 
@@ -517,10 +517,10 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                         facetFrames.push(<FacetFrame
                             {...frameSettings}
                             beforeElements={<FacetControls
-                                focusFunction={dxSettings => {
+                                focusFunction={(dxSettings: any) => {
                                     this.updateChart({ chart: { ...chart, ...dxSettings.dx }, view: initialView, facets: [] });
                                 }}
-                                removeFunction={facetIndex => { this.updateChart({ facets: facets.filter((d, i) => i !== facetIndex) }) }}
+                                removeFunction={(facetIndex: any) => { this.updateChart({ facets: facets.filter((d, i) => i !== facetIndex) }) }}
                                 dxSettings={facetMetadata}
                                 facetIndex={facetIndex}
                             />}
