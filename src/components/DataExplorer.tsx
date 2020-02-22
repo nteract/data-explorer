@@ -69,7 +69,7 @@ interface State {
     facetCharts?: Chart[];
     facets?: Dx.facetProps[];
     schema: Dx.Schema;
-    overrideSettings: object;
+    overrideSettings?: object;
 }
 
 const generateChartKey = ({
