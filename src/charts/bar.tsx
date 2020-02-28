@@ -13,15 +13,15 @@ interface BarOptions {
   colors: string[];
   setColor: (color: string[]) => void;
   barGrouping: Dx.BarGroupingType;
-  dimensions: object[];
-  metrics: object[];
+  dimensions: Dx.Dimension[];
+  metrics: Dx.Metric[];
 }
 
 export const semioticBarChart = (
   data: Dx.Datapoint[],
   schema: Dx.Schema,
   options: BarOptions,
-  colorHashOverride?: { key?: string },
+  colorHashOverride?: any,
   colorDimOverride?: string
 ) => {
   const { selectedDimensions, chart, colors, setColor, barGrouping } = options;
@@ -49,7 +49,7 @@ export const semioticBarChart = (
     pieceHoverAnnotation?: boolean;
   } = {};
 
-  const colorHash: {} = colorHashOverride || { Other: "grey" };
+  const colorHash = colorHashOverride || { Other: "grey" };
 
   const sortedData = sortByOrdinalRange(
     oAccessor,
@@ -149,7 +149,7 @@ export const semioticBarChart = (
               style={{ display: "flex", flexWrap: "wrap" }}
             >
               <div>
-                {options.dimensions.map((dim: { name: string }, index: number) => (
+                {options.dimensions.map((dim, index) => (
                   <div
                     style={{
                       margin: "2px 5px 0",

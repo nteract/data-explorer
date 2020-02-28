@@ -157,7 +157,7 @@ export const semioticNetwork = (
     edgeHash[`${edge[sourceDimension]}-${edge[targetDimension]}`].weight += 1;
   });
 
-  const colorHash: { [index: string]: string } = colorHashOverride || {};
+  const colorHash: any = colorHashOverride || {};
 
   if (!colorHashOverride) {
     data.forEach(edge => {
