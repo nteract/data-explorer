@@ -41,7 +41,7 @@ export interface Props {
         mediaType: Props["mediaType"]
     ) => void;
     overrideSettings?: object;
-    OverrideVizControls?: React.ReactNode
+    OverrideVizControls?: React.ComponentType
 }
 
 interface State {
@@ -567,7 +567,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                 areaType
             }
 
-            const ActualVizControls: React.ReactNode = OverrideVizControls || VizControls
+            const ActualVizControls = OverrideVizControls ? OverrideVizControls : VizControls
 
             finalRenderedViz = <React.Fragment>{instantiatedView}
                 {editable && <ActualVizControls
