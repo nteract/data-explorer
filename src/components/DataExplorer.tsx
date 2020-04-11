@@ -41,6 +41,7 @@ export interface Props {
         mediaType: Props["mediaType"]
     ) => void;
     overrideSettings?: object;
+    OverrideVizControls?: React.ReactNode
 }
 
 interface State {
@@ -127,9 +128,9 @@ const MetadataWarningWrapper = styled.div`
 
 const MetadataWarningContent = styled.div`
   & {
-    backgroundcolor: #cce;
+    background: #cce;
     padding: 10px;
-    paddingleft: 20px;
+    padding-left: 20px;
   }
 `;
 
@@ -391,7 +392,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
 
         let instantiatedView
 
-        const { data, height } = this.props;
+        const { data, height, OverrideVizControls } = this.props;
 
         const chartKey = generateChartKey({
             view,
@@ -541,31 +542,36 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                 />
             </FacetWrapper>
         } else {
+
+            const controlProps = {
+                data: stateData,
+                view,
+                chart,
+                metrics,
+                dimensions,
+                selectedDimensions,
+                selectedMetrics,
+                hierarchyType,
+                summaryType,
+                networkType,
+                trendLine,
+                marginalGraphics,
+                barGrouping,
+                updateChart: this.updateChart,
+                updateDimensions: this.updateDimensions,
+                setLineType: this.setLineType,
+                updateMetrics: this.updateMetrics,
+                generateFacets: this.generateFacets,
+                lineType,
+                setAreaType: this.setAreaType,
+                areaType
+            }
+
+            const ActualVizControls: React.ReactNode = OverrideVizControls || VizControls
+
             finalRenderedViz = <React.Fragment>{instantiatedView}
-                {editable && <VizControls
-                    {...{
-                        data: stateData,
-                        view,
-                        chart,
-                        metrics,
-                        dimensions,
-                        selectedDimensions,
-                        selectedMetrics,
-                        hierarchyType,
-                        summaryType,
-                        networkType,
-                        trendLine,
-                        marginalGraphics,
-                        barGrouping,
-                        updateChart: this.updateChart,
-                        updateDimensions: this.updateDimensions,
-                        setLineType: this.setLineType,
-                        updateMetrics: this.updateMetrics,
-                        generateFacets: this.generateFacets,
-                        lineType,
-                        setAreaType: this.setAreaType,
-                        areaType
-                    }} />}</React.Fragment>
+                {editable && <ActualVizControls
+                    {...controlProps} />}</React.Fragment>
         }
 
         const display: React.ReactNode = (

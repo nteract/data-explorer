@@ -203,73 +203,57 @@ import DataExplorer, { Viz, Toolbar } from "@nteract/data-explorer";
 </DataExplorer>;
 ```
 
-### Custom Styling
+### Custom Controls
 
-You can turn on faceting by sending multiple DataExplorer prop objects to the DataExplorer's `facets` property. When you do so, the properties of each object sent to faceting will be extended onto the properties sent to the data explorer, resulting in multiple views (one for each object sent to `facets`).
+If you pass `OverrideVizControls` to `DataExplorer` you can create your own custom controls for changing metrics. This can allow you to be more deliberate with your controls rather than using the default controls, which are designed for more flexibility. You might want to only expose specific functionality, for instance only allowing a user to add specific features to the chart or look at specific metrics, as below.
 
 ```jsx
+const SampleControls = props => {
+
+const {
+  data,
+  view,
+  chart,
+  metrics,
+  dimensions,
+  selectedDimensions,
+  selectedMetrics,
+  hierarchyType,
+  summaryType,
+  networkType,
+  trendLine,
+  marginalGraphics,
+  barGrouping,
+  updateChart,
+  updateDimensions,
+  setLineType,
+  updateMetrics,
+  generateFacets,
+  lineType,
+  setAreaType,
+  areaType
+} = props
+
+  return <div><button 
+  onClick={() => updateChart({ marginalGraphics: "histogram" })}
+  >Add Marginal Histogram</button>
+  <button
+    onClick={() => updateChart({ chart: { ...chart, metric3: "Generosity" } })}
+  >Show Generosity</button></div>
+}
+
 import DataExplorer, { Viz, Toolbar } from "@nteract/data-explorer";
 
 <DataExplorer
   data={{...largeVizData}}
-  overrideSettings={{ size: [150,150], axes: [], oLabel: false, margin: 5 }}
+  OverrideVizControls={SampleControls}
+  overrideSettings={{ size: [400,400], margin: 65 }}
   metadata={{ dx: {
-    facets: [
-    {
-      initialView: "summary",
-      metadata: {
-        dx: {
-          metric1: "Generosity"
-        }
-      }
-    },
-    {
-      initialView: "summary",
-//      dimFacet: { dim: "Region", value: "Western Europe" },
-      metadata: {
-        dx: {
-          metric1: "Dystopia Residual"
-        }
-      }
-    },
-    {
-      initialView: "summary",
-      metadata: {
-        dx: {
-          metric1: "Happiness Score"
-        }
-      }
-    },
-    {
-      initialView: "summary",
-      metadata: {
-        dx: {
-          metric1: "Economy (GDP per Capita)"
-        }
-      }
-    },
-    {
-      initialView: "summary",
-      metadata: {
-        dx: {
-          metric1: "Trust (Government Corruption)"
-        }
-      }
-    },
-    {
-      initialView: "summary",
-      metadata: {
-        dx: {
-          metric1: "Health (Life Expectancy)"
-        }
-      }
-    }
-  ]
-  }
-  } 
-  }
-  initialView="summary"
->
-  <Viz />
-</DataExplorer>;
+    chart: {
+        metric1: "Happiness Score",
+        metric2: "Economy (GDP per Capita)"
+      } 
+    } }}
+  initialView="scatter"
+/>;
 ```
