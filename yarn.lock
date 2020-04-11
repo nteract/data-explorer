@@ -6031,12 +6031,7 @@ mem@^4.0.0:
     mimic-fn "^2.0.0"
     p-is-promise "^2.0.0"
 
-memoize-one@4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-4.0.0.tgz#fc5e2f1427a216676a62ec652cf7398cfad123db"
-  integrity sha512-wdpOJ4XBejprGn/xhd1i2XR8Dv1A25FJeIvR7syQhQlz9eXsv+06llcvcmBxlWVGv4C73QBsWA8kxvZozzNwiQ==
-
-memoize-one@^5.0.0:
+memoize-one@^5.0.0, memoize-one@^5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.1.1.tgz#047b6e3199b508eaec03504de71229b8eb1d75c0"
   integrity sha512-HKeeBpWvqiVJD57ZUAsJNm71eHTykffzcLZVYWiVfQeI1rJtuEaS7hQiEpWfVVk18donPwJEcFKIkCmPJNOhHA==
@@ -8155,10 +8150,10 @@ semiotic-mark@0.4.5:
     d3-selection "^1.4.0"
     d3-transition "^1.2.0"
 
-semiotic@^2.0.0-beta.16:
-  version "2.0.0-rc.0"
-  resolved "https://registry.yarnpkg.com/semiotic/-/semiotic-2.0.0-rc.0.tgz#d86a7f53485b96ddd58ff9daa5d6601b9c228d78"
-  integrity sha512-cDa9y8ZQVSuK8bs55uJmlxYnbKZgk7pNSWvjJ8KzokQYFwjgSD5fmQ9bYLTigIiurHD+mOvlP3S0Gxnhu5lPjQ==
+semiotic@^2.0.0-rc.1:
+  version "2.0.0-rc.1"
+  resolved "https://registry.yarnpkg.com/semiotic/-/semiotic-2.0.0-rc.1.tgz#ea91091c97330a6138a0247f25a26a05212afd71"
+  integrity sha512-yEDYr8+VUP2d2IuNzDsnzzGZLyRqIWbWR+Zji2ve6eGYxWQUqjXHuRVzJIqAvoJ56SSKQGvIQ39lod1VrJ09lg==
   dependencies:
     d3-array "^1.2.0"
     d3-brush "^1.0.6"
@@ -8178,7 +8173,7 @@ semiotic@^2.0.0-beta.16:
     d3-voronoi "^1.0.2"
     element-resize-event "^3.0.3"
     labella "1.1.4"
-    memoize-one "4.0.0"
+    memoize-one "^5.1.1"
     object-assign "4.1.1"
     polygon-offset "0.3.1"
     react-annotation "3.0.0-beta.4"
