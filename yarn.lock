@@ -1253,10 +1253,10 @@
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-1.0.1.tgz#0a851d3bd96498fa25c33ab7278ed3bd65f06c3e"
   integrity sha512-l42BggppR6zLmpfU6fq9HEa2oGPEI8yrSPL3GITjfRInppYFahObbIQOQK3UGxEnyQpltZLaPe75046NOZQikw==
 
-"@types/styled-components@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@types/styled-components/-/styled-components-5.0.0.tgz#0ed43d0e6003358f8b1f74304de010de19cbda66"
-  integrity sha512-fnLlZKZfDCySbq0M25wh9nAXRuy2FaHCFHlRl4LkoKJXqk/bbd8FwYPctv6mVnEe6rqs3JLx1COVy3a0Nmrv+w==
+"@types/styled-components@^5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@types/styled-components/-/styled-components-5.0.1.tgz#44d210b0a0218a70df998d1a8e1f69c82d9cc68b"
+  integrity sha512-1yRYO1dAE2MGEuYKF1yQFeMdoyerIQn6ZDnFFkxZamcs3rn8RQVn98edPsTROAxbTz81tqnVN4BJ3Qs1cm/tKg==
   dependencies:
     "@types/hoist-non-react-statics" "*"
     "@types/react" "*"
@@ -3058,7 +3058,7 @@ d3-selection@1, d3-selection@^1.1.0, d3-selection@^1.4.0:
   resolved "https://registry.yarnpkg.com/d3-selection/-/d3-selection-1.4.1.tgz#98eedbbe085fbda5bafa2f9e3f3a2f4d7d622a98"
   integrity sha512-BTIbRjv/m5rcVTfBs4AMBLKs4x8XaaLkwm28KWu9S2vKNqXkXt2AH2Qf0sdPZHjFxcWg/YL53zcqAz+3g4/7PA==
 
-d3-shape@^1.2.0, d3-shape@^1.2.2:
+d3-shape@^1.2.0, d3-shape@^1.2.2, d3-shape@^1.3.5:
   version "1.3.7"
   resolved "https://registry.yarnpkg.com/d3-shape/-/d3-shape-1.3.7.tgz#df63801be07bc986bc54f63789b4fe502992b5d7"
   integrity sha512-EUkvKjqPFUAZyOlhY5gzCxCeI0Aep04LwIRpsZ/mLFelJiUfnK56jo5JMDSE7yyP2kLSb6LtF+S5chMk7uqPqw==
@@ -3455,6 +3455,11 @@ electron-to-chromium@^1.3.247, electron-to-chromium@^1.3.322:
   version "1.3.332"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.332.tgz#283df02d8269e25d9e2f424e11e909c9730a8a82"
   integrity sha512-AP2HkLhfSOIxP7gDjlyZ4ywGWIcxRMZoU9+JriuVkQe2pSLDdWBsE6+eI6BQOqun1dohLrUTOPHsQLLhhFA7Eg==
+
+element-resize-event@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/element-resize-event/-/element-resize-event-3.0.3.tgz#3f59facef6b8f23fbd678a5f364ee5723af98a2a"
+  integrity sha512-vhGNxT87PdZA6Ak4E0QhArwGzNcSPUwSN7n9wCFLeBlY2NNuuiwguQuQIp7P5oB65PLJ892yKcHiqz1xLWeiug==
 
 elliptic@^6.0.0:
   version "6.5.2"
@@ -7325,10 +7330,10 @@ raw-body@2.4.0:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
-react-annotation@3.0.0-beta.3:
-  version "3.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/react-annotation/-/react-annotation-3.0.0-beta.3.tgz#018ec19457a6f85d539af0369506074a104ccd5a"
-  integrity sha512-2FBRAghKOBlKsmYUNuJrYVYJ4oxkSs61mgqPo+M/bARXiB1ZnQiGaXHjw+N1Uyv1M1onnWHiwvwZ/zDbZojNBw==
+react-annotation@3.0.0-beta.4:
+  version "3.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/react-annotation/-/react-annotation-3.0.0-beta.4.tgz#f16a2706bf28373fa3551b887165cca12cc84aa0"
+  integrity sha512-JTmsToqezUBt7pTy5PqXd19tpbvwM0H7gwWqKFA6qOyp5mJP+jN4vh/hV8Abh/TaXoaeRiKjVrNKtr0K4AyOww==
   dependencies:
     prop-types "^15"
     viz-annotation "0.0.5"
@@ -8142,18 +8147,18 @@ selfsigned@^1.10.7:
   dependencies:
     node-forge "0.9.0"
 
-semiotic-mark@0.4.3:
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/semiotic-mark/-/semiotic-mark-0.4.3.tgz#d27267235a807c193270bc2a2821005209948c1f"
-  integrity sha512-syplrSxbD0uh9/NHKn8c67g73lcAUFb1M5mrV1KOKO/Bmm3LuRgS7i4bP/N1HLHcfIIJfyj/nN9m7l/Hfi0yHA==
+semiotic-mark@0.4.5:
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/semiotic-mark/-/semiotic-mark-0.4.5.tgz#544c3603b425dc719f55eedced29577a081b8e1c"
+  integrity sha512-vnEKLsJmjy+lDo5a0ENkKQCY2kzZ1IZYjWlF0VQZ1AFW/0FIU624ggcfJnYBAQ6mlUoM67wHGV4yj7jTP9Gagw==
   dependencies:
     d3-selection "^1.4.0"
     d3-transition "^1.2.0"
 
-semiotic@^2.0.0-beta.15:
-  version "2.0.0-beta.15"
-  resolved "https://registry.yarnpkg.com/semiotic/-/semiotic-2.0.0-beta.15.tgz#505310496263845638db894fc45898d91816a3d5"
-  integrity sha512-zbY1xVMxebyx25O/eVmaU5Eqn9aMNJ7hroW53qvly9iWQ/gF9Llgl/w7t9bt0mOg3YNdQ9Dp7LFJJj/sD6JM+w==
+semiotic@^2.0.0-beta.16:
+  version "2.0.0-rc.0"
+  resolved "https://registry.yarnpkg.com/semiotic/-/semiotic-2.0.0-rc.0.tgz#d86a7f53485b96ddd58ff9daa5d6601b9c228d78"
+  integrity sha512-cDa9y8ZQVSuK8bs55uJmlxYnbKZgk7pNSWvjJ8KzokQYFwjgSD5fmQ9bYLTigIiurHD+mOvlP3S0Gxnhu5lPjQ==
   dependencies:
     d3-array "^1.2.0"
     d3-brush "^1.0.6"
@@ -8169,15 +8174,16 @@ semiotic@^2.0.0-beta.15:
     d3-sankey-circular "0.25.0"
     d3-scale "^1.0.3"
     d3-selection "^1.4.0"
-    d3-shape "^1.2.0"
+    d3-shape "^1.3.5"
     d3-voronoi "^1.0.2"
+    element-resize-event "^3.0.3"
     labella "1.1.4"
     memoize-one "4.0.0"
     object-assign "4.1.1"
     polygon-offset "0.3.1"
-    react-annotation "3.0.0-beta.3"
+    react-annotation "3.0.0-beta.4"
     regression "^2.0.1"
-    semiotic-mark "0.4.3"
+    semiotic-mark "0.4.5"
     svg-path-bounding-box "1.0.4"
 
 "semver@2 || 3 || 4 || 5", semver@^5.4.1, semver@^5.5, semver@^5.5.0, semver@^5.6.0, semver@^5.7.0, semver@^5.7.1:

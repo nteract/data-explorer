@@ -66,13 +66,13 @@ const Wrapper = styled.div`
 `;
 
 const ColorPickerWrapper = styled.div`
-   {
+  & {
     width: 225px;
   }
 `;
 
 const PalettePickerWrapper = styled.div`
-   {
+  & {
     margin-top: 30px;
   }
 `;
