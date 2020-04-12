@@ -151,7 +151,7 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
           hoverAnnotation={true}
           margin={
             Object {
-              "bottom": 50,
+              "bottom": 75,
               "left": 75,
               "right": 30,
               "top": 30,
@@ -672,7 +672,7 @@ exports[`Default DataExplorer export with metadata 1`] = `
           hoverAnnotation={true}
           margin={
             Object {
-              "bottom": 50,
+              "bottom": 75,
               "left": 75,
               "right": 30,
               "top": 30,
@@ -1101,6 +1101,7 @@ exports[`Default DataExplorer export without metadata 1`] = `
     >
       <styled.div>
         <DataResourceTransformGrid
+          additionalViews={Object {}}
           data={
             Object {
               "data": Array [

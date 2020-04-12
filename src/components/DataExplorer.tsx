@@ -22,7 +22,8 @@ import {
     NetworkType,
     PieceType,
     SummaryType,
-    View
+    View,
+    SemioticSettings
 } from "../utilities/types";
 
 import { FacetController } from "semiotic"
@@ -41,7 +42,8 @@ export interface Props {
         mediaType: Props["mediaType"]
     ) => void;
     overrideSettings?: object;
-    OverrideVizControls?: React.ComponentType
+    OverrideVizControls?: React.ComponentType;
+    additionalViews?: SemioticSettings;
 }
 
 interface State {
@@ -233,7 +235,8 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
         height: 500,
         mediaType,
         initialView: "grid",
-        overrideSettings: {}
+        overrideSettings: {},
+        additionalViews: {}
     };
 
     constructor(props: Props) {
@@ -392,7 +395,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
 
         let instantiatedView
 
-        const { data, height, OverrideVizControls } = this.props;
+        const { data, height, OverrideVizControls, additionalViews } = this.props;
 
         const chartKey = generateChartKey({
             view,
@@ -410,10 +413,12 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
             barGrouping
         });
 
+        const extendedSettings: SemioticSettings = { ...semioticSettings, ...additionalViews }
+
         if (!view || view === "grid") {
             instantiatedView = <DataResourceTransformGrid {...this.props as Props} />
         } else {
-            const { Frame, chartGenerator } = semioticSettings[view];
+            const { Frame, chartGenerator } = extendedSettings[view];
 
             const chartSettings = {
                 metrics,
@@ -470,7 +475,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                     } else {
                         const { dx: facetDX = {} } = facetMetadata
 
-                        const { FacetFrame, chartGenerator: facetChartGenerator } = semioticSettings[initialView];
+                        const { FacetFrame, chartGenerator: facetChartGenerator } = extendedSettings[initialView];
 
                         const { data: facetData, schema: facetSchema } = facetDataSettings
 
@@ -634,8 +639,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
             barGrouping,
             colors,
             chart,
-            facets,
-            overrideSettings
+            facets
         } = this.state;
         if (onMetadataChange) {
             onMetadataChange(
@@ -736,21 +740,12 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
             facets
         } = this.state;
 
+        const { additionalViews } = this.props
+
         let display: React.ReactNode = null;
 
-        if (
-            [
-                "grid",
-                "line",
-                "scatter",
-                "bar",
-                "network",
-                "summary",
-                "hierarchy",
-                "hexbin",
-                "parallel"
-            ].includes(view)
-        ) {
+        if (semioticSettings[view] || view === "grid" || (additionalViews && additionalViews[view])) {
+
             const chartKey = generateChartKey({
                 view,
                 lineType,

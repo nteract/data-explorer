@@ -32,7 +32,7 @@ const semioticParallelCoordinates = (
   };
 };
 
-export const semioticSettings: any = {
+export const semioticSettings: Dx.SemioticSettings = {
   line: {
     Frame: ResponsiveXYFrame,
     controls: "switch between linetype",

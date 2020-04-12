@@ -81,6 +81,16 @@ export interface Datapoint {
   [fieldName: string]: any;
 }
 
+export type SemioticSettings = {
+  [fieldName: string]: {
+    Frame: Function,
+    controls: string,
+    chartGenerator: Function,
+    FacetFrame: Function
+  }
+}
+
+
 export interface LineCoordinate {
   value: number;
   x: number;
@@ -141,7 +151,8 @@ export type View =
   | "summary"
   | "hexbin"
   | "parallel"
-  | "hierarchy";
+  | "hierarchy"
+  | string;
 
 export type PrimitiveImmutable = string | number | boolean | null;
 export type JSONType = PrimitiveImmutable | JSONObject | JSONArray;

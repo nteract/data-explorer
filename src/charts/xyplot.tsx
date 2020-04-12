@@ -465,7 +465,7 @@ export const semioticXYPlot = (
     hoverAnnotation: true,
     responsiveWidth: false,
     size: [height + 105, height + 80],
-    margin: { left: 75, bottom: 50, right: 30, top: 30 },
+    margin: { left: 75, bottom: 75, right: 30, top: 30 },
     annotations: (type === "scatterplot" && annotations) || undefined,
     annotationSettings: {
       layout: { type: "marginalia", orient: "right", marginOffset: 30 }

@@ -257,3 +257,92 @@ import DataExplorer, { Viz, Toolbar } from "@nteract/data-explorer";
   initialView="scatter"
 />;
 ```
+
+### Custom Views
+
+If you pass `additionalViews` an object with keys corresponding to your view name (you can override existing view names or create your own) that has properties `Frame: ReactNode, controls: string, chartGenerator: Function => propsForReactNode, FacetFrame: ReactNode` you can create your own views.
+
+```jsx
+
+const BigNumberDiv = props => {
+  const { bigAverage, bigTrend } = props
+  const { metricAverage, metrics } = props
+
+  return metrics.map((d,i) => {
+
+    const diff = d.value - metricAverage
+    
+    return <div key={d.label} style={{ textAlign: "center", width: "100px", border: "1px solid black",
+  borderRadius: "5px", margin: "10px", padding: "10px",
+  display: "inline-block" }}>
+  <h3>{d.label}</h3>
+  <h2>{d.value.toFixed(2)}</h2>
+  <h1 style={{ color: diff > 0 ? "darkgreen" : "darkred" }}>
+  {diff > 0 ? "+" : ""}{diff.toFixed(2)}</h1>
+  </div>} )
+}
+
+const createBigNumber = (stateData, schema, chartSettings) => {
+
+  const { chart: { metric1 } } = chartSettings
+
+  const metrics = stateData.map(d => {
+    const label = d.Country
+    const value = d[metric1]
+
+    return {
+      label,
+      value
+    }
+  } )
+  .sort((a,b) => b.value - a.value)
+  .filter((d,i) => i < 12)
+
+  const metricAverage = (metrics.reduce((p,c)=> p += c.value,0) / 12)
+
+  return {
+    frameSettings: {
+      metricAverage,
+      metrics
+    },
+    //For facets sharing the same styling
+    colorDim: "none",
+    colorHash: {}
+  }
+}
+
+const generateBigNumber = {
+  Frame: BigNumberDiv,
+  controls: "switch between modes",
+  chartGenerator: createBigNumber,
+  FacetFrame: BigNumberDiv
+}
+
+const additionalViews = {
+  bignumber: generateBigNumber
+}
+
+const SampleControls = props => {
+
+const {
+  updateChart,
+  chart
+} = props
+
+  return <div><button 
+    onClick={() => updateChart({ chart: { ...chart, metric1: "Happiness Score" } })}
+  >Show Happiness Score</button>
+  <button
+    onClick={() => updateChart({ chart: { ...chart, metric1: "Generosity" } })}
+  >Show Generosity</button></div>
+}
+
+import DataExplorer, { Viz, Toolbar } from "@nteract/data-explorer";
+
+<DataExplorer
+  data={{...largeVizData}}
+  OverrideVizControls={SampleControls}
+  initialView="bignumber"
+  additionalViews={additionalViews}
+/>;
+```
