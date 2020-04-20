@@ -446,7 +446,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
 
             const { frameSettings } = baseFrameSettings
 
-            const frameOverride = typeof overrideSettings === "function" ? overrideSettings(chartSettings, baseFrameSettings, data) : overrideSettings
+            const frameOverride = typeof overrideSettings === "function" ? overrideSettings(chartSettings, baseFrameSettings, data, view) : overrideSettings
 
             instantiatedView = <Frame
                 responsiveWidth
@@ -513,7 +513,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                         colorHashOverride = colorHashOverride || colorHash
                         colorDimOverride = colorDimOverride || colorDim
 
-                        const facetOverride = typeof overrideSettings === "function" ? overrideSettings(facetChartSettings, facetFrameSettings, facetDataSettings) : overrideSettings
+                        const facetOverride = typeof overrideSettings === "function" ? overrideSettings(facetChartSettings, facetFrameSettings, facetDataSettings, view) : overrideSettings
 
                         facetFrames.push(<FacetFrame
                             {...frameSettings}

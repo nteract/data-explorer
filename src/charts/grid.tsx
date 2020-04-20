@@ -5,8 +5,6 @@ import withFixedColumns from "react-table-hoc-fixed-columns";
 import CustomReactTableStyles from "../css/";
 import * as Dx from "../utilities/types";
 
-import styled from "styled-components";
-
 const ReactTableFixedColumns = withFixedColumns(ReactTable);
 
 const switchMode = (currentMode: string) => {
