@@ -478,6 +478,7 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
               },
             ]
           }
+          filterData={[Function]}
           generateFacets={[Function]}
           hierarchyType="dendrogram"
           lineType="line"
@@ -530,6 +531,7 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
           selectedDimensions={Array []}
           selectedMetrics={Array []}
           setAreaType={[Function]}
+          setColor={[Function]}
           setLineType={[Function]}
           summaryType="violin"
           trendLine="none"
@@ -999,6 +1001,7 @@ exports[`Default DataExplorer export with metadata 1`] = `
               },
             ]
           }
+          filterData={[Function]}
           generateFacets={[Function]}
           hierarchyType="dendrogram"
           lineType="line"
@@ -1051,6 +1054,7 @@ exports[`Default DataExplorer export with metadata 1`] = `
           selectedDimensions={Array []}
           selectedMetrics={Array []}
           setAreaType={[Function]}
+          setColor={[Function]}
           setLineType={[Function]}
           summaryType="violin"
           trendLine="none"
@@ -1484,6 +1488,7 @@ exports[`Default DataExplorer export without metadata 1`] = `
               },
             ]
           }
+          filterData={[Function]}
           generateFacets={[Function]}
           hierarchyType="dendrogram"
           lineType="line"
@@ -1540,6 +1545,7 @@ exports[`Default DataExplorer export without metadata 1`] = `
           }
           selectedMetrics={Array []}
           setAreaType={[Function]}
+          setColor={[Function]}
           setLineType={[Function]}
           summaryType="violin"
           trendLine="none"

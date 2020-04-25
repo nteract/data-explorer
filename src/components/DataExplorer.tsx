@@ -44,6 +44,8 @@ export interface Props {
     overrideSettings?: object;
     OverrideVizControls?: React.ComponentType;
     additionalViews?: SemioticSettings;
+    filterData?: Function;
+    children?: React.ReactNode
 }
 
 interface State {
@@ -73,6 +75,8 @@ interface State {
     facets?: Dx.facetProps[];
     schema: Dx.Schema;
     overrideSettings?: object;
+    filteredData?: Dx.Datapoint[];
+    props: Props
 }
 
 const generateChartKey = ({
@@ -225,6 +229,137 @@ const SemioticWrapper = styled.div`
   }
 `;
 
+const processInitialData = (props: Props, existingView?: View, existingDX?: Dx.dxMetaProps, filteredData?: Dx.Datapoint[]) => {
+
+    const { metadata, initialView, overrideSettings } = props;
+
+    // Handle case of metadata being empty yet dx not set
+    const dx = existingDX || metadata.dx || { chart: {}, facets: undefined };
+    const { chart = {}, facets, ...nonChartDXSettings } = dx;
+
+    let { fields = [], primaryKey = [] } = props.data.schema;
+    // Provide a default primaryKey if none provided
+    if (primaryKey.length === 0) {
+        primaryKey = [Dx.defaultPrimaryKey];
+        fields = [...fields, { name: Dx.defaultPrimaryKey, type: "integer" }];
+    }
+
+    const dimensions = fields
+        .filter(
+            field =>
+                field.type === "string" ||
+                field.type === "boolean" ||
+                field.type === "datetime"
+        )
+        .map(field => ({ ...field, cardinality: 0 })) as Dx.Dimension[];
+
+    // Should datetime data types be transformed into js dates before getting to this resource?
+
+    const baseData = filteredData || props.data.data
+
+    const data = baseData.map((datapoint, datapointIndex) => {
+        const mappedDatapoint: Dx.Datapoint = {
+            ...datapoint
+        };
+        fields.forEach(field => {
+            if (field.name === Dx.defaultPrimaryKey) {
+                mappedDatapoint[Dx.defaultPrimaryKey] = datapointIndex;
+            }
+            if (field.type === "datetime") {
+                mappedDatapoint[field.name] = new Date(mappedDatapoint[field.name]);
+            }
+        });
+        return mappedDatapoint;
+    });
+
+
+    let largeDataset = true;
+    let selectedDimensions: string[] = [];
+
+    if (data.length < 5000) {
+        largeDataset = false;
+        const cardinalityHash: { [key: string]: { [key: string]: true } } = {};
+        dimensions.forEach(dim => {
+            cardinalityHash[dim.name] = {};
+            data.forEach(datapoint => {
+                const dimValue = datapoint[dim.name];
+                cardinalityHash[dim.name][dimValue] = true;
+            });
+
+            dim.cardinality = Object.entries(cardinalityHash[dim.name]).length;
+        });
+
+        selectedDimensions = dimensions
+            .sort((a, b) => a.cardinality - b.cardinality)
+            .filter((data, index) => index === 0)
+            .map(dim => dim.name);
+    }
+
+    const metrics = fields
+        .filter(
+            field =>
+                field.type === "integer" ||
+                field.type === "number" ||
+                field.type === "datetime"
+        )
+        .filter(
+            field => !primaryKey.find(pkey => pkey === field.name)
+        ) as Dx.Metric[];
+
+    const finalChartSettings = {
+        metric1: (metrics[0] && metrics[0].name) || "none",
+        metric2: (metrics[1] && metrics[1].name) || "none",
+        metric3: "none",
+        metric4: "none",
+        dim1: (dimensions[0] && dimensions[0].name) || "none",
+        dim2: (dimensions[1] && dimensions[1].name) || "none",
+        dim3: "none",
+        timeseriesSort: "array-order",
+        networkLabel: "none",
+        ...chart
+    };
+
+    const displayChart: DisplayChart = {};
+    let newState: State = {
+        largeDataset,
+        view: existingView || initialView,
+        lineType: "line",
+        areaType: "hexbin",
+        trendLine: "none",
+        marginalGraphics: "none",
+        barGrouping: "Clustered",
+        selectedDimensions,
+        selectedMetrics: [],
+        pieceType: "bar",
+        summaryType: "violin",
+        networkType: "force",
+        hierarchyType: "dendrogram",
+        dimensions,
+        metrics,
+        colors,
+        // ui: {},
+        chart: finalChartSettings,
+        overrideSettings,
+        displayChart,
+        primaryKey,
+        data,
+        editable: true,
+        showLegend: true,
+        facets,
+        schema: props.data.schema,
+        props
+    }
+
+    if (!filteredData) {
+        newState = {
+            ...newState,
+            ...nonChartDXSettings
+        }
+    }
+
+    return newState
+}
+
 class DataExplorer extends React.PureComponent<Partial<Props>, State> {
     static MIMETYPE: Props["mediaType"] = mediaType;
 
@@ -242,125 +377,28 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
     constructor(props: Props) {
         super(props);
 
-        const { metadata, initialView, overrideSettings } = props;
-
-        // Handle case of metadata being empty yet dx not set
-        const dx = metadata.dx || { chart: {}, facets: undefined };
-        const { chart = {}, facets, ...nonChartDXSettings } = dx;
-
-        let { fields = [], primaryKey = [] } = props.data.schema;
-        // Provide a default primaryKey if none provided
-        if (primaryKey.length === 0) {
-            primaryKey = [Dx.defaultPrimaryKey];
-            fields = [...fields, { name: Dx.defaultPrimaryKey, type: "integer" }];
-        }
-
-        const dimensions = fields
-            .filter(
-                field =>
-                    field.type === "string" ||
-                    field.type === "boolean" ||
-                    field.type === "datetime"
-            )
-            .map(field => ({ ...field, cardinality: 0 })) as Dx.Dimension[];
-
-        // Should datetime data types be transformed into js dates before getting to this resource?
-
-        const data = props.data.data.map((datapoint, datapointIndex) => {
-            const mappedDatapoint: Dx.Datapoint = {
-                ...datapoint
-            };
-            fields.forEach(field => {
-                if (field.name === Dx.defaultPrimaryKey) {
-                    mappedDatapoint[Dx.defaultPrimaryKey] = datapointIndex;
-                }
-                if (field.type === "datetime") {
-                    mappedDatapoint[field.name] = new Date(mappedDatapoint[field.name]);
-                }
-            });
-            return mappedDatapoint;
-        });
-
-        let largeDataset = true;
-        let selectedDimensions: string[] = [];
-
-        if (data.length < 5000) {
-            largeDataset = false;
-            const cardinalityHash: { [key: string]: { [key: string]: true } } = {};
-            dimensions.forEach(dim => {
-                cardinalityHash[dim.name] = {};
-                data.forEach(datapoint => {
-                    const dimValue = datapoint[dim.name];
-                    cardinalityHash[dim.name][dimValue] = true;
-                });
-
-                dim.cardinality = Object.entries(cardinalityHash[dim.name]).length;
-            });
-
-            selectedDimensions = dimensions
-                .sort((a, b) => a.cardinality - b.cardinality)
-                .filter((data, index) => index === 0)
-                .map(dim => dim.name);
-        }
-
-        const metrics = fields
-            .filter(
-                field =>
-                    field.type === "integer" ||
-                    field.type === "number" ||
-                    field.type === "datetime"
-            )
-            .filter(
-                field => !primaryKey.find(pkey => pkey === field.name)
-            ) as Dx.Metric[];
-
-        const finalChartSettings = {
-            metric1: (metrics[0] && metrics[0].name) || "none",
-            metric2: (metrics[1] && metrics[1].name) || "none",
-            metric3: "none",
-            metric4: "none",
-            dim1: (dimensions[0] && dimensions[0].name) || "none",
-            dim2: (dimensions[1] && dimensions[1].name) || "none",
-            dim3: "none",
-            timeseriesSort: "array-order",
-            networkLabel: "none",
-            ...chart
-        };
-
-        const displayChart: DisplayChart = {};
-        this.state = {
-            largeDataset,
-            view: initialView,
-            lineType: "line",
-            areaType: "hexbin",
-            trendLine: "none",
-            marginalGraphics: "none",
-            barGrouping: "Clustered",
-            selectedDimensions,
-            selectedMetrics: [],
-            pieceType: "bar",
-            summaryType: "violin",
-            networkType: "force",
-            hierarchyType: "dendrogram",
-            dimensions,
-            metrics,
-            colors,
-            // ui: {},
-            chart: finalChartSettings,
-            overrideSettings,
-            displayChart,
-            primaryKey,
-            data,
-            editable: true,
-            showLegend: true,
-            facets,
-            schema: props.data.schema,
-            ...nonChartDXSettings
-        };
+        this.state = processInitialData(props);
     }
 
     componentDidMount() {
         this.updateChart(this.state);
+    }
+
+    filterData = (filterFn: Function) => {
+
+        const { data, props, view, metrics, dimensions, ...remainingState } = this.state
+
+        if (!filterFn) {
+            this.updateChart(processInitialData(props, view, remainingState))
+        }
+
+        const { filteredData = data } = this.state
+        const newFilteredData = filterFn(filteredData)
+
+        const newState = processInitialData(props, view, this.state, newFilteredData)
+
+        this.updateChart(newState);
+
     }
 
     updateChart = (updatedState: Partial<State>) => {
@@ -439,6 +477,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                 marginalGraphics,
                 barGrouping,
                 setColor: this.setColor,
+                filterData: this.filterData,
                 showLegend
             }
 
@@ -502,6 +541,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                             marginalGraphics,
                             barGrouping,
                             setColor: this.setColor,
+                            filterData: this.filterData,
                             showLegend,
                             ...facetDX
                         }
@@ -561,14 +601,16 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                 trendLine,
                 marginalGraphics,
                 barGrouping,
+                lineType,
+                areaType,
+                setAreaType: this.setAreaType,
                 updateChart: this.updateChart,
                 updateDimensions: this.updateDimensions,
                 setLineType: this.setLineType,
                 updateMetrics: this.updateMetrics,
                 generateFacets: this.generateFacets,
-                lineType,
-                setAreaType: this.setAreaType,
-                areaType
+                filterData: this.filterData,
+                setColor: this.setColor
             }
 
             const ActualVizControls = OverrideVizControls ? OverrideVizControls : VizControls
@@ -791,13 +833,11 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
             <div>
                 <MetadataWarning metadata={this.props.metadata!} />
                 <FlexWrapper>{
-
                     children ? children :
                         <>
                             <Viz>{display}</Viz>
                             {(!facets || facets.length === 0) && <Toolbar {...toolbarProps} />}
                         </>
-
                 }</FlexWrapper>
             </div>
         );
