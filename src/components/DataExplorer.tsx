@@ -390,6 +390,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
 
         if (!filterFn) {
             this.updateChart(processInitialData(props, view, remainingState))
+            return
         }
 
         const { filteredData = data } = this.state
