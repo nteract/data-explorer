@@ -355,6 +355,12 @@ const processInitialData = (props: Props, existingView?: View, existingDX?: Dx.d
             ...newState,
             ...nonChartDXSettings
         }
+    } else {
+        newState = {
+            ...newState,
+            ...nonChartDXSettings,
+            data
+        }
     }
 
     return newState
@@ -384,7 +390,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
         this.updateChart(this.state);
     }
 
-    filterData = (filterFn: Function) => {
+    filterData = (filterFn: Function, useBaseData?: boolean) => {
 
         const { data, props, view, metrics, dimensions, ...remainingState } = this.state
 
@@ -394,7 +400,13 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
         }
 
         const { filteredData = data } = this.state
-        const newFilteredData = filterFn(filteredData)
+        let newFilteredData: Dx.Datapoint[] = []
+
+        if (useBaseData) {
+            newFilteredData = filterFn(props.data.data)
+        } else {
+            newFilteredData = filterFn(filteredData)
+        }
 
         const newState = processInitialData(props, view, this.state, newFilteredData)
 
