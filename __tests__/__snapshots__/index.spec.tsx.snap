@@ -70,6 +70,50 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
       }
       key=".0"
       largeDataset={false}
+      metrics={
+        Array [
+          Object {
+            "name": "Happiness Rank",
+            "type": "integer",
+          },
+          Object {
+            "name": "Happiness Score",
+            "type": "number",
+          },
+          Object {
+            "name": "Standard Error",
+            "type": "number",
+          },
+          Object {
+            "name": "Economy (GDP per Capita)",
+            "type": "number",
+          },
+          Object {
+            "name": "Family",
+            "type": "number",
+          },
+          Object {
+            "name": "Health (Life Expectancy)",
+            "type": "number",
+          },
+          Object {
+            "name": "Freedom",
+            "type": "number",
+          },
+          Object {
+            "name": "Trust (Government Corruption)",
+            "type": "number",
+          },
+          Object {
+            "name": "Generosity",
+            "type": "number",
+          },
+          Object {
+            "name": "Dystopia Residual",
+            "type": "number",
+          },
+        ]
+      }
       setGrid={[Function]}
       setView={[Function]}
     />
@@ -1083,6 +1127,50 @@ exports[`Default DataExplorer export with metadata 1`] = `
         ]
       }
       largeDataset={false}
+      metrics={
+        Array [
+          Object {
+            "name": "Happiness Rank",
+            "type": "integer",
+          },
+          Object {
+            "name": "Happiness Score",
+            "type": "number",
+          },
+          Object {
+            "name": "Standard Error",
+            "type": "number",
+          },
+          Object {
+            "name": "Economy (GDP per Capita)",
+            "type": "number",
+          },
+          Object {
+            "name": "Family",
+            "type": "number",
+          },
+          Object {
+            "name": "Health (Life Expectancy)",
+            "type": "number",
+          },
+          Object {
+            "name": "Freedom",
+            "type": "number",
+          },
+          Object {
+            "name": "Trust (Government Corruption)",
+            "type": "number",
+          },
+          Object {
+            "name": "Generosity",
+            "type": "number",
+          },
+          Object {
+            "name": "Dystopia Residual",
+            "type": "number",
+          },
+        ]
+      }
       setGrid={[Function]}
       setView={[Function]}
     />
@@ -1574,6 +1662,50 @@ exports[`Default DataExplorer export without metadata 1`] = `
         ]
       }
       largeDataset={false}
+      metrics={
+        Array [
+          Object {
+            "name": "Happiness Rank",
+            "type": "integer",
+          },
+          Object {
+            "name": "Happiness Score",
+            "type": "number",
+          },
+          Object {
+            "name": "Standard Error",
+            "type": "number",
+          },
+          Object {
+            "name": "Economy (GDP per Capita)",
+            "type": "number",
+          },
+          Object {
+            "name": "Family",
+            "type": "number",
+          },
+          Object {
+            "name": "Health (Life Expectancy)",
+            "type": "number",
+          },
+          Object {
+            "name": "Freedom",
+            "type": "number",
+          },
+          Object {
+            "name": "Trust (Government Corruption)",
+            "type": "number",
+          },
+          Object {
+            "name": "Generosity",
+            "type": "number",
+          },
+          Object {
+            "name": "Dystopia Residual",
+            "type": "number",
+          },
+        ]
+      }
       setGrid={[Function]}
       setView={[Function]}
     />

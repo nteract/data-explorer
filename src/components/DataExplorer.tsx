@@ -778,6 +778,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
         const {
             view,
             dimensions,
+            metrics,
             chart,
             lineType,
             areaType,
@@ -821,6 +822,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
 
         const toolbarProps = {
             dimensions,
+            metrics,
             currentView: view,
             setGrid: this.setGrid,
             setView: this.setView,
