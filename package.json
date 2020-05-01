@@ -34,6 +34,7 @@
   ],
   "dependencies": {
     "@nteract/octicons": "^2.0.0",
+    "@types/d3-array": "^2.0.0",
     "d3-collection": "^1.0.7",
     "d3-scale": "^3.0.0",
     "d3-shape": "^1.2.2",

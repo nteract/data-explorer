@@ -9,9 +9,6 @@ import FacetControls from "./FacetControls";
 import { Viz } from "./Viz";
 import { Toolbar } from "./Toolbar";
 
-
-const mediaType: Props["mediaType"] = "application/vnd.dataresource+json";
-
 import styled from "styled-components";
 import * as Dx from "../utilities/types";
 import {
@@ -27,6 +24,10 @@ import {
 } from "../utilities/types";
 
 import { FacetController } from "semiotic"
+
+import { extent } from "d3-array"
+
+const mediaType: Props["mediaType"] = "application/vnd.dataresource+json";
 
 export interface Props {
     data: Dx.DataProps;
@@ -251,7 +252,7 @@ const processInitialData = (props: Props, existingView?: View, existingDX?: Dx.d
                 field.type === "boolean" ||
                 field.type === "datetime"
         )
-        .map(field => ({ ...field, cardinality: 0 })) as Dx.Dimension[];
+        .map(field => ({ ...field, cardinality: 0, cardinalValues: [] })) as Dx.Dimension[];
 
     // Should datetime data types be transformed into js dates before getting to this resource?
 
@@ -275,8 +276,11 @@ const processInitialData = (props: Props, existingView?: View, existingDX?: Dx.d
 
     let largeDataset = true;
     let selectedDimensions: string[] = [];
-
     if (data.length < 5000) {
+        largeDataset = false
+    }
+
+    if (data.length < 50000) {
         largeDataset = false;
         const cardinalityHash: { [key: string]: { [key: string]: true } } = {};
         dimensions.forEach(dim => {
@@ -286,7 +290,10 @@ const processInitialData = (props: Props, existingView?: View, existingDX?: Dx.d
                 cardinalityHash[dim.name][dimValue] = true;
             });
 
-            dim.cardinality = Object.entries(cardinalityHash[dim.name]).length;
+            const dimKeys = Object.keys(cardinalityHash[dim.name])
+
+            dim.cardinality = dimKeys.length;
+            dim.cardinalValues = dimKeys
         });
 
         selectedDimensions = dimensions
@@ -305,6 +312,10 @@ const processInitialData = (props: Props, existingView?: View, existingDX?: Dx.d
         .filter(
             field => !primaryKey.find(pkey => pkey === field.name)
         ) as Dx.Metric[];
+
+    metrics.forEach(m => {
+        m.extent = extent(data.map(d => d[m.name]))
+    })
 
     const finalChartSettings = {
         metric1: (metrics[0] && metrics[0].name) || "none",

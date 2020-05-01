@@ -1094,6 +1094,11 @@
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
   integrity sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==
 
+"@types/d3-array@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@types/d3-array/-/d3-array-2.0.0.tgz#a0d63a296a2d8435a9ec59393dcac746c6174a96"
+  integrity sha512-rGqfPVowNDTszSFvwoZIXvrPG7s/qKzm9piCRIH6xwTTRu7pPZ3ootULFnPkTt74B6i5lN0FpLQL24qGOw1uZA==
+
 "@types/d3-collection@^1.0.7":
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/@types/d3-collection/-/d3-collection-1.0.8.tgz#aa9552c570a96e33c132e0fd20e331f64baa9dd5"
@@ -8150,10 +8155,10 @@ semiotic-mark@0.4.5:
     d3-selection "^1.4.0"
     d3-transition "^1.2.0"
 
-semiotic@^2.0.0-rc.1:
-  version "2.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/semiotic/-/semiotic-2.0.0-rc.1.tgz#ea91091c97330a6138a0247f25a26a05212afd71"
-  integrity sha512-yEDYr8+VUP2d2IuNzDsnzzGZLyRqIWbWR+Zji2ve6eGYxWQUqjXHuRVzJIqAvoJ56SSKQGvIQ39lod1VrJ09lg==
+semiotic@^2.0.0-rc.2:
+  version "2.0.0-rc.2"
+  resolved "https://registry.yarnpkg.com/semiotic/-/semiotic-2.0.0-rc.2.tgz#320d90bfec003ffc00373bafa96196bfaaf31a61"
+  integrity sha512-nnBcpJ49n53eeLJDrxY0GuI7oJEp219Ntv9KAbAA8FnOvlaoTz432xYAK3asuYsQ4cE7300uy1w+pMd6zpIN+g==
   dependencies:
     d3-array "^1.2.0"
     d3-brush "^1.0.6"
