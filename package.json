@@ -1,6 +1,6 @@
 {
   "name": "@nteract/data-explorer",
-  "version": "8.2.3",
+  "version": "8.2.4",
   "description": "Transform for data resource JSON",
   "main": "lib/",
   "types": "lib/index.d.ts",
