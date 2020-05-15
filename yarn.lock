@@ -1735,6 +1735,11 @@ arrify@^1.0.1:
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
   integrity sha1-iYUI2iIm84DfkEcoRWhJwVAaSw0=
 
+asap@~2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
+  integrity sha1-5QNHYR1+aQlDIIu9r+vLwvuGbUY=
+
 asn1.js@^4.0.0:
   version "4.10.1"
   resolved "https://registry.yarnpkg.com/asn1.js/-/asn1.js-4.10.1.tgz#b9c2bf5805f1e64aadeed6df3a2bfafb5a73f5a0"
@@ -7128,6 +7133,13 @@ promise-inflight@^1.0.1:
   resolved "https://registry.yarnpkg.com/promise-inflight/-/promise-inflight-1.0.1.tgz#98472870bf228132fcbdd868129bad12c3c029e3"
   integrity sha1-mEcocL8igTL8vdhoEputEsPAKeM=
 
+promise@8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/promise/-/promise-8.1.0.tgz#697c25c3dfe7435dd79fcd58c38a135888eaf05e"
+  integrity sha512-W04AqnILOL/sPRXziNicCjSNRruLAuIHEOVBazepu0545DDNGYHz7ar9ZgZ1fMU8/MA4mVxp5rkBWRi6OXIy3Q==
+  dependencies:
+    asap "~2.0.6"
+
 prompts@^2.0.1:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/prompts/-/prompts-2.3.0.tgz#a444e968fa4cc7e86689a74050685ac8006c4cc4"
@@ -8155,10 +8167,10 @@ semiotic-mark@0.4.5:
     d3-selection "^1.4.0"
     d3-transition "^1.2.0"
 
-semiotic@^2.0.0-rc.2:
-  version "2.0.0-rc.2"
-  resolved "https://registry.yarnpkg.com/semiotic/-/semiotic-2.0.0-rc.2.tgz#320d90bfec003ffc00373bafa96196bfaaf31a61"
-  integrity sha512-nnBcpJ49n53eeLJDrxY0GuI7oJEp219Ntv9KAbAA8FnOvlaoTz432xYAK3asuYsQ4cE7300uy1w+pMd6zpIN+g==
+semiotic@^2.0.0-rc.4:
+  version "2.0.0-rc.4"
+  resolved "https://registry.yarnpkg.com/semiotic/-/semiotic-2.0.0-rc.4.tgz#c39d0127a7cae6e10e48b0d74c82cd468754a426"
+  integrity sha512-TDhMsnUlsKas4RtVPpuzhP4G1Z1/GmDMavIRsIWNz3AZPgiWYnX+cNloxJRM8STbYHhuRpVfyfi4P+nwX9s40Q==
   dependencies:
     d3-array "^1.2.0"
     d3-brush "^1.0.6"
@@ -8181,6 +8193,7 @@ semiotic@^2.0.0-rc.2:
     memoize-one "^5.1.1"
     object-assign "4.1.1"
     polygon-offset "0.3.1"
+    promise "8.1.0"
     react-annotation "3.0.0-beta.4"
     regression "^2.0.1"
     semiotic-mark "0.4.5"
