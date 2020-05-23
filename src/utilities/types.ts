@@ -2,12 +2,15 @@
 export interface Metric extends Field {
   type: "integer" | "datetime" | "number";
   extent: [any, any];
+  unfilteredExtent: [any, any];
 }
 
 export interface Dimension extends Field {
   type: "string" | "boolean" | "datetime";
   cardinality: number;
   cardinalValues: string[];
+  unfilteredCardinality: number;
+  unfilteredCardinalValues: string[];
 }
 
 export interface ChartOptions {

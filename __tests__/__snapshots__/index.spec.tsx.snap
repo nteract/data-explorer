@@ -65,6 +65,12 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
             "cardinality": 3,
             "name": "Region",
             "type": "string",
+            "unfilteredCardinalValues": Array [
+              "Western Europe",
+              "North America",
+              "Australia and New Zealand",
+            ],
+            "unfilteredCardinality": 3,
           },
           Object {
             "cardinalValues": Array [
@@ -81,6 +87,18 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
             "cardinality": 9,
             "name": "Country",
             "type": "string",
+            "unfilteredCardinalValues": Array [
+              "Switzerland",
+              "Iceland",
+              "Denmark",
+              "Norway",
+              "Canada",
+              "Finland",
+              "Netherlands",
+              "Sweden",
+              "New Zealand",
+            ],
+            "unfilteredCardinality": 9,
           },
         ]
       }
@@ -95,6 +113,10 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
             ],
             "name": "Happiness Rank",
             "type": "integer",
+            "unfilteredExtent": Array [
+              1,
+              9,
+            ],
           },
           Object {
             "extent": Array [
@@ -103,6 +125,10 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
             ],
             "name": "Happiness Score",
             "type": "number",
+            "unfilteredExtent": Array [
+              7.286,
+              7.587,
+            ],
           },
           Object {
             "extent": Array [
@@ -111,6 +137,10 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
             ],
             "name": "Standard Error",
             "type": "number",
+            "unfilteredExtent": Array [
+              0.02799,
+              0.04884,
+            ],
           },
           Object {
             "extent": Array [
@@ -119,6 +149,10 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
             ],
             "name": "Economy (GDP per Capita)",
             "type": "number",
+            "unfilteredExtent": Array [
+              1.25018,
+              1.459,
+            ],
           },
           Object {
             "extent": Array [
@@ -127,6 +161,10 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
             ],
             "name": "Family",
             "type": "number",
+            "unfilteredExtent": Array [
+              1.28017,
+              1.40223,
+            ],
           },
           Object {
             "extent": Array [
@@ -135,6 +173,10 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
             ],
             "name": "Health (Life Expectancy)",
             "type": "number",
+            "unfilteredExtent": Array [
+              0.87464,
+              0.94784,
+            ],
           },
           Object {
             "extent": Array [
@@ -143,6 +185,10 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
             ],
             "name": "Freedom",
             "type": "number",
+            "unfilteredExtent": Array [
+              0.61576,
+              0.66973,
+            ],
           },
           Object {
             "extent": Array [
@@ -151,6 +197,10 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
             ],
             "name": "Trust (Government Corruption)",
             "type": "number",
+            "unfilteredExtent": Array [
+              0.14145,
+              0.48357,
+            ],
           },
           Object {
             "extent": Array [
@@ -159,6 +209,10 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
             ],
             "name": "Generosity",
             "type": "number",
+            "unfilteredExtent": Array [
+              0.23351,
+              0.4761,
+            ],
           },
           Object {
             "extent": Array [
@@ -167,6 +221,10 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
             ],
             "name": "Dystopia Residual",
             "type": "number",
+            "unfilteredExtent": Array [
+              2.26425,
+              2.70201,
+            ],
           },
         ]
       }
@@ -575,6 +633,12 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
                 "cardinality": 3,
                 "name": "Region",
                 "type": "string",
+                "unfilteredCardinalValues": Array [
+                  "Western Europe",
+                  "North America",
+                  "Australia and New Zealand",
+                ],
+                "unfilteredCardinality": 3,
               },
               Object {
                 "cardinalValues": Array [
@@ -591,6 +655,18 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
                 "cardinality": 9,
                 "name": "Country",
                 "type": "string",
+                "unfilteredCardinalValues": Array [
+                  "Switzerland",
+                  "Iceland",
+                  "Denmark",
+                  "Norway",
+                  "Canada",
+                  "Finland",
+                  "Netherlands",
+                  "Sweden",
+                  "New Zealand",
+                ],
+                "unfilteredCardinality": 9,
               },
             ]
           }
@@ -608,6 +684,10 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
                 ],
                 "name": "Happiness Rank",
                 "type": "integer",
+                "unfilteredExtent": Array [
+                  1,
+                  9,
+                ],
               },
               Object {
                 "extent": Array [
@@ -616,6 +696,10 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
                 ],
                 "name": "Happiness Score",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  7.286,
+                  7.587,
+                ],
               },
               Object {
                 "extent": Array [
@@ -624,6 +708,10 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
                 ],
                 "name": "Standard Error",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  0.02799,
+                  0.04884,
+                ],
               },
               Object {
                 "extent": Array [
@@ -632,6 +720,10 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
                 ],
                 "name": "Economy (GDP per Capita)",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  1.25018,
+                  1.459,
+                ],
               },
               Object {
                 "extent": Array [
@@ -640,6 +732,10 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
                 ],
                 "name": "Family",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  1.28017,
+                  1.40223,
+                ],
               },
               Object {
                 "extent": Array [
@@ -648,6 +744,10 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
                 ],
                 "name": "Health (Life Expectancy)",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  0.87464,
+                  0.94784,
+                ],
               },
               Object {
                 "extent": Array [
@@ -656,6 +756,10 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
                 ],
                 "name": "Freedom",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  0.61576,
+                  0.66973,
+                ],
               },
               Object {
                 "extent": Array [
@@ -664,6 +768,10 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
                 ],
                 "name": "Trust (Government Corruption)",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  0.14145,
+                  0.48357,
+                ],
               },
               Object {
                 "extent": Array [
@@ -672,6 +780,10 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
                 ],
                 "name": "Generosity",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  0.23351,
+                  0.4761,
+                ],
               },
               Object {
                 "extent": Array [
@@ -680,6 +792,10 @@ exports[`DataExplorer composed with children with Toolbar to the left 1`] = `
                 ],
                 "name": "Dystopia Residual",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  2.26425,
+                  2.70201,
+                ],
               },
             ]
           }
@@ -1154,6 +1270,12 @@ exports[`Default DataExplorer export with metadata 1`] = `
                 "cardinality": 3,
                 "name": "Region",
                 "type": "string",
+                "unfilteredCardinalValues": Array [
+                  "Western Europe",
+                  "North America",
+                  "Australia and New Zealand",
+                ],
+                "unfilteredCardinality": 3,
               },
               Object {
                 "cardinalValues": Array [
@@ -1170,6 +1292,18 @@ exports[`Default DataExplorer export with metadata 1`] = `
                 "cardinality": 9,
                 "name": "Country",
                 "type": "string",
+                "unfilteredCardinalValues": Array [
+                  "Switzerland",
+                  "Iceland",
+                  "Denmark",
+                  "Norway",
+                  "Canada",
+                  "Finland",
+                  "Netherlands",
+                  "Sweden",
+                  "New Zealand",
+                ],
+                "unfilteredCardinality": 9,
               },
             ]
           }
@@ -1187,6 +1321,10 @@ exports[`Default DataExplorer export with metadata 1`] = `
                 ],
                 "name": "Happiness Rank",
                 "type": "integer",
+                "unfilteredExtent": Array [
+                  1,
+                  9,
+                ],
               },
               Object {
                 "extent": Array [
@@ -1195,6 +1333,10 @@ exports[`Default DataExplorer export with metadata 1`] = `
                 ],
                 "name": "Happiness Score",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  7.286,
+                  7.587,
+                ],
               },
               Object {
                 "extent": Array [
@@ -1203,6 +1345,10 @@ exports[`Default DataExplorer export with metadata 1`] = `
                 ],
                 "name": "Standard Error",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  0.02799,
+                  0.04884,
+                ],
               },
               Object {
                 "extent": Array [
@@ -1211,6 +1357,10 @@ exports[`Default DataExplorer export with metadata 1`] = `
                 ],
                 "name": "Economy (GDP per Capita)",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  1.25018,
+                  1.459,
+                ],
               },
               Object {
                 "extent": Array [
@@ -1219,6 +1369,10 @@ exports[`Default DataExplorer export with metadata 1`] = `
                 ],
                 "name": "Family",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  1.28017,
+                  1.40223,
+                ],
               },
               Object {
                 "extent": Array [
@@ -1227,6 +1381,10 @@ exports[`Default DataExplorer export with metadata 1`] = `
                 ],
                 "name": "Health (Life Expectancy)",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  0.87464,
+                  0.94784,
+                ],
               },
               Object {
                 "extent": Array [
@@ -1235,6 +1393,10 @@ exports[`Default DataExplorer export with metadata 1`] = `
                 ],
                 "name": "Freedom",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  0.61576,
+                  0.66973,
+                ],
               },
               Object {
                 "extent": Array [
@@ -1243,6 +1405,10 @@ exports[`Default DataExplorer export with metadata 1`] = `
                 ],
                 "name": "Trust (Government Corruption)",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  0.14145,
+                  0.48357,
+                ],
               },
               Object {
                 "extent": Array [
@@ -1251,6 +1417,10 @@ exports[`Default DataExplorer export with metadata 1`] = `
                 ],
                 "name": "Generosity",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  0.23351,
+                  0.4761,
+                ],
               },
               Object {
                 "extent": Array [
@@ -1259,6 +1429,10 @@ exports[`Default DataExplorer export with metadata 1`] = `
                 ],
                 "name": "Dystopia Residual",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  2.26425,
+                  2.70201,
+                ],
               },
             ]
           }
@@ -1291,6 +1465,12 @@ exports[`Default DataExplorer export with metadata 1`] = `
             "cardinality": 3,
             "name": "Region",
             "type": "string",
+            "unfilteredCardinalValues": Array [
+              "Western Europe",
+              "North America",
+              "Australia and New Zealand",
+            ],
+            "unfilteredCardinality": 3,
           },
           Object {
             "cardinalValues": Array [
@@ -1307,6 +1487,18 @@ exports[`Default DataExplorer export with metadata 1`] = `
             "cardinality": 9,
             "name": "Country",
             "type": "string",
+            "unfilteredCardinalValues": Array [
+              "Switzerland",
+              "Iceland",
+              "Denmark",
+              "Norway",
+              "Canada",
+              "Finland",
+              "Netherlands",
+              "Sweden",
+              "New Zealand",
+            ],
+            "unfilteredCardinality": 9,
           },
         ]
       }
@@ -1320,6 +1512,10 @@ exports[`Default DataExplorer export with metadata 1`] = `
             ],
             "name": "Happiness Rank",
             "type": "integer",
+            "unfilteredExtent": Array [
+              1,
+              9,
+            ],
           },
           Object {
             "extent": Array [
@@ -1328,6 +1524,10 @@ exports[`Default DataExplorer export with metadata 1`] = `
             ],
             "name": "Happiness Score",
             "type": "number",
+            "unfilteredExtent": Array [
+              7.286,
+              7.587,
+            ],
           },
           Object {
             "extent": Array [
@@ -1336,6 +1536,10 @@ exports[`Default DataExplorer export with metadata 1`] = `
             ],
             "name": "Standard Error",
             "type": "number",
+            "unfilteredExtent": Array [
+              0.02799,
+              0.04884,
+            ],
           },
           Object {
             "extent": Array [
@@ -1344,6 +1548,10 @@ exports[`Default DataExplorer export with metadata 1`] = `
             ],
             "name": "Economy (GDP per Capita)",
             "type": "number",
+            "unfilteredExtent": Array [
+              1.25018,
+              1.459,
+            ],
           },
           Object {
             "extent": Array [
@@ -1352,6 +1560,10 @@ exports[`Default DataExplorer export with metadata 1`] = `
             ],
             "name": "Family",
             "type": "number",
+            "unfilteredExtent": Array [
+              1.28017,
+              1.40223,
+            ],
           },
           Object {
             "extent": Array [
@@ -1360,6 +1572,10 @@ exports[`Default DataExplorer export with metadata 1`] = `
             ],
             "name": "Health (Life Expectancy)",
             "type": "number",
+            "unfilteredExtent": Array [
+              0.87464,
+              0.94784,
+            ],
           },
           Object {
             "extent": Array [
@@ -1368,6 +1584,10 @@ exports[`Default DataExplorer export with metadata 1`] = `
             ],
             "name": "Freedom",
             "type": "number",
+            "unfilteredExtent": Array [
+              0.61576,
+              0.66973,
+            ],
           },
           Object {
             "extent": Array [
@@ -1376,6 +1596,10 @@ exports[`Default DataExplorer export with metadata 1`] = `
             ],
             "name": "Trust (Government Corruption)",
             "type": "number",
+            "unfilteredExtent": Array [
+              0.14145,
+              0.48357,
+            ],
           },
           Object {
             "extent": Array [
@@ -1384,6 +1608,10 @@ exports[`Default DataExplorer export with metadata 1`] = `
             ],
             "name": "Generosity",
             "type": "number",
+            "unfilteredExtent": Array [
+              0.23351,
+              0.4761,
+            ],
           },
           Object {
             "extent": Array [
@@ -1392,6 +1620,10 @@ exports[`Default DataExplorer export with metadata 1`] = `
             ],
             "name": "Dystopia Residual",
             "type": "number",
+            "unfilteredExtent": Array [
+              2.26425,
+              2.70201,
+            ],
           },
         ]
       }
@@ -1572,82 +1804,42 @@ exports[`Default DataExplorer export without metadata 1`] = `
                     "type": "string",
                   },
                   Object {
-                    "extent": Array [
-                      1,
-                      9,
-                    ],
                     "name": "Happiness Rank",
                     "type": "integer",
                   },
                   Object {
-                    "extent": Array [
-                      7.286,
-                      7.587,
-                    ],
                     "name": "Happiness Score",
                     "type": "number",
                   },
                   Object {
-                    "extent": Array [
-                      0.02799,
-                      0.04884,
-                    ],
                     "name": "Standard Error",
                     "type": "number",
                   },
                   Object {
-                    "extent": Array [
-                      1.25018,
-                      1.459,
-                    ],
                     "name": "Economy (GDP per Capita)",
                     "type": "number",
                   },
                   Object {
-                    "extent": Array [
-                      1.28017,
-                      1.40223,
-                    ],
                     "name": "Family",
                     "type": "number",
                   },
                   Object {
-                    "extent": Array [
-                      0.87464,
-                      0.94784,
-                    ],
                     "name": "Health (Life Expectancy)",
                     "type": "number",
                   },
                   Object {
-                    "extent": Array [
-                      0.61576,
-                      0.66973,
-                    ],
                     "name": "Freedom",
                     "type": "number",
                   },
                   Object {
-                    "extent": Array [
-                      0.14145,
-                      0.48357,
-                    ],
                     "name": "Trust (Government Corruption)",
                     "type": "number",
                   },
                   Object {
-                    "extent": Array [
-                      0.23351,
-                      0.4761,
-                    ],
                     "name": "Generosity",
                     "type": "number",
                   },
                   Object {
-                    "extent": Array [
-                      2.26425,
-                      2.70201,
-                    ],
                     "name": "Dystopia Residual",
                     "type": "number",
                   },
@@ -1837,6 +2029,12 @@ exports[`Default DataExplorer export without metadata 1`] = `
                 "cardinality": 3,
                 "name": "Region",
                 "type": "string",
+                "unfilteredCardinalValues": Array [
+                  "Western Europe",
+                  "North America",
+                  "Australia and New Zealand",
+                ],
+                "unfilteredCardinality": 3,
               },
               Object {
                 "cardinalValues": Array [
@@ -1853,6 +2051,18 @@ exports[`Default DataExplorer export without metadata 1`] = `
                 "cardinality": 9,
                 "name": "Country",
                 "type": "string",
+                "unfilteredCardinalValues": Array [
+                  "Switzerland",
+                  "Iceland",
+                  "Denmark",
+                  "Norway",
+                  "Canada",
+                  "Finland",
+                  "Netherlands",
+                  "Sweden",
+                  "New Zealand",
+                ],
+                "unfilteredCardinality": 9,
               },
             ]
           }
@@ -1870,6 +2080,10 @@ exports[`Default DataExplorer export without metadata 1`] = `
                 ],
                 "name": "Happiness Rank",
                 "type": "integer",
+                "unfilteredExtent": Array [
+                  1,
+                  9,
+                ],
               },
               Object {
                 "extent": Array [
@@ -1878,6 +2092,10 @@ exports[`Default DataExplorer export without metadata 1`] = `
                 ],
                 "name": "Happiness Score",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  7.286,
+                  7.587,
+                ],
               },
               Object {
                 "extent": Array [
@@ -1886,6 +2104,10 @@ exports[`Default DataExplorer export without metadata 1`] = `
                 ],
                 "name": "Standard Error",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  0.02799,
+                  0.04884,
+                ],
               },
               Object {
                 "extent": Array [
@@ -1894,6 +2116,10 @@ exports[`Default DataExplorer export without metadata 1`] = `
                 ],
                 "name": "Economy (GDP per Capita)",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  1.25018,
+                  1.459,
+                ],
               },
               Object {
                 "extent": Array [
@@ -1902,6 +2128,10 @@ exports[`Default DataExplorer export without metadata 1`] = `
                 ],
                 "name": "Family",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  1.28017,
+                  1.40223,
+                ],
               },
               Object {
                 "extent": Array [
@@ -1910,6 +2140,10 @@ exports[`Default DataExplorer export without metadata 1`] = `
                 ],
                 "name": "Health (Life Expectancy)",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  0.87464,
+                  0.94784,
+                ],
               },
               Object {
                 "extent": Array [
@@ -1918,6 +2152,10 @@ exports[`Default DataExplorer export without metadata 1`] = `
                 ],
                 "name": "Freedom",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  0.61576,
+                  0.66973,
+                ],
               },
               Object {
                 "extent": Array [
@@ -1926,6 +2164,10 @@ exports[`Default DataExplorer export without metadata 1`] = `
                 ],
                 "name": "Trust (Government Corruption)",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  0.14145,
+                  0.48357,
+                ],
               },
               Object {
                 "extent": Array [
@@ -1934,6 +2176,10 @@ exports[`Default DataExplorer export without metadata 1`] = `
                 ],
                 "name": "Generosity",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  0.23351,
+                  0.4761,
+                ],
               },
               Object {
                 "extent": Array [
@@ -1942,6 +2188,10 @@ exports[`Default DataExplorer export without metadata 1`] = `
                 ],
                 "name": "Dystopia Residual",
                 "type": "number",
+                "unfilteredExtent": Array [
+                  2.26425,
+                  2.70201,
+                ],
               },
             ]
           }
@@ -1978,6 +2228,12 @@ exports[`Default DataExplorer export without metadata 1`] = `
             "cardinality": 3,
             "name": "Region",
             "type": "string",
+            "unfilteredCardinalValues": Array [
+              "Western Europe",
+              "North America",
+              "Australia and New Zealand",
+            ],
+            "unfilteredCardinality": 3,
           },
           Object {
             "cardinalValues": Array [
@@ -1994,6 +2250,18 @@ exports[`Default DataExplorer export without metadata 1`] = `
             "cardinality": 9,
             "name": "Country",
             "type": "string",
+            "unfilteredCardinalValues": Array [
+              "Switzerland",
+              "Iceland",
+              "Denmark",
+              "Norway",
+              "Canada",
+              "Finland",
+              "Netherlands",
+              "Sweden",
+              "New Zealand",
+            ],
+            "unfilteredCardinality": 9,
           },
         ]
       }
@@ -2007,6 +2275,10 @@ exports[`Default DataExplorer export without metadata 1`] = `
             ],
             "name": "Happiness Rank",
             "type": "integer",
+            "unfilteredExtent": Array [
+              1,
+              9,
+            ],
           },
           Object {
             "extent": Array [
@@ -2015,6 +2287,10 @@ exports[`Default DataExplorer export without metadata 1`] = `
             ],
             "name": "Happiness Score",
             "type": "number",
+            "unfilteredExtent": Array [
+              7.286,
+              7.587,
+            ],
           },
           Object {
             "extent": Array [
@@ -2023,6 +2299,10 @@ exports[`Default DataExplorer export without metadata 1`] = `
             ],
             "name": "Standard Error",
             "type": "number",
+            "unfilteredExtent": Array [
+              0.02799,
+              0.04884,
+            ],
           },
           Object {
             "extent": Array [
@@ -2031,6 +2311,10 @@ exports[`Default DataExplorer export without metadata 1`] = `
             ],
             "name": "Economy (GDP per Capita)",
             "type": "number",
+            "unfilteredExtent": Array [
+              1.25018,
+              1.459,
+            ],
           },
           Object {
             "extent": Array [
@@ -2039,6 +2323,10 @@ exports[`Default DataExplorer export without metadata 1`] = `
             ],
             "name": "Family",
             "type": "number",
+            "unfilteredExtent": Array [
+              1.28017,
+              1.40223,
+            ],
           },
           Object {
             "extent": Array [
@@ -2047,6 +2335,10 @@ exports[`Default DataExplorer export without metadata 1`] = `
             ],
             "name": "Health (Life Expectancy)",
             "type": "number",
+            "unfilteredExtent": Array [
+              0.87464,
+              0.94784,
+            ],
           },
           Object {
             "extent": Array [
@@ -2055,6 +2347,10 @@ exports[`Default DataExplorer export without metadata 1`] = `
             ],
             "name": "Freedom",
             "type": "number",
+            "unfilteredExtent": Array [
+              0.61576,
+              0.66973,
+            ],
           },
           Object {
             "extent": Array [
@@ -2063,6 +2359,10 @@ exports[`Default DataExplorer export without metadata 1`] = `
             ],
             "name": "Trust (Government Corruption)",
             "type": "number",
+            "unfilteredExtent": Array [
+              0.14145,
+              0.48357,
+            ],
           },
           Object {
             "extent": Array [
@@ -2071,6 +2371,10 @@ exports[`Default DataExplorer export without metadata 1`] = `
             ],
             "name": "Generosity",
             "type": "number",
+            "unfilteredExtent": Array [
+              0.23351,
+              0.4761,
+            ],
           },
           Object {
             "extent": Array [
@@ -2079,6 +2383,10 @@ exports[`Default DataExplorer export without metadata 1`] = `
             ],
             "name": "Dystopia Residual",
             "type": "number",
+            "unfilteredExtent": Array [
+              2.26425,
+              2.70201,
+            ],
           },
         ]
       }

@@ -44,6 +44,7 @@ export interface Props {
     ) => void;
     overrideSettings?: object;
     OverrideVizControls?: React.ComponentType;
+    OverrideLegend?: React.ComponentType;
     additionalViews?: SemioticSettings;
     filterData?: Function;
     children?: React.ReactNode
@@ -252,7 +253,7 @@ const processInitialData = (props: Props, existingView?: View, existingDX?: Dx.d
                 field.type === "boolean" ||
                 field.type === "datetime"
         )
-        .map(field => ({ ...field, cardinality: 0, cardinalValues: [] })) as Dx.Dimension[];
+        .map(field => ({ cardinality: 0, cardinalValues: [], unfilteredCardinality: 0, unfilteredCardinalValues: [], ...field })) as Dx.Dimension[];
 
     // Should datetime data types be transformed into js dates before getting to this resource?
 
@@ -276,31 +277,7 @@ const processInitialData = (props: Props, existingView?: View, existingDX?: Dx.d
 
     let largeDataset = true;
     let selectedDimensions: string[] = [];
-    if (data.length < 5000) {
-        largeDataset = false
-    }
 
-    if (data.length < 50000) {
-        largeDataset = false;
-        const cardinalityHash: { [key: string]: { [key: string]: true } } = {};
-        dimensions.forEach(dim => {
-            cardinalityHash[dim.name] = {};
-            data.forEach(datapoint => {
-                const dimValue = datapoint[dim.name];
-                cardinalityHash[dim.name][dimValue] = true;
-            });
-
-            const dimKeys = Object.keys(cardinalityHash[dim.name])
-
-            dim.cardinality = dimKeys.length;
-            dim.cardinalValues = dimKeys
-        });
-
-        selectedDimensions = dimensions
-            .sort((a, b) => a.cardinality - b.cardinality)
-            .filter((data, index) => index === 0)
-            .map(dim => dim.name);
-    }
 
     const metrics = fields
         .filter(
@@ -311,11 +288,60 @@ const processInitialData = (props: Props, existingView?: View, existingDX?: Dx.d
         )
         .filter(
             field => !primaryKey.find(pkey => pkey === field.name)
-        ) as Dx.Metric[];
+        ).map(d => ({ ...d })) as Dx.Metric[];
 
-    metrics.forEach(m => {
-        m.extent = extent(data.map(d => d[m.name]))
-    })
+    if (data.length < 5000) {
+        largeDataset = false
+    }
+
+    if (data.length < 100000) {
+        metrics.forEach(m => {
+            if (!m.extent) {
+                m.extent = extent(data.map(d => d[m.name]))
+            }
+            if (!m.unfilteredExtent) {
+                m.unfilteredExtent = filteredData ? extent(props.data.data.map(d => d[m.name])) : m.extent
+            }
+        })
+
+        dimensions.forEach(dim => {
+            if (dim.cardinality === 0) {
+                const cardinalityHash: { [key: string]: { [key: string]: true } } = {};
+                cardinalityHash[dim.name] = {};
+                data.forEach(datapoint => {
+                    const dimValue = datapoint[dim.name];
+                    cardinalityHash[dim.name][dimValue] = true;
+                });
+
+                const dimKeys = Object.keys(cardinalityHash[dim.name])
+
+                dim.cardinality = dimKeys.length;
+                dim.cardinalValues = dimKeys
+            }
+            if (dim.unfilteredCardinality === 0) {
+                if (!filteredData) {
+                    dim.unfilteredCardinality = dim.cardinality
+                    dim.unfilteredCardinalValues = dim.cardinalValues
+                }
+                const cardinalityHash: { [key: string]: { [key: string]: true } } = {};
+                cardinalityHash[dim.name] = {};
+                props.data.data.forEach(datapoint => {
+                    const dimValue = datapoint[dim.name];
+                    cardinalityHash[dim.name][dimValue] = true;
+                });
+
+                const dimKeys = Object.keys(cardinalityHash[dim.name])
+
+                dim.unfilteredCardinality = dimKeys.length;
+                dim.unfilteredCardinalValues = dimKeys
+            }
+        });
+
+        selectedDimensions = dimensions
+            .sort((a, b) => a.cardinality - b.cardinality)
+            .filter((data, index) => index === 0)
+            .map(dim => dim.name);
+    }
 
     const finalChartSettings = {
         metric1: (metrics[0] && metrics[0].name) || "none",
@@ -370,6 +396,8 @@ const processInitialData = (props: Props, existingView?: View, existingDX?: Dx.d
         newState = {
             ...newState,
             ...nonChartDXSettings,
+            metrics,
+            dimensions,
             data
         }
     }
@@ -448,7 +476,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
             showLegend,
             data: stateData,
             facets,
-            overrideSettings
+            overrideSettings,
         } = { ...this.state, ...updatedState };
 
         if (!this.props.data && !this.props.metadata) {
@@ -457,7 +485,7 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
 
         let instantiatedView
 
-        const { data, height, OverrideVizControls, additionalViews } = this.props;
+        const { data, height, OverrideVizControls, OverrideLegend, additionalViews } = this.props;
 
         const chartKey = generateChartKey({
             view,
@@ -598,11 +626,14 @@ class DataExplorer extends React.PureComponent<Partial<Props>, State> {
                     }
                 })
 
+            const ActualLegend = OverrideLegend ? OverrideLegend : HTMLLegend
+
+
             finalRenderedViz = <FacetWrapper>
                 <FacetController>
                     {facetFrames}
                 </FacetController>
-                <HTMLLegend
+                <ActualLegend
                     valueHash={{}}
                     colorHash={colorHashOverride}
                     setColor={this.setColor}
