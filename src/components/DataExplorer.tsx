@@ -300,7 +300,11 @@ const processInitialData = (props: Props, existingView?: View, existingDX?: Dx.d
                 m.extent = extent(data.map(d => d[m.name]))
             }
             if (!m.unfilteredExtent) {
-                m.unfilteredExtent = filteredData ? extent(props.data.data.map(d => d[m.name])) : m.extent
+                if (m.type === "datetime") {
+                    m.unfilteredExtent = filteredData ? extent(props.data.data.map(d => new Date(d[m.name]))) : m.extent
+                } else {
+                    m.unfilteredExtent = filteredData ? extent(props.data.data.map(d => d[m.name])) : m.extent
+                }
             }
         })
 
