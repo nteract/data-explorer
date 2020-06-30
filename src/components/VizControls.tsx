@@ -1,9 +1,9 @@
-import * as React from "react";
+import * as React from "react"
 
-import { ChartOptionTypes, controlHelpText } from "../docs/chart-docs";
+import { ChartOptionTypes, controlHelpText } from "../chartmeta/chart-docs"
 
-import styled, { css } from "styled-components";
-import * as Dx from "../utilities/types";
+import styled, { css } from "styled-components"
+import * as Dx from "../utilities/types"
 
 const commonCSS = css`
   h2 {
@@ -18,12 +18,12 @@ const commonCSS = css`
     background-color: #d8e1e8 !important;
     background-image: none !important;
   }
-`;
+`
 
 const ControlWrapper = styled.div`
   margin-right: 30px;
   ${commonCSS}
-`;
+`
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,7 +31,7 @@ const Wrapper = styled.div`
   justify-content: left;
   margin-bottom: 30px;
   ${commonCSS}
-`;
+`
 
 const metricDimSelector = (
   values: string[],
@@ -40,16 +40,19 @@ const metricDimSelector = (
   required: boolean,
   selectedValue: string,
   contextTooltip = "Help me help you help yourself",
-  facetingFunction?: (onWhat: "dimension" | "metric" | "vizType", which?: string) => void
+  facetingFunction?: (
+    onWhat: "dimension" | "metric" | "vizType",
+    which?: string
+  ) => void
 ) => {
-  const metricsList = required ? values : ["none", ...values];
-  let displayMetrics;
+  const metricsList = required ? values : ["none", ...values]
+  let displayMetrics
 
   if (metricsList.length > 1) {
     displayMetrics = (
       <select
         onChange={(event: { target: { value: string } }): void => {
-          selectionFunction(event.target.value);
+          selectionFunction(event.target.value)
         }}
         value={selectedValue}
       >
@@ -64,16 +67,22 @@ const metricDimSelector = (
           </option>
         ))}
       </select>
-    );
+    )
   } else {
-    displayMetrics = <p style={{ margin: 0 }}>{metricsList[0]}</p>;
+    displayMetrics = <p style={{ margin: 0 }}>{metricsList[0]}</p>
   }
 
   let generateFacetButton
   if (facetingFunction) {
-    generateFacetButton = <button
-      onClick={() => { facetingFunction("metric", title) }}
-    >Facet</button>
+    generateFacetButton = (
+      <button
+        onClick={() => {
+          facetingFunction("metric", title)
+        }}
+      >
+        Facet
+      </button>
+    )
   }
 
   return (
@@ -84,30 +93,30 @@ const metricDimSelector = (
       {displayMetrics}
       {generateFacetButton}
     </ControlWrapper>
-  );
-};
+  )
+}
 
 const availableLineTypes: Array<{
-  type: Dx.LineType;
-  label: string;
+  type: Dx.LineType
+  label: string
 }> = [
-    {
-      type: "line",
-      label: "Line Chart"
-    },
-    {
-      type: "stackedarea",
-      label: "Stacked Area Chart"
-    },
-    {
-      type: "stackedpercent",
-      label: "Stacked Area Chart (Percent)"
-    },
-    {
-      type: "bumparea",
-      label: "Ranked Area Chart"
-    }
-  ];
+  {
+    type: "line",
+    label: "Line Chart"
+  },
+  {
+    type: "stackedarea",
+    label: "Stacked Area Chart"
+  },
+  {
+    type: "stackedpercent",
+    label: "Stacked Area Chart (Percent)"
+  },
+  {
+    type: "bumparea",
+    label: "Ranked Area Chart"
+  }
+]
 
 const availableAreaTypes = [
   {
@@ -122,32 +131,34 @@ const availableAreaTypes = [
     type: "contour",
     label: "Contour Plot"
   }
-];
+]
 
-type ChartOptions = { [key in ChartOptionTypes]: string };
+type ChartOptions = { [key in ChartOptionTypes]: string }
 interface VizControlParams {
-  view: Dx.View;
-  chart: Dx.Chart;
-  metrics: Dx.Field[];
-  dimensions: Dx.Dimension[];
+  view: Dx.View
+  chart: Dx.Chart
+  metrics: Dx.Field[]
+  dimensions: Dx.Dimension[]
   // TODO: leave "options: any" for now and improve typedef later
-  updateChart: (options: any) => void;
-  selectedDimensions: string[];
-  selectedMetrics: string[];
-  hierarchyType: Dx.HierarchyType;
-  summaryType: Dx.SummaryType;
-  networkType: string;
-  setLineType: (lineType: Dx.LineType) => void;
-  updateMetrics: (name: string) => void;
-  generateFacets: (metricName: string) => (onWhat: "dimension" | "metric" | "vizType", which?: string) => void;
-  updateDimensions: (name: string) => void;
-  lineType: Dx.LineType;
-  areaType: Dx.AreaType;
-  setAreaType: (label: Dx.AreaType) => void;
-  data: Dx.Datapoint[];
-  trendLine: Dx.TrendLineType;
-  marginalGraphics: Dx.SummaryType;
-  barGrouping: Dx.BarGroupingType;
+  updateChart: (options: any) => void
+  selectedDimensions: string[]
+  selectedMetrics: string[]
+  hierarchyType: Dx.HierarchyType
+  summaryType: Dx.SummaryType
+  networkType: string
+  setLineType: (lineType: Dx.LineType) => void
+  updateMetrics: (name: string) => void
+  generateFacets: (
+    metricName: string
+  ) => (onWhat: "dimension" | "metric" | "vizType", which?: string) => void
+  updateDimensions: (name: string) => void
+  lineType: Dx.LineType
+  areaType: Dx.AreaType
+  setAreaType: (label: Dx.AreaType) => void
+  data: Dx.Datapoint[]
+  trendLine: Dx.TrendLineType
+  marginalGraphics: Dx.SummaryType
+  barGrouping: Dx.BarGroupingType
 }
 export default ({
   view,
@@ -172,33 +183,33 @@ export default ({
   data,
   generateFacets
 }: VizControlParams) => {
-  const metricNames = metrics.map(metric => metric.name);
-  const dimensionNames = dimensions.map(dim => dim.name);
+  const metricNames = metrics.map(metric => metric.name)
+  const dimensionNames = dimensions.map(dim => dim.name)
 
   const updateChartGenerator = (chartProperty: string) => {
     return (metricOrDim: string) =>
-      updateChart({ chart: { ...chart, [chartProperty]: metricOrDim } });
-  };
+      updateChart({ chart: { ...chart, [chartProperty]: metricOrDim } })
+  }
 
   const getControlHelpText = (view: string, metricOrDim: string) => {
     if (Object.keys(controlHelpText).find(mOrD => mOrD === metricOrDim)) {
-      const mOrD = metricOrDim as ChartOptionTypes;
+      const mOrD = metricOrDim as ChartOptionTypes
       const views =
-        controlHelpText[mOrD] !== undefined ? controlHelpText[mOrD] : null;
+        controlHelpText[mOrD] !== undefined ? controlHelpText[mOrD] : null
       if (views == null) {
-        return "";
+        return ""
       }
       if (typeof views === "string") {
-        return views;
+        return views
       }
       if (views[view] != null) {
-        return views[view];
+        return views[view]
       } else {
-        return views.default;
+        return views.default
       }
     }
-    return "";
-  };
+    return ""
+  }
 
   return (
     <React.Fragment>
@@ -406,7 +417,7 @@ export default ({
               <h3>Chart Type</h3>
             </div>
             {availableAreaTypes.map(areaTypeOption => {
-              const areaTypeOptionType = areaTypeOption.type;
+              const areaTypeOptionType = areaTypeOption.type
               if (
                 areaTypeOptionType === "contour" ||
                 areaTypeOptionType === "hexbin" ||
@@ -421,9 +432,9 @@ export default ({
                   >
                     {areaTypeOption.label}
                   </button>
-                );
+                )
               } else {
-                return <div />;
+                return <div />
               }
             })}
           </div>
@@ -485,5 +496,5 @@ export default ({
         )}
       </Wrapper>
     </React.Fragment>
-  );
-};
+  )
+}

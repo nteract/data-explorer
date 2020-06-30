@@ -1,21 +1,22 @@
-import { nest } from "d3-collection";
-import { interpolateLab } from "d3-interpolate";
-import * as React from "react";
+import { nest } from "d3-collection"
+import { interpolateLab } from "d3-interpolate"
+import * as React from "react"
 
-import TooltipContent from "../utilities/tooltip-content";
+import TooltipContent from "../utilities/tooltip-content"
 
-import { chartHelpText } from "../docs/chart-docs";
-import * as Dx from "../utilities/types";
+import * as Dx from "../utilities/types"
 
 interface HierarchicalOptions {
-  hierarchyType: Dx.HierarchyType;
-  chart: Dx.Chart;
-  selectedDimensions: Dx.ChartOptions["selectedDimensions"];
-  primaryKey: Dx.ChartOptions["primaryKey"];
-  colors: Dx.ChartOptions["colors"];
+  hierarchyType: Dx.HierarchyType
+  chart: Dx.Chart
+  selectedDimensions: Dx.ChartOptions["selectedDimensions"]
+  primaryKey: Dx.ChartOptions["primaryKey"]
+  colors: Dx.ChartOptions["colors"]
 }
 
-const overrideFrameHover = (hierarchyType: Dx.HierarchyType) => (annotation: any) => {
+const overrideFrameHover = (hierarchyType: Dx.HierarchyType) => (
+  annotation: any
+) => {
   const { d } = annotation
   if (d.type === "frame-hover" && hierarchyType !== "treemap") {
     return
@@ -23,7 +24,11 @@ const overrideFrameHover = (hierarchyType: Dx.HierarchyType) => (annotation: any
   return null
 }
 
-const hierarchicalAnnotation = (hierarchyType: Dx.HierarchyType, selectedDimensions: string[], metric: string) => (annotation: any) => {
+const hierarchicalAnnotation = (
+  hierarchyType: Dx.HierarchyType,
+  selectedDimensions: string[],
+  metric: string
+) => (annotation: any) => {
   const { d, networkFrameState, nodes: drawnNodes } = annotation
   const { type, parent } = d
   const { networkFrameRender } = networkFrameState
@@ -35,25 +40,43 @@ const hierarchicalAnnotation = (hierarchyType: Dx.HierarchyType, selectedDimensi
     const ancestors = parent.ancestors()
     const parentPlusPieces = [parent, ...ancestors]
 
-    const drawnPieces = parentPlusPieces
-      .map(d => drawnNodes.find((p: any) => p.depth === 0 && d.depth === 0 || (p.hierarchicalID === d.hierarchicalID)))
+    const drawnPieces = parentPlusPieces.map(d =>
+      drawnNodes.find(
+        (p: any) =>
+          (p.depth === 0 && d.depth === 0) ||
+          p.hierarchicalID === d.hierarchicalID
+      )
+    )
 
     const allPieces = [d, ...drawnPieces]
     const baseMarkProps = { forceUpdate: true }
 
-    const ancestorHighlight = allPieces
-      .map((node, nodei) => {
-        const transform = `translate(${node.x},${node.y})`
-        const styleFn = (d: any) => ({ ...baseStyle(d), ...{ fill: "red", opacity: 0.5, stroke: "red", strokeWidth: "4px" } })
-        const customNode = customMark({ d: node, styleFn, transform: transform, baseMarkProps, key: `highlight-${nodei}-parent` })
-
-        const thisLevelName = selectedDimensions[node.depth - 1]
-
-
-        return <g>{customNode}
-          <text transform={transform}>{thisLevelName && `${thisLevelName}: ${node.key}`}{node.depth !== 0 && node[metric] && `${metric}: ${node[metric]}`}</text>
-        </g>
+    const ancestorHighlight = allPieces.map((node, nodei) => {
+      const transform = `translate(${node.x},${node.y})`
+      const styleFn = (d: any) => ({
+        ...baseStyle(d),
+        ...{ fill: "red", opacity: 0.5, stroke: "red", strokeWidth: "4px" }
       })
+      const customNode = customMark({
+        d: node,
+        styleFn,
+        transform: transform,
+        baseMarkProps,
+        key: `highlight-${nodei}-parent`
+      })
+
+      const thisLevelName = selectedDimensions[node.depth - 1]
+
+      return (
+        <g>
+          {customNode}
+          <text transform={transform}>
+            {thisLevelName && `${thisLevelName}: ${node.key}`}
+            {node.depth !== 0 && node[metric] && `${metric}: ${node[metric]}`}
+          </text>
+        </g>
+      )
+    })
     return <g>{ancestorHighlight}</g>
   }
   return null
@@ -61,12 +84,12 @@ const hierarchicalAnnotation = (hierarchyType: Dx.HierarchyType, selectedDimensi
 
 const parentPath = (datapoint: Dx.Datapoint, pathArray: string[]) => {
   if (datapoint.parent) {
-    pathArray = parentPath(datapoint.parent, [datapoint.key, ...pathArray]);
+    pathArray = parentPath(datapoint.parent, [datapoint.key, ...pathArray])
   } else {
-    pathArray = [...pathArray];
+    pathArray = [...pathArray]
   }
-  return pathArray;
-};
+  return pathArray
+}
 
 const hierarchicalTooltip = (
   datapoint: Dx.Datapoint,
@@ -76,54 +99,59 @@ const hierarchicalTooltip = (
 ) => {
   const pathString = datapoint.parent
     ? parentPath(
-      datapoint.parent,
-      (datapoint.key && [datapoint.key]) || []
-    ).map((d, i) => <p>{selectedDimensions[i]}: {d}</p>)
-    : "";
-  const content = [];
+        datapoint.parent,
+        (datapoint.key && [datapoint.key]) || []
+      ).map((d, i) => (
+        <p>
+          {selectedDimensions[i]}: {d}
+        </p>
+      ))
+    : ""
+  const content = []
   if (!datapoint.parent) {
-    content.push(<h2 key="hierarchy-title">Root</h2>);
+    content.push(<h2 key="hierarchy-title">Root</h2>)
   } else if (datapoint.key) {
-    content.push(<h2 key="hierarchy-title">{datapoint.key}</h2>);
-    content.push(<p key="path-string">{pathString}</p>);
-    content.push(<p key="hierarchy-value">Total Value: {datapoint.value}</p>);
+    content.push(<h2 key="hierarchy-title">{datapoint.key}</h2>)
+    content.push(<p key="path-string">{pathString}</p>)
+    content.push(<p key="hierarchy-value">Total Value: {datapoint.value}</p>)
     content.push(
       <p key="hierarchy-children">Children: {datapoint.children.length}</p>
-    );
+    )
   } else {
-    content.push(pathString,
+    content.push(
+      pathString,
       <p key="leaf-label">
         {primaryKey.map((pkey: string) => datapoint[pkey]).join(", ")}
       </p>
-    );
+    )
     content.push(
       <p key="hierarchy-value">
         {metric}: {datapoint[metric]}
       </p>
-    );
+    )
   }
 
-  return content;
-};
+  return content
+}
 
 const hierarchicalColor = (
   colorHash: { [index: string]: string },
   datapoint: Dx.Datapoint
 ) => {
   if (datapoint.depth === 0) {
-    return "white";
+    return "white"
   }
   if (datapoint.depth === 1) {
-    return colorHash[datapoint.key];
+    return colorHash[datapoint.key]
   }
-  let colorNode = datapoint;
+  let colorNode = datapoint
   for (let x = datapoint.depth; x > 1; x--) {
-    colorNode = colorNode.parent;
+    colorNode = colorNode.parent
   }
-  const lightenScale = interpolateLab("white", colorHash[colorNode.key]);
+  const lightenScale = interpolateLab("white", colorHash[colorNode.key])
 
-  return lightenScale(Math.max(0, datapoint.depth / 6));
-};
+  return lightenScale(Math.max(0, datapoint.depth / 6))
+}
 
 export const semioticHierarchicalChart = (
   data: Dx.DataProps["data"],
@@ -138,41 +166,43 @@ export const semioticHierarchicalChart = (
     selectedDimensions,
     primaryKey,
     colors
-  } = options;
-  const { metric1 } = chart;
+  } = options
+  const { metric1 } = chart
 
   // a sunburst is just a radial partition
   const hierarchyType =
-    baseHierarchyType === "sunburst" ? "partition" : baseHierarchyType;
+    baseHierarchyType === "sunburst" ? "partition" : baseHierarchyType
 
   if (selectedDimensions.length === 0) {
-    return {};
+    return {}
   }
 
-  const nestingParams = nest<{ [index: string]: string }>();
+  const nestingParams = nest<{ [index: string]: string }>()
 
   selectedDimensions.forEach((dim: string) => {
-    nestingParams.key((param: { [index: string]: string }) => param[dim]);
-  });
+    nestingParams.key((param: { [index: string]: string }) => param[dim])
+  })
 
-  const colorHash: any = colorHashOverride || {};
-  const sanitizedData: Array<any> = [];
+  const colorHash: any = colorHashOverride || {}
+  const sanitizedData: Array<any> = []
 
   data.forEach((datapoint: Dx.Datapoint) => {
     if (!colorDimOverride && !colorHash[datapoint[selectedDimensions[0]]]) {
       colorHash[datapoint[selectedDimensions[0]]] =
-        colors[Object.keys(colorHash).length];
+        colors[Object.keys(colorHash).length]
     }
 
     sanitizedData.push({
       ...datapoint,
       sanitizedR: datapoint.r,
       r: undefined
-    });
-  });
+    })
+  })
 
-  const entries = nestingParams.entries(sanitizedData.sort((a, b) => a[metric1] - b[metric1]));
-  const rootNode = { id: "all", values: entries };
+  const entries = nestingParams.entries(
+    sanitizedData.sort((a, b) => a[metric1] - b[metric1])
+  )
+  const rootNode = { id: "all", values: entries }
 
   const hierarchySettings = {
     edges: rootNode,
@@ -182,7 +212,7 @@ export const semioticHierarchicalChart = (
         fill: hierarchicalColor(colorHash, node),
         stroke: node.depth === 1 ? "white" : "black",
         strokeOpacity: node.depth * 0.1 + 0.2
-      };
+      }
     },
     networkType: {
       type: hierarchyType,
@@ -193,7 +223,7 @@ export const semioticHierarchicalChart = (
       zoom: false
     },
     edgeRenderKey: (edge: object, index: number) => {
-      return index;
+      return index
     },
     nodeIDAccessor: (d: any, i: any) => d.id || d.key || i,
     baseMarkProps: { forceUpdate: true },
@@ -210,17 +240,29 @@ export const semioticHierarchicalChart = (
         }
       }
     ],
-    svgAnnotationRules: hierarchicalAnnotation(hierarchyType, selectedDimensions, metric1),
+    svgAnnotationRules: hierarchicalAnnotation(
+      hierarchyType,
+      selectedDimensions,
+      metric1
+    ),
     htmlAnnotationRules: overrideFrameHover(hierarchyType),
     tooltipContent: (hoveredDatapoint: Dx.Datapoint) => {
       return (
         <TooltipContent x={hoveredDatapoint.x} y={hoveredDatapoint.y}>
-          {hierarchicalTooltip(hoveredDatapoint, primaryKey, metric1, selectedDimensions)}
+          {hierarchicalTooltip(
+            hoveredDatapoint,
+            primaryKey,
+            metric1,
+            selectedDimensions
+          )}
         </TooltipContent>
-      );
+      )
     }
-  };
+  }
 
-  return { frameSettings: hierarchySettings, colorDim: selectedDimensions[0], colorHash }
-
-};
+  return {
+    frameSettings: hierarchySettings,
+    colorDim: selectedDimensions[0],
+    colorHash
+  }
+}

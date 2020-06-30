@@ -1,16 +1,19 @@
-import * as React from "react";
+import * as React from "react"
 
-import styled from "styled-components";
+import styled from "styled-components"
 
 interface Props {
-  x: number;
-  y: number;
+  x: number
+  y: number
 }
+
+export const safeDisplayValue = (value: any) =>
+  value && value.toString ? value.toString() : value
 
 // A little "mixin" for picking the :before on a tooltip
 const beforeContent = (props: Props) => {
   if (props.x < 200 || props.x > 600) {
-    return null;
+    return null
   }
   if (props.y < 200) {
     return `
@@ -26,7 +29,7 @@ const beforeContent = (props: Props) => {
       height: 15px;
       position: absolute;
       z-index: 99;
-    `;
+    `
   }
 
   return `
@@ -42,8 +45,8 @@ const beforeContent = (props: Props) => {
     height: 15px;
     position: absolute;
     z-index: 99;
-  `;
-};
+  `
+}
 
 const TooltipContent = styled.div.attrs((props: Props) => ({
   style: {
@@ -73,5 +76,5 @@ const TooltipContent = styled.div.attrs((props: Props) => ({
   &:before {
     ${beforeContent}
   }
-`;
-export default TooltipContent;
+`
+export default TooltipContent
