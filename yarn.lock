@@ -8307,10 +8307,10 @@ semiotic-mark@0.4.5:
     d3-selection "^1.4.0"
     d3-transition "^1.2.0"
 
-semiotic@^2.0.0-rc.5:
-  version "2.0.0-rc.5"
-  resolved "https://registry.yarnpkg.com/semiotic/-/semiotic-2.0.0-rc.5.tgz#b47e82671037283407f4e100a48619d299c51033"
-  integrity sha512-+va0b49RbvhkgC6irfrMQmmXQNHVmOe5uH84zT0iaxeLObHKwQs5ozdZkqTukOGis7/WT3bDYYo5jQj7plZ3Ug==
+semiotic@^2.0.0-rc.6:
+  version "2.0.0-rc.6"
+  resolved "https://registry.yarnpkg.com/semiotic/-/semiotic-2.0.0-rc.6.tgz#7ff64963062327e545d67391be8059e3f6d6ae23"
+  integrity sha512-aQN1H1oFCRPtVT3is9xkoAzjZSSKRBYmtej5FFRfCOKIikqWhUQmXmXA/Ao8VUnpRntC6TqMmn4VqwfzhQBRjg==
   dependencies:
     d3-array "^1.2.0"
     d3-brush "^1.0.6"
