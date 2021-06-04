@@ -15,6 +15,8 @@ Read [Elijah Meeks](https://twitter.com/elijah_meeks)'s [post on designing the d
 
 ## Using the Data Explorer
 
+To use Data Explorer in your project, use the following approach.
+
 ```bash
 yarn add @nteract/data-explorer
 ```
