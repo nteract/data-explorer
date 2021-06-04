@@ -1,5 +1,6 @@
 [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/nteract/examples/master?urlpath=%2Fnteract%2Fedit%2Fpython%2Fhappiness.ipynb)
 [![<ORG_NAME>](https://circleci.com/gh/nteract/data-explorer.svg?style=svg)](<LINK>)
+
 # nteract Data Explorer
 
 ## [Interactive Documentation](https://data-explorer.nteract.io/)
@@ -14,12 +15,13 @@ Read [Elijah Meeks](https://twitter.com/elijah_meeks)'s [post on designing the d
 
 ## Using the Data Explorer
 
-```
+```bash
 yarn add @nteract/data-explorer
 ```
 
 Install `react` and `styled-components` if you are not already using them.
-```
+
+```bash
 yarn add react styled-components
 ```
 
@@ -53,4 +55,4 @@ import { DataExplorer, Toolbar, Viz } from "@nteract/data-explorer";
 
 For expedited development, you can run `npm run styleguide` and the data explorer documentation will be run live locally and you can experiment with the settings and data.
 
-### Now you are ready to contribute :tada:
+Now you are ready to contribute :tada:
