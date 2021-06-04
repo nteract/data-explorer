@@ -4,9 +4,13 @@
 
 ## [Interactive Documentation](https://data-explorer.nteract.io/)
 
+Explore the [documentation](https://data-explorer.nteract.io/).
+
 ![Data Explorer Examples](https://user-images.githubusercontent.com/1863892/55675008-07632e80-5871-11e9-9dac-0a71450faf7b.gif)
 
-[Read @emeek's post on designing the data explorer](https://blog.nteract.io/designing-the-nteract-data-explorer-f4476d53f897).
+## Creating Data Explorer
+
+Read [Elijah Meeks](https://twitter.com/elijah_meeks)'s [post on designing the data explorer](https://blog.nteract.io/designing-the-nteract-data-explorer-f4476d53f897).
 
 ## Using the Data Explorer
 
