@@ -1,17 +1,32 @@
 {
   "compilerOptions": {
-    "strict": true,
-    "esModuleInterop": true,
+    "allowJs": true,
+    "checkJs": false,
     "composite": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "jsx": "react",
     "lib": [
       "esnext",
-      "dom"
+      "dom",
+      "dom.iterable"
     ],
-    "target": "es2017",
     "module": "commonjs",
     "moduleResolution": "node",
+    "noImplicitAny": false,
+    "resolveJsonModule": true,
     "skipLibCheck": true,
-    "noImplicitAny": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es2017",
+    "typeRoots": [
+      "./node_modules/@types",
+      "types"
+    ],
+    "allowSyntheticDefaultImports": true,
+    "noEmit": false,
     "plugins": [
       {
         "name": "typescript-styled-plugin"
@@ -20,19 +35,11 @@
         "name": "typescript-tslint-plugin"
       }
     ],
-    "resolveJsonModule": true,
     "preserveWatchOutput": true,
-    "allowSyntheticDefaultImports": true,
-    "typeRoots": [
-      "./node_modules/@types",
-      "types"
-    ],
-    "declaration": true,
     "tsBuildInfoFile": "lib/.tsbuildinfo",
     "outDir": "lib",
     "rootDir": "src",
     "baseUrl": ".",
-    "jsx": "react"
   },
   "include": [
     "src"
