@@ -55,6 +55,13 @@ import { DataExplorer, Toolbar, Viz } from "@nteract/data-explorer";
 
 ## Hacking on the nteract Data Explorer
 
-For expedited development, you can run `npm run styleguide` and the data explorer documentation will be run live locally and you can experiment with the settings and data.
+For expedited development, you can run:
+
+```bash
+yarn install
+yarn styleguide
+```
+
+and the data explorer documentation will be run live locally and you can experiment with the settings and data.
 
 Now you are ready to contribute :tada:
