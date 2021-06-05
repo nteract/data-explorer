@@ -1,7 +1,7 @@
 {
   "name": "@nteract/data-explorer",
   "version": "8.2.9",
-  "description": "Transform for data resource JSON",
+  "description": "nteract data explorer",
   "main": "lib/",
   "types": "lib/index.d.ts",
   "scripts": {
@@ -10,6 +10,7 @@
     "type-check": "tsc --pretty -p tsconfig.json",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --quiet",
     "test": "jest",
+    "test-script": "react-scripts test",
     "styleguide": "styleguidist server",
     "styleguide:build": "styleguidist build"
   },
@@ -17,11 +18,6 @@
   "repository": "https://github.com/nteract/data-explorer",
   "publishConfig": {
     "access": "public"
-  },
-  "peerDependencies": {
-    "numeral": "^2.0.6",
-    "react": "^16.13.1",
-    "styled-components": ">= 4"
   },
   "files": [
     "lib",
@@ -37,20 +33,24 @@
   ],
   "dependencies": {
     "@nteract/octicons": "^2.0.0",
+    "@nteract/outputs": "^3.0.11",
     "d3-collection": "^1.0.7",
     "d3-scale": "^3.3.0",
     "d3-shape": "^3.0.0",
     "numeral": "^2.0.6",
+    "react": "^16.14.0",
     "react-color": "^2.19.3",
+    "react-scripts": "^4.0.1",
     "react-table": "7.7.0",
     "react-table-hoc-fixed-columns": "2.3.3",
-    "semiotic": "^2.0.0-rc.12"
+    "semiotic": "^2.0.0-rc.12",
+    "styled-components": "^5.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.7",
-    "@babel/preset-env": "^7.7.7",
-    "@babel/preset-react": "^7.7.4",
-    "@nteract/outputs": "^3.0.11",
+    "@testing-library/dom": "^7.24.3",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
     "@types/d3-array": "^2.0.0",
     "@types/d3-collection": "^1.0.7",
     "@types/d3-interpolate": "^1.3.0",
@@ -67,7 +67,6 @@
     "@typescript-eslint/parser": "^4.26.0",
     "acorn": "^7.1.1",
     "acorn-jsx": "^5.1.0",
-    "babel-loader": "^8.0.6",
     "css-loader": "^3.4.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
@@ -82,24 +81,14 @@
     "eslint-plugin-react": "^7.20.5",
     "eslint-plugin-react-hooks": "^4.0.8",
     "eslint-plugin-testing-library": "^3.6.0",
-    "jest": "^24.9.0",
     "numeral": "^2.0.6",
     "prettier": "^2.3.0",
     "react": "^16.14.0",
     "react-docgen-typescript": "^1.22.0",
     "react-dom": "^16.14.0",
     "react-styleguidist": "^10.6.2",
-    "source-map-loader": "^3.0.0",
-    "style-loader": "^1.1.2",
-    "styled-components": "^4.1.3",
-    "ts-jest": "^24.3.0",
     "ts-loader": "^8.0.4",
-    "tsconfig-paths-webpack-plugin": "^3.2.0",
-    "typescript": "^3.9.7",
-    "typescript-styled-plugin": "^0.15.0",
-    "typescript-tslint-plugin": "^0.5.5",
-    "webpack": "^4.41.5",
-    "webpack-dev-server": "^3.10.1"
+    "typescript": "^3.9.7"
   },
   "eslintConfig": {
     "extends": "react-app"

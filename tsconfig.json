@@ -13,7 +13,7 @@
       "dom",
       "dom.iterable"
     ],
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
     "noImplicitAny": false,
     "resolveJsonModule": true,
@@ -26,7 +26,7 @@
       "types"
     ],
     "allowSyntheticDefaultImports": true,
-    "noEmit": false,
+    "noEmit": true,
     "plugins": [
       {
         "name": "typescript-styled-plugin"
@@ -40,6 +40,7 @@
     "outDir": "lib",
     "rootDir": "src",
     "baseUrl": ".",
+    "noFallthroughCasesInSwitch": true
   },
   "include": [
     "src"
