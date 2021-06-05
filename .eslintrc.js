@@ -1,0 +1,68 @@
+module.exports = {
+    env: {
+      browser: true,
+      es6: true,
+      "jest/globals": true,
+    },
+    parser: "@typescript-eslint/parser",
+    parserOptions: {
+      ecmaVersion: 2020,
+      sourceType: "module",
+      ecmaFeatures: {
+        jsx: true,
+      },
+    },
+    settings: {
+      react: {
+        version: "detect",
+      },
+    },
+    extends: [
+      "plugin:react/recommended", // Uses the recommended rules from @eslint-plugin-react
+      "plugin:@typescript-eslint/recommended", // Uses the recommended rules from @typescript-eslint/eslint-plugin
+      "prettier/@typescript-eslint",
+      "plugin:prettier/recommended",
+      "plugin:jsx-a11y/recommended",
+      "plugin:jest/recommended",
+      "plugin:jest-dom/recommended",
+      "plugin:testing-library/recommended",
+    ],
+    plugins: [
+      "@typescript-eslint",
+      "react",
+      "jest",
+      "jest-dom",
+      "testing-library",
+    ],
+    rules: {
+      "jsx-a11y/click-events-have-key-events": 0,
+      "jsx-a11y/no-static-element-interactions": 0,
+      "prettier/prettier": 0,
+      "@typescript-eslint/no-empty-function": 0,
+      "@typescript-eslint/no-inferrable-types": 0,
+      "@typescript-eslint/ban-types": 0,
+      "@typescript-eslint/ban-ts-comment": 0,
+      "@typescript-eslint/no-var-requires": 0,
+      "@typescript-eslint/no-explicit-any": 0,
+      "@typescript-eslint/no-non-null-assertion": 0,
+      "@typescript-eslint/explicit-module-boundary-types": 0,
+      "react/display-name": 0,
+      "react/no-children-prop": 0,
+      "react/jsx-key": 0,
+      "react/prop-types": 0,
+      "prefer-const": 0,
+      "no-var": 0,
+      "jest/no-disabled-tests": "warn",
+      "jest/no-focused-tests": "warn",
+      "jest/no-identical-title": "error",
+      "jest/prefer-to-have-length": "warn",
+      "jest/valid-expect": "error",
+      "jest-dom/prefer-checked": "error",
+      "jest-dom/prefer-enabled-disabled": "error",
+      "jest-dom/prefer-required": "error",
+      "jest-dom/prefer-to-have-attribute": "error",
+      "testing-library/await-async-query": "error",
+      "testing-library/no-await-sync-query": "error",
+      "testing-library/no-debug": "warn",
+    },
+  };
