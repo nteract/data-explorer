@@ -28,6 +28,7 @@
       "types"
     ],
     "declaration": true,
+    "tsBuildInfoFile": "lib/.tsbuildinfo",
     "outDir": "lib",
     "rootDir": "src",
     "baseUrl": ".",
