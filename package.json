@@ -5,6 +5,7 @@
   "main": "lib/",
   "types": "lib/index.d.ts",
   "scripts": {
+    "clean": "yarn --force autoclean && yarn cache clean && rm -rf node_modules dist lib",
     "build": "tsc -b",
     "type-check": "tsc --pretty -p tsconfig.json",
     "test": "jest",
