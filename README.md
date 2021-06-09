@@ -1,7 +1,10 @@
-[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/nteract/examples/master?urlpath=%2Fnteract%2Fedit%2Fpython%2Fhappiness.ipynb)
-[![<ORG_NAME>](https://circleci.com/gh/nteract/data-explorer.svg?style=svg)](<LINK>)
-
 # nteract Data Explorer
+
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/nteract/examples/master?urlpath=%2Fnteract%2Fedit%2Fpython%2Fhappiness.ipynb)
+[![Node.js CI](https://github.com/nteract/data-explorer/actions/workflows/node.js.yml/badge.svg)](https://github.com/nteract/data-explorer/actions/workflows/node.js.yml)
+[![CodeQL](https://github.com/nteract/data-explorer/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/nteract/data-explorer/actions/workflows/codeql-analysis.yml)
+
+An automatic data visualization tool.
 
 ## [Interactive Documentation](https://data-explorer.nteract.io/)
 
