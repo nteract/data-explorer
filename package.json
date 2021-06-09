@@ -1,7 +1,7 @@
 {
   "name": "@nteract/data-explorer",
   "version": "8.2.9",
-  "description": "nteract data explorer",
+  "description": "an autovisualization tool",
   "main": "lib/",
   "types": "lib/index.d.ts",
   "scripts": {
