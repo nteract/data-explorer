@@ -3,6 +3,7 @@
 [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/nteract/examples/master?urlpath=%2Fnteract%2Fedit%2Fpython%2Fhappiness.ipynb)
 [![Node.js CI](https://github.com/nteract/data-explorer/actions/workflows/node.js.yml/badge.svg)](https://github.com/nteract/data-explorer/actions/workflows/node.js.yml)
 [![CodeQL](https://github.com/nteract/data-explorer/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/nteract/data-explorer/actions/workflows/codeql-analysis.yml)
+[![npm version](https://badge.fury.io/js/%40nteract%2Fdata-explorer.svg)](https://www.npmjs.com/package/@nteract/data-explorer)
 
 An automatic data visualization tool.
 
