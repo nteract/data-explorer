@@ -62,6 +62,7 @@
     "@types/styled-components": "^5.0.1",
     "acorn": "^7.1.1",
     "acorn-jsx": "^5.1.0",
+    "auto": "^10.29.3",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.4.1",
     "enzyme": "^3.11.0",
