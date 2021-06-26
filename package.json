@@ -86,5 +86,14 @@
     "typescript-tslint-plugin": "^0.5.5",
     "webpack": "^4.41.5",
     "webpack-dev-server": "^3.10.1"
+  },
+  "auto": {
+    "plugins": [
+      "npm",
+      "conventional-commits",
+      "first-time-contributor",
+      "released"
+    ],
+    "onlyPublishWithReleaseLabel": true
   }
 }
