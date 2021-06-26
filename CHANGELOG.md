@@ -11,11 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Add Code of Conduct file
+- Add `auto` to automate versioning and deployment #63
 
 ### Changed
 
 - Update Semiotic
 - Move to GH-Actions
+- Bugfix for string columns #41 (@hydrosquall)
 
 ### Removed
 
