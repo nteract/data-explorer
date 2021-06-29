@@ -180,7 +180,8 @@ class DataResourceTransformGrid extends React.PureComponent<Props, State> {
       ) {
         return {
           Header: field.name,
-          accessor: field.name,
+          accessor: (rowValue: { [key: string]: any }) => rowValue[field.name],
+          id: field.name,
           fixed: primaryKey.indexOf(field.name) !== -1 && "left",
           filterMethod: (filter: Dx.JSONObject, row: Dx.JSONObject) => {
             if (
