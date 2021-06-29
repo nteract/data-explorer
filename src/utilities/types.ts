@@ -80,7 +80,7 @@ export interface Field {
   name: string;
   // Types are based on the json-schema standard, with some variations
   // https://specs.frictionlessdata.io/table-schema/#types-and-formats
-  type: 'string' | 'integer' | 'number' | 'boolean' | 'datetime' | string; // Other types are permitted, but not explicitly handled
+  type: 'string' | 'integer' | 'number' | 'boolean' | 'datetime' | 'object' | string; // Other types are permitted, but not explicitly handled
 }
 
 

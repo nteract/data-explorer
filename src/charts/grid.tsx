@@ -21,6 +21,7 @@ type OnChangeProps = (input: number | string) => void;
 // Only some field types are filterable
 // Iterate over a union type
 // https://stackoverflow.com/a/59420158/5129731
+// Members come from values of Field.type
 const filterableFields= ['integer' , 'number' , 'string'] as const;
 type FilterIndexSignature = typeof filterableFields[number];
 
@@ -156,6 +157,13 @@ function isFilterableFieldType (fieldType: any): fieldType is FilterIndexSignatu
   return filterableFieldSet.has(fieldType);
 }
 
+// Non-primitive field types cannot be outputted directly as React children
+// Members come from possible values of Field.type
+const shouldStringifyFieldSet = new Set([
+  'boolean',
+  'object'
+])
+
 class DataResourceTransformGrid extends React.PureComponent<Props, State> {
   static defaultProps = {
     metadata: {},
@@ -206,8 +214,8 @@ class DataResourceTransformGrid extends React.PureComponent<Props, State> {
           Header: field.name,
           id: field.name,
           accessor: (rowValue: { [key: string]: any }) => {
-            return field.type === "boolean"
-              ? rowValue[field.name].toString()
+            return shouldStringifyFieldSet.has(field.type)
+              ? JSON.stringify(rowValue[field.name])
               : rowValue[field.name];
           },
           fixed: primaryKey.indexOf(field.name) !== -1 && "left",
