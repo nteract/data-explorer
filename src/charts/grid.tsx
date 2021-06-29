@@ -18,7 +18,11 @@ const switchMode = (currentMode: string) => {
 
 type OnChangeProps = (input: number | string) => void;
 
-type FilterIndexSignature = "integer" | "number" | "string";
+// Only some field types are filterable
+// Iterate over a union type
+// https://stackoverflow.com/a/59420158/5129731
+const filterableFields= ['integer' , 'number' , 'string'] as const;
+type FilterIndexSignature = typeof filterableFields[number];
 
 interface NumberFilterProps {
   onChange: OnChangeProps;
@@ -147,6 +151,11 @@ interface Props {
   theme?: string;
 }
 
+const filterableFieldSet = new Set(filterableFields);
+function isFilterableFieldType (fieldType: any): fieldType is FilterIndexSignature {
+  return filterableFieldSet.has(fieldType);
+}
+
 class DataResourceTransformGrid extends React.PureComponent<Props, State> {
   static defaultProps = {
     metadata: {},
@@ -173,21 +182,13 @@ class DataResourceTransformGrid extends React.PureComponent<Props, State> {
     const { primaryKey = [] } = schema;
 
     const tableColumns = schema.fields.map((field: Dx.Field) => {
-      if (
-        field.type === "string" ||
-        field.type === "number" ||
-        field.type === "integer"
-      ) {
+      if (isFilterableFieldType(field.type)) {
         return {
           Header: field.name,
           accessor: field.name,
           fixed: primaryKey.indexOf(field.name) !== -1 && "left",
           filterMethod: (filter: Dx.JSONObject, row: Dx.JSONObject) => {
-            if (
-              field.type === "string" ||
-              field.type === "number" ||
-              field.type === "integer"
-            ) {
+            if (isFilterableFieldType(field.type)) {
               return filterMethod[field.type](filters[field.name])(filter, row);
             }
           },
@@ -197,17 +198,19 @@ class DataResourceTransformGrid extends React.PureComponent<Props, State> {
             field.name,
             (newFilter: { [key: string]: Function }) => {
               this.setState({ filters: { ...filters, ...newFilter } });
-            }
-          )
+            },
+          ),
         };
       } else {
         return {
           Header: field.name,
           id: field.name,
           accessor: (rowValue: { [key: string]: any }) => {
-            return field.type === "boolean" ? rowValue[field.name].toString() : rowValue[field.name]
+            return field.type === "boolean"
+              ? rowValue[field.name].toString()
+              : rowValue[field.name];
           },
-          fixed: primaryKey.indexOf(field.name) !== -1 && "left"
+          fixed: primaryKey.indexOf(field.name) !== -1 && "left",
         };
       }
     });
