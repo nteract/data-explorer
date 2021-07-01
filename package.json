@@ -76,6 +76,7 @@
     "enzyme-to-json": "^3.4.3",
     "husky": "^6.0.0",
     "jest": "^24.9.0",
+    "lint-staged": ">=10",
     "numeral": "^2.0.6",
     "prettier": "^2.3.2",
     "prop-types": "^15.7.2",
@@ -94,5 +95,14 @@
     "typescript-tslint-plugin": "^0.5.5",
     "webpack": "^4.41.5",
     "webpack-dev-server": "^3.10.1"
+  },
+  "lint-staged": {
+    "*.tsx,*.ts,*.js,!*js.snap": [
+      "prettier --write"
+    ],
+    "*.json,!package.json": [
+      "prettier --write"
+    ],
+    "*.{js,jsx,ts,tsx}": "eslint --cache --fix"
   }
 }
