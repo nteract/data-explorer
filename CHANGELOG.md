@@ -1,3 +1,15 @@
+# v8.2.11 (Thu Jul 01 2021)
+
+#### 🐛 Bug Fix
+
+- fix: Correctly display complex datatypes (objects) in table cells [#65](https://github.com/nteract/data-explorer/pull/65) ([@hydrosquall](https://github.com/hydrosquall))
+
+#### Authors: 1
+
+- Cameron Yick ([@hydrosquall](https://github.com/hydrosquall))
+
+---
+
 # v8.2.9 (Tue Jun 29 2021)
 
 :tada: This release contains work from new contributors! :tada:
