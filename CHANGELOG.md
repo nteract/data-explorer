@@ -10,7 +10,7 @@
 
 ---
 
-# v8.2.9 (Tue Jun 29 2021)
+# v8.2.10 (Tue Jun 29 2021)
 
 :tada: This release contains work from new contributors! :tada:
 
