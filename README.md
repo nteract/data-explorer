@@ -4,6 +4,8 @@
 [![Node.js CI](https://github.com/nteract/data-explorer/actions/workflows/node.js.yml/badge.svg)](https://github.com/nteract/data-explorer/actions/workflows/node.js.yml)
 [![CodeQL](https://github.com/nteract/data-explorer/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/nteract/data-explorer/actions/workflows/codeql-analysis.yml)
 [![npm version](https://badge.fury.io/js/%40nteract%2Fdata-explorer.svg)](https://www.npmjs.com/package/@nteract/data-explorer)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+
 
 An automatic data visualization tool.
 
@@ -57,15 +59,6 @@ import { DataExplorer, Toolbar, Viz } from "@nteract/data-explorer";
 </DataExplorer>;
 ```
 
-## Hacking on the nteract Data Explorer
+## How do I contribute to this repo?
 
-For expedited development, you can run:
-
-```bash
-yarn install
-yarn styleguide
-```
-
-and the data explorer documentation will be run live locally and you can experiment with the settings and data.
-
-Now you are ready to contribute :tada:
+If you are interested in contributing to nteract, please read the [contribution guidelines](./CONTRIBUTING.md) for information on how to set up your nteract repo for development, how to update documentation, and how to submit your code changes for review on GitHub.
