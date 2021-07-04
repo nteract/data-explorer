@@ -1,6 +1,5 @@
 export const chartHelpText = {
-  line:
-    "Line and stacked area charts for time series data where each row is a point and columns are data to be plotted.",
+  line: "Line and stacked area charts for time series data where each row is a point and columns are data to be plotted.",
   bar: "Bar charts to compare individual and aggregate amounts.",
   scatter: "Scatterplot for comparing correlation between x and y values.",
   grid: "A table of data.",
@@ -12,7 +11,7 @@ export const chartHelpText = {
   parallel:
     "Parallel coordinates for comparing and filtering across different values in the dataset.",
   hierarchy:
-    "Nest data by categorical values using treemap, dendrogram, sunburst or partition."
+    "Nest data by categorical values using treemap, dendrogram, sunburst or partition.",
 };
 
 const hexScatterX = "Plot this metric along the X axis";
@@ -42,32 +41,32 @@ export type ExplorationTypes =
   | "barGrouping"
   | "marginalGraphics";
 export const controlHelpText: {
-  [key in ExplorationTypes]?: { [key: string]: string } | string
+  [key in ExplorationTypes]?: { [key: string]: string } | string;
 } = {
   metric1: {
     default: "Plot this metric",
     scatter: hexScatterX,
-    hexbin: hexScatterX
+    hexbin: hexScatterX,
   },
   metric2: {
-    default: "Plot this metric along the Y axis"
+    default: "Plot this metric along the Y axis",
   },
   metric3: {
     default: "Size the width of bars (Marimekko style) based on this metric",
-    scatter: "Size the radius of points based on this metric"
+    scatter: "Size the radius of points based on this metric",
   },
   metric4: "Error bars according to this value",
   dim1: {
     default: "Color items by this dimension",
     summary: "Group items into this category",
-    network: "Use this dimension to determine the source node"
+    network: "Use this dimension to determine the source node",
   },
   dim2: {
     default: "Label prominent datapoints using this dimension",
-    network: "Use this dimension to determine the target node"
+    network: "Use this dimension to determine the target node",
   },
   dim3: {
-    default: "Split contours into separate groups based on this dimension"
+    default: "Split contours into separate groups based on this dimension",
   },
   networkType:
     "Represent network as a force-directed network (good for social networks) or as a sankey diagram (good for flow networks)",
@@ -84,5 +83,5 @@ export const controlHelpText: {
   barGrouping:
     "Choose between a clustered or a stacked bar chart when there are multiple pieces in the same category",
   marginalGraphics:
-    "Choose the kind of marginal summary you want to see for summarizing density along the axes"
+    "Choose the kind of marginal summary you want to see for summarizing density along the axes",
 };

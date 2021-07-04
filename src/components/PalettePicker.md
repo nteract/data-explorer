@@ -2,9 +2,11 @@ Simple controls for selecting a new color for your legend. The `updateColor` pro
 
 ```jsx
 <PalettePicker
-    colors={["red", "green", "yellow", "blue"]}
-    selectedColor="red"
-    selectedPosition={0}
-    updateColor={colors => {console.info(colors)}}
+  colors={["red", "green", "yellow", "blue"]}
+  selectedColor="red"
+  selectedPosition={0}
+  updateColor={(colors) => {
+    console.info(colors);
+  }}
 />
 ```

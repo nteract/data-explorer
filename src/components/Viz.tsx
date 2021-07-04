@@ -20,7 +20,7 @@ function PlaceHolder() {
 
 export const Viz: React.FunctionComponent<Partial<Props>> = ({
   children,
-  componentType
+  componentType,
 }: Props) => {
   // In the future, the Viz component might be used for things like error boundaries
   return <FlexItem>{children}</FlexItem>;

@@ -2,7 +2,7 @@ import * as Dx from "../utilities/types";
 
 function stringOrFnAccessor(
   datapoint: Dx.Datapoint,
-  accessor: string | Function
+  accessor: string | Function,
 ) {
   return typeof accessor === "function"
     ? accessor(datapoint)
@@ -19,11 +19,11 @@ export const sortByOrdinalRange = (
   oAccessor: string | ((datapoint: Dx.Datapoint) => string),
   rAccessor: string | (() => void),
   secondarySort: string,
-  data: Dx.DataProps["data"]
+  data: Dx.DataProps["data"],
 ): any[] => {
   const subsortData: { [index: string]: SubsortObject } = {};
   let subsortArrays: SubsortObject[] = [];
-  data.forEach(datapoint => {
+  data.forEach((datapoint) => {
     const ordinalValue = stringOrFnAccessor(datapoint, oAccessor);
     if (!subsortData[ordinalValue]) {
       subsortData[ordinalValue] = { array: [], value: 0, label: ordinalValue };
@@ -48,11 +48,11 @@ export const sortByOrdinalRange = (
   });
 
   if (secondarySort !== "none") {
-    subsortArrays.forEach(ordinalData => {
+    subsortArrays.forEach((ordinalData) => {
       ordinalData.array = ordinalData.array.sort(
         (ordinalAData, ordinalBData) =>
           stringOrFnAccessor(ordinalBData, secondarySort) -
-          stringOrFnAccessor(ordinalAData, secondarySort)
+          stringOrFnAccessor(ordinalAData, secondarySort),
       );
     });
   }
@@ -60,8 +60,8 @@ export const sortByOrdinalRange = (
   return subsortArrays.reduce(
     (combinedArray: Dx.Datapoint[], ordinalData) => [
       ...combinedArray,
-      ...ordinalData.array
+      ...ordinalData.array,
     ],
-    []
+    [],
   );
 };
