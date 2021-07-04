@@ -5,7 +5,7 @@ import TooltipContent, { safeDisplayValue } from "../utilities/tooltip-content";
 import { numeralFormatting } from "../utilities/utilities";
 
 import * as Dx from "../utilities/types";
-import { sortByOrdinalRange } from "./shared";
+import { sortByOrdinalRange, getUniqueValues } from "./shared";
 
 interface BarOptions {
   selectedDimensions: string[];
@@ -112,15 +112,7 @@ export const semioticBarChart = (
     };
   }
 
-  const uniqueValues = sortedData.reduce(
-    (uniques, datapoint) =>
-      !uniques.find(
-        (uniqueDimName: string) => uniqueDimName === datapoint[dim1].toString(),
-      )
-        ? [...uniques, datapoint[dim1].toString()]
-        : uniques,
-    [],
-  );
+  const uniqueValues = dim1 === "none" ? [] : getUniqueValues(sortedData, dim1);
 
   if (!colorHashOverride && dim1 && dim1 !== "none") {
     uniqueValues.forEach((value: string, index: number) => {
