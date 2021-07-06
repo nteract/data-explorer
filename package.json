@@ -5,6 +5,7 @@
   "main": "lib/",
   "types": "lib/index.d.ts",
   "scripts": {
+    "commit": "cz",
     "clean": "yarn --force autoclean && yarn cache clean && rm -rf node_modules dist lib",
     "build": "tsc -b",
     "type-check": "tsc --pretty -p tsconfig.json",
@@ -70,7 +71,9 @@
     "acorn-jsx": "^5.1.0",
     "auto": "^10.29.3",
     "babel-loader": "^8.0.6",
+    "commitizen": "^4.2.4",
     "css-loader": "^3.4.1",
+    "cz-conventional-changelog": "^3.3.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.4.3",
