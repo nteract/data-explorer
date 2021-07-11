@@ -4,7 +4,7 @@ import {
   ResponsiveXYFrame,
   NetworkFrame,
   OrdinalFrame,
-  XYFrame
+  XYFrame,
 } from "semiotic";
 
 import ParallelCoordinatesController from "../components/ParallelCoordinatesController";
@@ -21,14 +21,14 @@ import * as Dx from "../utilities/types";
 const semioticParallelCoordinates = (
   data: Dx.Datapoint[],
   schema: Dx.Schema,
-  options: Dx.ChartOptions
+  options: Dx.ChartOptions,
 ) => {
   return {
     frameSettings: {
       data,
       schema,
-      options
-    }
+      options,
+    },
   };
 };
 
@@ -37,48 +37,48 @@ export const semioticSettings: Dx.SemioticSettings = {
     Frame: ResponsiveXYFrame,
     controls: "switch between linetype",
     chartGenerator: semioticLineChart,
-    FacetFrame: XYFrame
+    FacetFrame: XYFrame,
   },
   scatter: {
     Frame: ResponsiveXYFrame,
     controls: "switch between modes",
     chartGenerator: semioticScatterplot,
-    FacetFrame: XYFrame
+    FacetFrame: XYFrame,
   },
   hexbin: {
     Frame: ResponsiveXYFrame,
     controls: "switch between modes",
     chartGenerator: semioticHexbin,
-    FacetFrame: XYFrame
+    FacetFrame: XYFrame,
   },
   bar: {
     Frame: ResponsiveOrdinalFrame,
     controls: "switch between modes",
     chartGenerator: semioticBarChart,
-    FacetFrame: OrdinalFrame
+    FacetFrame: OrdinalFrame,
   },
   summary: {
     Frame: ResponsiveOrdinalFrame,
     controls: "switch between modes",
     chartGenerator: semioticSummaryChart,
-    FacetFrame: OrdinalFrame
+    FacetFrame: OrdinalFrame,
   },
   network: {
     Frame: ResponsiveNetworkFrame,
     controls: "switch between modes",
     chartGenerator: semioticNetwork,
-    FacetFrame: NetworkFrame
+    FacetFrame: NetworkFrame,
   },
   hierarchy: {
     Frame: ResponsiveNetworkFrame,
     controls: "switch between modes",
     chartGenerator: semioticHierarchicalChart,
-    FacetFrame: NetworkFrame
+    FacetFrame: NetworkFrame,
   },
   parallel: {
     Frame: ParallelCoordinatesController,
     controls: "switch between modes",
     chartGenerator: semioticParallelCoordinates,
-    FacetFrame: ParallelCoordinatesController
-  }
+    FacetFrame: ParallelCoordinatesController,
+  },
 };

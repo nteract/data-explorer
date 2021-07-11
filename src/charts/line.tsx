@@ -18,31 +18,25 @@ interface LineOptions {
 export const semioticLineChart = (
   data: Dx.Datapoint[],
   schema: Dx.Schema,
-  options: LineOptions
+  options: LineOptions,
 ) => {
   let lineData;
 
-  const {
-    chart,
-    selectedMetrics,
-    lineType,
-    metrics,
-    primaryKey,
-    colors
-  } = options;
+  const { chart, selectedMetrics, lineType, metrics, primaryKey, colors } =
+    options;
   // const F = (a: number, b:Dx.Chart): string[]=> selectedMetrics;
   const { timeseriesSort } = chart;
 
   const timeSeriesFields = schema.fields.find(
-    field => field && field.name === timeseriesSort
+    (field) => field && field.name === timeseriesSort,
   );
 
   const sortType =
     timeseriesSort === "array-order"
       ? "integer"
       : timeSeriesFields && timeSeriesFields.type
-        ? timeSeriesFields.type
-        : null;
+      ? timeSeriesFields.type
+      : null;
 
   const formatting = (tickValue: Date | number) =>
     sortType === "datetime"
@@ -51,40 +45,40 @@ export const semioticLineChart = (
 
   const xScale = sortType === "datetime" ? scaleTime() : scaleLinear();
   lineData = metrics
-    .map(
-      (metric: Dx.Metric, index: number): Dx.LineData => {
-        const metricData =
-          timeseriesSort === "array-order"
-            ? data
-            : data.sort(
+    .map((metric: Dx.Metric, index: number): Dx.LineData => {
+      const metricData =
+        timeseriesSort === "array-order"
+          ? data
+          : data.sort(
               // Using some questionable type assertions here
               (datapointA, datapointB) =>
-                datapointA[timeseriesSort] - datapointB[timeseriesSort]
+                datapointA[timeseriesSort] - datapointB[timeseriesSort],
             );
-        return {
-          color: colors[index % colors.length],
+      return {
+        color: colors[index % colors.length],
+        label: metric.name,
+        type: metric.type,
+        coordinates: metricData.map((datapoint, datapointValue) => ({
+          value: datapoint[metric.name],
+          x:
+            timeseriesSort === "array-order"
+              ? datapointValue
+              : datapoint[timeseriesSort],
           label: metric.name,
-          type: metric.type,
-          coordinates: metricData.map((datapoint, datapointValue) => ({
-            value: datapoint[metric.name],
-            x:
-              timeseriesSort === "array-order"
-                ? datapointValue
-                : datapoint[timeseriesSort],
-            label: metric.name,
-            color: colors[index % colors.length],
-            originalData: datapoint
-          }))
-        };
-      }
-    )
+          color: colors[index % colors.length],
+          originalData: datapoint,
+        })),
+      };
+    })
     .filter(
       (metric: Dx.LineData) =>
         selectedMetrics.length === 0 ||
-        selectedMetrics.some(selectedMetric => selectedMetric === metric.label)
+        selectedMetrics.some(
+          (selectedMetric) => selectedMetric === metric.label,
+        ),
     );
 
-  const canvasRender: boolean = lineData[0].coordinates.length > 250
+  const canvasRender: boolean = lineData[0].coordinates.length > 250;
 
   const lineSettings = {
     lineType: { type: lineType, interpolator: curveMonotoneX },
@@ -93,7 +87,7 @@ export const semioticLineChart = (
     canvasLines: canvasRender,
     renderKey: (
       line: { coordinates: Dx.LineCoordinate[]; label: string; line: string },
-      index: number
+      index: number,
     ) => {
       return line.coordinates
         ? `line-${line.label}`
@@ -102,12 +96,12 @@ export const semioticLineChart = (
     lineStyle: (line: Dx.LineCoordinate) => ({
       fill: lineType === "line" ? "none" : line.color,
       stroke: line.color,
-      fillOpacity: 0.75
+      fillOpacity: 0.75,
     }),
     pointStyle: (point: Dx.LineData) => {
       return {
         fill: point.color,
-        fillOpacity: 0.75
+        fillOpacity: 0.75,
       };
     },
     axes: [
@@ -124,8 +118,8 @@ export const semioticLineChart = (
               {label}
             </text>
           );
-        }
-      }
+        },
+      },
     ],
     hoverAnnotation: true,
     xAccessor: "x",
@@ -135,7 +129,7 @@ export const semioticLineChart = (
       top: 20,
       right: 200,
       bottom: sortType === "datetime" ? 80 : 40,
-      left: 50
+      left: 50,
     },
     legend: {
       title: "Legend",
@@ -145,9 +139,9 @@ export const semioticLineChart = (
         {
           label: "",
           styleFn: (legendItem: Dx.LineData) => ({ fill: legendItem.color }),
-          items: lineData
-        }
-      ]
+          items: lineData,
+        },
+      ],
     },
     tooltipContent: (hoveredDatapoint: Dx.Datapoint) => {
       return (
@@ -173,9 +167,8 @@ export const semioticLineChart = (
           ))}
         </TooltipContent>
       );
-    }
-  }
+    },
+  };
 
-  return { frameSettings: lineSettings, colorDim: "none", colorHash: {} }
-
+  return { frameSettings: lineSettings, colorDim: "none", colorHash: {} };
 };

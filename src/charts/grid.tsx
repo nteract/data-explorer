@@ -11,7 +11,7 @@ const switchMode = (currentMode: string) => {
   const nextMode: Dx.JSONObject = {
     "=": ">",
     ">": "<",
-    "<": "="
+    "<": "=",
   };
   return nextMode[currentMode];
 };
@@ -22,7 +22,7 @@ type OnChangeProps = (input: number | string) => void;
 // Iterate over a union type
 // https://stackoverflow.com/a/59420158/5129731
 // Members come from values of Field.type
-const filterableFields= ['integer' , 'number' , 'string'] as const;
+const filterableFields = ["integer", "number", "string"] as const;
 type FilterIndexSignature = typeof filterableFields[number];
 
 interface NumberFilterProps {
@@ -42,7 +42,7 @@ const NumberFilter = (props: NumberFilterProps) => {
         border: "1px solid gray",
         background: "white",
         borderRadius: "5px",
-        width: "100%"
+        width: "100%",
       }}
     >
       <input
@@ -66,47 +66,52 @@ const NumberFilter = (props: NumberFilterProps) => {
   );
 };
 
-const stringFilter = () => ({ onChange }: { onChange: OnChangeProps }) => (
-  <form>
-    <input
-      type="text"
-      id="string-filter"
-      name="string-filter"
-      onChange={(event: React.FormEvent<HTMLInputElement>) => {
-        onChange(event.currentTarget.value);
-      }}
-      placeholder="string"
-    />
-  </form>
-);
+const stringFilter =
+  () =>
+  ({ onChange }: { onChange: OnChangeProps }) =>
+    (
+      <form>
+        <input
+          type="text"
+          id="string-filter"
+          name="string-filter"
+          onChange={(event: React.FormEvent<HTMLInputElement>) => {
+            onChange(event.currentTarget.value);
+          }}
+          placeholder="string"
+        />
+      </form>
+    );
 
-const numberFilterWrapper = (
-  filterState: NumberFilterProps["filterState"],
-  filterName: NumberFilterProps["filterName"],
-  updateFunction: NumberFilterProps["updateFunction"]
-) => ({ onChange }: { onChange: OnChangeProps }) => (
-  <NumberFilter
-    onChange={onChange}
-    filterState={filterState}
-    filterName={filterName}
-    updateFunction={updateFunction}
-  />
-);
+const numberFilterWrapper =
+  (
+    filterState: NumberFilterProps["filterState"],
+    filterName: NumberFilterProps["filterName"],
+    updateFunction: NumberFilterProps["updateFunction"],
+  ) =>
+  ({ onChange }: { onChange: OnChangeProps }) =>
+    (
+      <NumberFilter
+        onChange={onChange}
+        filterState={filterState}
+        filterName={filterName}
+        updateFunction={updateFunction}
+      />
+    );
 
-const filterNumbers = (mode = "=") => (
-  filter: FilterObject,
-  row: NumberRowObject
-) => {
-  const filterValue = Number(filter.value);
-  if (mode === "=") {
-    return row[filter.id] === filterValue;
-  } else if (mode === "<") {
-    return row[filter.id] < filterValue;
-  } else if (mode === ">") {
-    return row[filter.id] > filterValue;
-  }
-  return row[filter.id];
-};
+const filterNumbers =
+  (mode = "=") =>
+  (filter: FilterObject, row: NumberRowObject) => {
+    const filterValue = Number(filter.value);
+    if (mode === "=") {
+      return row[filter.id] === filterValue;
+    } else if (mode === "<") {
+      return row[filter.id] < filterValue;
+    } else if (mode === ">") {
+      return row[filter.id] > filterValue;
+    }
+    return row[filter.id];
+  };
 
 const filterStrings = () => (filter: FilterObject, row: StringRowObject) => {
   return (
@@ -119,13 +124,13 @@ type FilterMethodType = { [index in FilterIndexSignature]: Function };
 const columnFilters: FilterMethodType = {
   integer: numberFilterWrapper,
   number: numberFilterWrapper,
-  string: stringFilter
+  string: stringFilter,
 };
 
 const filterMethod: FilterMethodType = {
   integer: filterNumbers,
   number: filterNumbers,
-  string: filterStrings
+  string: filterStrings,
 };
 
 interface FilterObject {
@@ -153,28 +158,27 @@ interface Props {
 }
 
 const filterableFieldSet = new Set(filterableFields);
-function isFilterableFieldType (fieldType: any): fieldType is FilterIndexSignature {
+function isFilterableFieldType(
+  fieldType: any,
+): fieldType is FilterIndexSignature {
   return filterableFieldSet.has(fieldType);
 }
 
 // Non-primitive field types cannot be outputted directly as React children
 // Members come from possible values of Field.type
-const shouldStringifyFieldSet = new Set([
-  'boolean',
-  'object'
-])
+const shouldStringifyFieldSet = new Set(["boolean", "object"]);
 
 class DataResourceTransformGrid extends React.PureComponent<Props, State> {
   static defaultProps = {
     metadata: {},
-    height: 500
+    height: 500,
   };
 
   constructor(props: Props) {
     super(props);
     this.state = {
       filters: {},
-      showFilters: false
+      showFilters: false,
     };
   }
 
@@ -182,7 +186,7 @@ class DataResourceTransformGrid extends React.PureComponent<Props, State> {
     const {
       data: { data, schema },
       height,
-      theme
+      theme,
     } = this.props;
 
     const { filters, showFilters } = this.state;
@@ -236,7 +240,7 @@ class DataResourceTransformGrid extends React.PureComponent<Props, State> {
           data={data}
           columns={tableColumns}
           style={{
-            height: `${height}px`
+            height: `${height}px`,
           }}
           className="-striped -highlight"
           filterable={showFilters}

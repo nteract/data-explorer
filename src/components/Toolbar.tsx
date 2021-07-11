@@ -1,7 +1,7 @@
-import { DatabaseOcticon } from "@nteract/octicons"
-import * as React from "react"
+import { DatabaseOcticon } from "@nteract/octicons";
+import * as React from "react";
 
-import { chartHelpText } from "../chartmeta/chart-docs"
+import { chartHelpText } from "../chartmeta/chart-docs";
 import {
   BarChartIcon,
   BoxplotIcon,
@@ -10,23 +10,23 @@ import {
   NetworkIcon,
   ParallelCoordinatesIcon,
   ScatterplotIcon,
-  TreeIcon
-} from "../utilities/icons"
+  TreeIcon,
+} from "../utilities/icons";
 
-import { View } from "../utilities/types"
+import { View } from "../utilities/types";
 
-import { IconButton } from "./IconButton"
+import { IconButton } from "./IconButton";
 
-import styled from "styled-components"
+import styled from "styled-components";
 
 interface Props {
-  setGrid: () => void
-  dimensions: object[]
-  setView: (view: View) => void
-  currentView: string
+  setGrid: () => void;
+  dimensions: object[];
+  setView: (view: View) => void;
+  currentView: string;
   // How we tell the root DataExplorer to pass toolbar props to this component:
-  componentType: "toolbar"
-  largeDataset?: boolean
+  componentType: "toolbar";
+  largeDataset?: boolean;
 }
 
 const ToolbarWrapper = styled.div`
@@ -34,15 +34,15 @@ const ToolbarWrapper = styled.div`
   flex-flow: column nowrap;
   z-index: 1;
   padding: 5px;
-`
+`;
 
 Toolbar.defaultProps = {
   componentType: "toolbar",
   currentView: "",
   dimensions: [],
   setGrid: () => null,
-  setView: () => null
-}
+  setView: () => null,
+};
 
 export function Toolbar({
   dimensions,
@@ -50,7 +50,7 @@ export function Toolbar({
   setView,
   currentView,
   componentType,
-  largeDataset
+  largeDataset,
 }: Props) {
   return (
     <ToolbarWrapper className="dx-button-bar">
@@ -135,5 +135,5 @@ export function Toolbar({
         <LineChartIcon />
       </IconButton>
     </ToolbarWrapper>
-  )
+  );
 }

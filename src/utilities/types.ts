@@ -1,4 +1,3 @@
-
 export interface Metric extends Field {
   type: "integer" | "datetime" | "number";
   extent: [any, any];
@@ -37,12 +36,11 @@ export interface DataProps {
 }
 
 export interface facetProps {
-  dimFacet?: { dim: string, value: string };
+  dimFacet?: { dim: string; value: string };
   data?: DataProps;
   metadata?: Metadata;
   initialView?: View;
 }
-
 
 export interface dxMetaProps {
   view?: View;
@@ -80,9 +78,15 @@ export interface Field {
   name: string;
   // Types are based on the json-schema standard, with some variations
   // https://specs.frictionlessdata.io/table-schema/#types-and-formats
-  type: 'string' | 'integer' | 'number' | 'boolean' | 'datetime' | 'object' | string; // Other types are permitted, but not explicitly handled
+  type:
+    | "string"
+    | "integer"
+    | "number"
+    | "boolean"
+    | "datetime"
+    | "object"
+    | string; // Other types are permitted, but not explicitly handled
 }
-
 
 export interface Datapoint {
   [fieldName: string]: any;
@@ -90,13 +94,12 @@ export interface Datapoint {
 
 export type SemioticSettings = {
   [fieldName: string]: {
-    Frame: Function,
-    controls: string,
-    chartGenerator: Function,
-    FacetFrame: Function
-  }
-}
-
+    Frame: Function;
+    controls: string;
+    chartGenerator: Function;
+    FacetFrame: Function;
+  };
+};
 
 export interface LineCoordinate {
   value: number;
@@ -166,7 +169,7 @@ export type JSONType = PrimitiveImmutable | JSONObject | JSONArray;
 export interface JSONObject {
   [key: string]: JSONType;
 }
-export interface JSONArray extends Array<JSONType> { }
+export interface JSONArray extends Array<JSONType> {}
 
 /**
  *

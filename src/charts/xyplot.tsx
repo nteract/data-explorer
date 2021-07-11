@@ -38,7 +38,7 @@ interface XYPlotOptions {
 
 const binHash = {
   heatmap: heatmapping,
-  hexbin: hexbinning
+  hexbin: hexbinning,
 };
 
 const steps = ["none", "#FBEEEC", "#f3c8c2", "#e39787", "#ce6751", "#b3331d"];
@@ -49,21 +49,21 @@ const thresholds = scaleThreshold<number, string>()
 function combineTopAnnotations(
   topQ: Dx.Datapoint[],
   topSecondQ: Dx.Datapoint[],
-  dim2: string
+  dim2: string,
 ): any[] {
   const combinedAnnotations: Dx.JSONObject[] = [];
   const combinedHash: {
     [index: string]: { [index: string]: any; coordinates: Dx.Datapoint[] };
   } = {};
-  [...topQ, ...topSecondQ].forEach(topDatapoint => {
+  [...topQ, ...topSecondQ].forEach((topDatapoint) => {
     const hashD = combinedHash[topDatapoint[dim2]];
 
     if (hashD) {
       const newCoordinates = (hashD.coordinates && [
         ...hashD.coordinates,
-        topDatapoint
+        topDatapoint,
       ]) || [topDatapoint, hashD];
-      Object.keys(combinedHash[topDatapoint[dim2]]).forEach(key => {
+      Object.keys(combinedHash[topDatapoint[dim2]]).forEach((key) => {
         delete combinedHash[topDatapoint[dim2]][key];
       });
       combinedHash[topDatapoint[dim2]].id = topDatapoint[dim2];
@@ -76,7 +76,7 @@ function combineTopAnnotations(
         label: topDatapoint[dim2],
         id: topDatapoint[dim2],
         coordinates: [],
-        ...topDatapoint
+        ...topDatapoint,
       };
       combinedAnnotations.push(combinedHash[topDatapoint[dim2]]);
     }
@@ -89,9 +89,16 @@ export const semioticHexbin = (
   schema: Dx.DataProps["schema"],
   options: XYPlotOptions,
   colorHashOverride?: { key?: string },
-  colorDimOverride?: string
+  colorDimOverride?: string,
 ) => {
-  return semioticXYPlot(data, schema, options, options.areaType, colorHashOverride, colorDimOverride);
+  return semioticXYPlot(
+    data,
+    schema,
+    options,
+    options.areaType,
+    colorHashOverride,
+    colorDimOverride,
+  );
 };
 
 export const semioticScatterplot = (
@@ -99,9 +106,17 @@ export const semioticScatterplot = (
   schema: Dx.DataProps["schema"],
   options: XYPlotOptions,
   colorHashOverride?: { key?: string },
-  colorDimOverride?: string) => {
-  return semioticXYPlot(data, schema, options, "scatterplot", colorHashOverride, colorDimOverride)
-}
+  colorDimOverride?: string,
+) => {
+  return semioticXYPlot(
+    data,
+    schema,
+    options,
+    "scatterplot",
+    colorHashOverride,
+    colorDimOverride,
+  );
+};
 
 export const semioticXYPlot = (
   data: Dx.DataProps["data"],
@@ -109,7 +124,7 @@ export const semioticXYPlot = (
   options: XYPlotOptions,
   type: string = "scatterplot",
   colorHashOverride?: { key?: string },
-  colorDimOverride?: string
+  colorDimOverride?: string,
 ) => {
   const height = options.height - 150 || 500;
 
@@ -120,7 +135,7 @@ export const semioticXYPlot = (
     setColor,
     dimensions,
     trendLine,
-    marginalGraphics
+    marginalGraphics,
   } = options;
 
   const { dim1, dim2, dim3, metric1, metric2, metric3 } = chart;
@@ -129,14 +144,14 @@ export const semioticXYPlot = (
     (datapoint: Dx.Datapoint) =>
       datapoint[metric1] &&
       datapoint[metric2] &&
-      (!metric3 || metric3 === "none" || datapoint[metric3])
+      (!metric3 || metric3 === "none" || datapoint[metric3]),
   );
 
   const pointTooltip = (hoveredDatapoint: Dx.Datapoint) => {
     return (
       <TooltipContent x={hoveredDatapoint.x} y={hoveredDatapoint.y}>
-        <h3>{primaryKey.map(pkey => hoveredDatapoint[pkey]).join(", ")}</h3>
-        {dimensions.map(dim => (
+        <h3>{primaryKey.map((pkey) => hoveredDatapoint[pkey]).join(", ")}</h3>
+        {dimensions.map((dim) => (
           <p key={`tooltip-dim-${dim.name}`}>
             {dim.name}:{" "}
             {(hoveredDatapoint[dim.name].toString &&
@@ -174,10 +189,10 @@ export const semioticXYPlot = (
           (binnedDatapoint: { [index: string]: any }, index: number) => {
             const id = dimensions
               .map(
-                dim =>
+                (dim) =>
                   (binnedDatapoint[dim.name].toString &&
                     binnedDatapoint[dim.name].toString()) ||
-                  binnedDatapoint[dim.name]
+                  binnedDatapoint[dim.name],
               )
               .join(",");
             return (
@@ -185,7 +200,7 @@ export const semioticXYPlot = (
                 {id}, {binnedDatapoint[metric1]}, {binnedDatapoint[metric2]}
               </TooltipP>
             );
-          }
+          },
         )}
       </TooltipContent>
     );
@@ -200,14 +215,14 @@ export const semioticXYPlot = (
   if (dim2 && dim2 !== "none") {
     const topQ = [...filteredData]
       .sort(
-        (datapointA, datapointB) => datapointB[metric1] - datapointA[metric1]
+        (datapointA, datapointB) => datapointB[metric1] - datapointA[metric1],
       )
       .filter((d, index) => index < 3);
     const topSecondQ = [...filteredData]
       .sort(
-        (datapointA, datapointB) => datapointB[metric2] - datapointA[metric2]
+        (datapointA, datapointB) => datapointB[metric2] - datapointA[metric2],
       )
-      .filter(datapoint => topQ.indexOf(datapoint) === -1)
+      .filter((datapoint) => topQ.indexOf(datapoint) === -1)
       .filter((d, index) => index < 3);
 
     annotations = combineTopAnnotations(topQ, topSecondQ, dim2);
@@ -218,21 +233,19 @@ export const semioticXYPlot = (
 
   if (metric3 && metric3 !== "none") {
     const dataMin = Math.min(
-      ...filteredData.map(datapoint => datapoint[metric3])
+      ...filteredData.map((datapoint) => datapoint[metric3]),
     );
     const dataMax = Math.max(
-      ...filteredData.map(datapoint => datapoint[metric3])
+      ...filteredData.map((datapoint) => datapoint[metric3]),
     );
-    sizeScale = scaleLinear()
-      .domain([dataMin, dataMax])
-      .range([2, 20]);
+    sizeScale = scaleLinear().domain([dataMin, dataMax]).range([2, 20]);
   }
 
   const sortedData = sortByOrdinalRange(
     metric1,
     (metric3 !== "none" && metric3) || metric2,
     "none",
-    data
+    data,
   );
 
   if (
@@ -243,15 +256,16 @@ export const semioticXYPlot = (
     const uniqueValues = sortedData.reduce(
       (uniqueArray, datapoint) =>
         (!uniqueArray.find(
-          (uniqueDim: string) => uniqueDim === datapoint[dim1].toString()
+          (uniqueDim: string) => uniqueDim === datapoint[dim1].toString(),
         ) && [...uniqueArray, datapoint[dim1].toString()]) ||
         uniqueArray,
-      []
+      [],
     );
 
     if (!colorHashOverride) {
       uniqueValues.sort().forEach((dimValue: string, index: number) => {
-        colorHash[dimValue] = index > 18 ? "grey" : colors[index % colors.length];
+        colorHash[dimValue] =
+          index > 18 ? "grey" : colors[index % colors.length];
       });
     }
 
@@ -277,28 +291,28 @@ export const semioticXYPlot = (
       const calculatedAreas = binHash[type]({
         summaryType: { type, bins: 10 },
         data: {
-          coordinates: filteredData.map(datapoint => ({
+          coordinates: filteredData.map((datapoint) => ({
             ...datapoint,
             x: datapoint[metric1],
-            y: datapoint[metric2]
-          }))
+            y: datapoint[metric2],
+          })),
         },
-        size: [height, height]
+        size: [height, height],
       });
 
       areas = calculatedAreas;
 
       const thresholdSteps = [0.2, 0.4, 0.6, 0.8, 1]
-        .map(thresholdValue =>
-          Math.floor(calculatedAreas.binMax * thresholdValue)
+        .map((thresholdValue) =>
+          Math.floor(calculatedAreas.binMax * thresholdValue),
         )
         .reduce(
           (thresholdArray: number[], thresholdValue: number) =>
             thresholdValue === 0 ||
-              thresholdArray.indexOf(thresholdValue) !== -1
+            thresholdArray.indexOf(thresholdValue) !== -1
               ? thresholdArray
               : [...thresholdArray, thresholdValue],
-          []
+          [],
         );
 
       const withZeroThresholdSteps = [0, ...thresholdSteps];
@@ -317,7 +331,7 @@ export const semioticXYPlot = (
         "#f3c8c2",
         "#e39787",
         "#ce6751",
-        "#b3331d"
+        "#b3331d",
       ];
       const hexHash: { [index: string]: string } = {};
 
@@ -329,7 +343,9 @@ export const semioticXYPlot = (
         .domain([0.01, ...thresholdSteps])
         .range([
           "none",
-          ...thresholdColors.filter((d, index) => index < thresholdSteps.length)
+          ...thresholdColors.filter(
+            (d, index) => index < thresholdSteps.length,
+          ),
         ]);
 
       additionalSettings.afterElements = (
@@ -351,12 +367,12 @@ export const semioticXYPlot = (
       };
     } = {};
     areas = [];
-    filteredData.forEach(datapoint => {
+    filteredData.forEach((datapoint) => {
       if (!multiclassHash[datapoint[dim1]]) {
         multiclassHash[datapoint[dim1]] = {
           label: datapoint[dim1],
           color: colorHash[datapoint[dim1]],
-          coordinates: []
+          coordinates: [],
         };
         areas.push(multiclassHash[datapoint[dim1]]);
       }
@@ -377,8 +393,8 @@ export const semioticXYPlot = (
         tickFormat: () => "",
         marginalSummaryType: {
           type: marginalGraphics,
-          showPoints: !renderInCanvas
-        }
+          showPoints: !renderInCanvas,
+        },
       },
       {
         orient: "top",
@@ -386,9 +402,9 @@ export const semioticXYPlot = (
         tickFormat: () => "",
         marginalSummaryType: {
           type: marginalGraphics,
-          showPoints: !renderInCanvas
-        }
-      }
+          showPoints: !renderInCanvas,
+        },
+      },
     ];
   }
 
@@ -399,7 +415,7 @@ export const semioticXYPlot = (
     calculatedSummaryType = {
       type,
       bins: 10,
-      thresholds: dim3 === "none" ? 6 : 3
+      thresholds: dim3 === "none" ? 6 : 3,
     };
   }
 
@@ -413,7 +429,7 @@ export const semioticXYPlot = (
         label: metric2,
         tickFormat: numeralFormatting,
         baseline: type === "scatterplot",
-        tickSize: type === "heatmap" ? 0 : undefined
+        tickSize: type === "heatmap" ? 0 : undefined,
       },
       {
         orient: "bottom",
@@ -422,9 +438,9 @@ export const semioticXYPlot = (
         tickFormat: numeralFormatting,
         footer: type === "heatmap",
         baseline: type === "scatterplot",
-        tickSize: type === "heatmap" ? 0 : undefined
+        tickSize: type === "heatmap" ? 0 : undefined,
       },
-      ...marginalGraphicsAxes
+      ...marginalGraphicsAxes,
     ],
     points: (type === "scatterplot" || type === "contour") && data,
     canvasPoints: renderInCanvas,
@@ -443,9 +459,9 @@ export const semioticXYPlot = (
           type !== "contour"
             ? undefined
             : dim3 === "none"
-              ? "#BBB"
-              : areaDatapoint.parentSummary.color,
-        strokeWidth: type === "contour" ? 2 : 1
+            ? "#BBB"
+            : areaDatapoint.parentSummary.color,
+        strokeWidth: type === "contour" ? 2 : 1,
       };
     },
     pointStyle: (datapoint: Dx.Datapoint) => {
@@ -453,14 +469,18 @@ export const semioticXYPlot = (
         r: renderInCanvas
           ? 2
           : type === "contour"
-            ? 3
-            : `${sizeScale(datapoint[metric3])}px`,
+          ? 3
+          : `${sizeScale(datapoint[metric3])}px`,
         fill: colorHash[datapoint[colorDimOverride || dim1]] || "black",
         fillOpacity: 0.75,
-        stroke: renderInCanvas ? "none" : type === "contour" ? "white" : "black",
+        stroke: renderInCanvas
+          ? "none"
+          : type === "contour"
+          ? "white"
+          : "black",
         strokeWidth: type === "contour" ? 0.5 : 1,
-        strokeOpacity: 0.9
-      }
+        strokeOpacity: 0.9,
+      };
     },
     hoverAnnotation: true,
     responsiveWidth: false,
@@ -468,18 +488,17 @@ export const semioticXYPlot = (
     margin: { left: 75, bottom: 75, right: 30, top: 30 },
     annotations: (type === "scatterplot" && annotations) || undefined,
     annotationSettings: {
-      layout: { type: "marginalia", orient: "right", marginOffset: 30 }
+      layout: { type: "marginalia", orient: "right", marginOffset: 30 },
     },
     tooltipContent:
       ((type === "hexbin" || type === "heatmap") && areaTooltip) ||
       pointTooltip,
-    ...additionalSettings
+    ...additionalSettings,
   };
 
   if (type !== "scatterplot") {
     xyPlotSettings.summaries = areas;
   }
 
-  return { frameSettings: xyPlotSettings, colorDim: dim1, colorHash }
-
+  return { frameSettings: xyPlotSettings, colorDim: dim1, colorHash };
 };

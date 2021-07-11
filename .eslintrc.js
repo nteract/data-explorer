@@ -10,7 +10,9 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["@typescript-eslint"],
-  rules: {},
+  rules: {
+    "no-unused-vars": "warn",
+  },
   overrides: [
     {
       // No need to check for global definitions in Eslint, let Typescript compiler handle it.

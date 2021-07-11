@@ -41,10 +41,10 @@ const HTMLLegend = ({
   values = Object.keys(colorHash),
   valueHash,
   colors = Object.values(colorHash),
-  setColor
+  setColor,
 }: HTMLLegendProps) => {
   const updateColorFn: (newColorArray: string[]) => void = (
-    newColorArray: string[]
+    newColorArray: string[],
   ) => {
     setColor(newColorArray);
   };
@@ -53,7 +53,7 @@ const HTMLLegend = ({
     <LegendWrapper>
       {(values.length > 18
         ? // limit the displayed values to the top 18 and bin everything else into Other
-        [...values.filter((d, index) => index < 18), "Other"]
+          [...values.filter((d, index) => index < 18), "Other"]
         : values
       ).map(
         (value, index) =>
@@ -61,7 +61,7 @@ const HTMLLegend = ({
             <LegendItemSpan key={`legend-item-${index}`}>
               <CircleSpan
                 style={{
-                  background: colorHash[value]
+                  background: colorHash[value],
                 }}
               />
               <span className="html-legend-item">{value}</span>
@@ -70,7 +70,7 @@ const HTMLLegend = ({
                 `(${valueHash[value]})`) ||
                 ""}
             </LegendItemSpan>
-          )
+          ),
       )}
       {setColor && (
         <PalettePicker colors={colors} updateColor={updateColorFn} />

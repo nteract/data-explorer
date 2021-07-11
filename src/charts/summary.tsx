@@ -1,64 +1,55 @@
-import { scaleLinear } from "d3-scale"
-import * as React from "react"
+import { scaleLinear } from "d3-scale";
+import * as React from "react";
 
-import HTMLLegend from "../components/HTMLLegend"
-import TooltipContent, { safeDisplayValue } from "../utilities/tooltip-content"
-import * as Dx from "../utilities/types"
-import { numeralFormatting } from "../utilities/utilities"
+import HTMLLegend from "../components/HTMLLegend";
+import TooltipContent, { safeDisplayValue } from "../utilities/tooltip-content";
+import * as Dx from "../utilities/types";
+import { numeralFormatting } from "../utilities/utilities";
 
 interface SummaryOptions {
-  chart: Dx.Chart
-  colors: Dx.ChartOptions["colors"]
-  primaryKey: string[]
-  setColor: Dx.ChartOptions["setColor"]
-  summaryType: Dx.SummaryType
-  showLegend: boolean
-  dimensions: Dx.Dimension[]
+  chart: Dx.Chart;
+  colors: Dx.ChartOptions["colors"];
+  primaryKey: string[];
+  setColor: Dx.ChartOptions["setColor"];
+  summaryType: Dx.SummaryType;
+  showLegend: boolean;
+  dimensions: Dx.Dimension[];
 }
 
-const fontScale = scaleLinear()
-  .domain([8, 25])
-  .range([14, 8])
-  .clamp(true)
+const fontScale = scaleLinear().domain([8, 25]).range([14, 8]).clamp(true);
 
 export const semioticSummaryChart = (
   data: Dx.DataProps["data"],
   schema: Dx.DataProps["schema"],
   options: SummaryOptions,
   colorHashOverride?: any,
-  colorDimOverride?: string
+  colorDimOverride?: string,
 ) => {
-  const additionalSettings: { afterElements?: JSX.Element } = {}
-  const colorHash = colorHashOverride || {}
+  const additionalSettings: { afterElements?: JSX.Element } = {};
+  const colorHash = colorHashOverride || {};
 
-  const {
-    chart,
-    summaryType,
-    primaryKey,
-    colors,
-    setColor,
-    showLegend
-  } = options
+  const { chart, summaryType, primaryKey, colors, setColor, showLegend } =
+    options;
 
-  const { dim1, metric1 } = chart
+  const { dim1, metric1 } = chart;
 
-  const oAccessor = dim1
+  const oAccessor = dim1;
 
-  const rAccessor = metric1
+  const rAccessor = metric1;
 
   const uniqueValues = data.reduce(
     (uniqueArray: string[], datapoint) =>
       (!uniqueArray.find(
-        (dimValue: string) => dimValue === datapoint[dim1].toString()
+        (dimValue: string) => dimValue === datapoint[dim1].toString(),
       ) && [...uniqueArray, datapoint[dim1].toString()]) ||
       uniqueArray,
-    []
-  )
+    [],
+  );
 
   if (!colorHashOverride && dim1 && dim1 !== "none") {
     uniqueValues.sort().forEach((dimValue, index) => {
-      colorHash[dimValue] = colors[index % colors.length]
-    })
+      colorHash[dimValue] = colors[index % colors.length];
+    });
     if (showLegend) {
       additionalSettings.afterElements = (
         <HTMLLegend
@@ -67,7 +58,7 @@ export const semioticSummaryChart = (
           setColor={setColor}
           colors={colors}
         />
-      )
+      );
     }
   }
 
@@ -81,11 +72,12 @@ export const semioticSummaryChart = (
     summaryStyle: (summaryDatapoint: Dx.Datapoint) => ({
       fill: colorHash[summaryDatapoint[colorDimOverride || dim1]] || colors[0],
       fillOpacity: 0.8,
-      stroke: colorHash[summaryDatapoint[colorDimOverride || dim1]] || colors[0]
+      stroke:
+        colorHash[summaryDatapoint[colorDimOverride || dim1]] || colors[0],
     }),
     style: (pieceDatapoint: Dx.Datapoint) => ({
       fill: colorHash[pieceDatapoint[colorDimOverride || dim1]] || colors[0],
-      stroke: "white"
+      stroke: "white",
     }),
     oPadding: 5,
     oLabel:
@@ -94,8 +86,9 @@ export const semioticSummaryChart = (
         : (columnName: string) => (
             <text
               textAnchor="end"
-              fontSize={`${(columnName && fontScale(columnName.length)) ||
-                12}px`}
+              fontSize={`${
+                (columnName && fontScale(columnName.length)) || 12
+              }px`}
             >
               {columnName}
             </text>
@@ -105,21 +98,21 @@ export const semioticSummaryChart = (
       {
         orient: "bottom",
         label: rAccessor,
-        tickFormat: numeralFormatting
-      }
+        tickFormat: numeralFormatting,
+      },
     ],
     baseMarkProps: { forceUpdate: true },
     pieceHoverAnnotation: summaryType === "violin",
     tooltipContent: (hoveredDatapoint: Dx.Datapoint) => {
-      const dimensions = options.dimensions.filter(dim => dim.name !== dim1)
-      const furtherDims = dimensions.map(dim => (
+      const dimensions = options.dimensions.filter((dim) => dim.name !== dim1);
+      const furtherDims = dimensions.map((dim) => (
         <p>
           {dim.name}: {safeDisplayValue(hoveredDatapoint[dim.name])}
         </p>
-      ))
+      ));
       return (
         <TooltipContent x={hoveredDatapoint.x} y={hoveredDatapoint.y}>
-          <h3>{primaryKey.map(pkey => hoveredDatapoint[pkey]).join(", ")}</h3>
+          <h3>{primaryKey.map((pkey) => hoveredDatapoint[pkey]).join(", ")}</h3>
           <p>
             {dim1}: {safeDisplayValue(hoveredDatapoint[dim1])}
           </p>
@@ -128,10 +121,10 @@ export const semioticSummaryChart = (
             {rAccessor}: {safeDisplayValue(hoveredDatapoint[rAccessor])}
           </p>
         </TooltipContent>
-      )
+      );
     },
-    ...additionalSettings
-  }
+    ...additionalSettings,
+  };
 
-  return { frameSettings: summarySettings, colorDim: dim1, colorHash }
-}
+  return { frameSettings: summarySettings, colorDim: dim1, colorHash };
+};

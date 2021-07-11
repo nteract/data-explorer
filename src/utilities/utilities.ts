@@ -13,5 +13,5 @@ export function numeralFormatting(tickValue: number): string {
 }
 
 export function createLabelItems(uniqueValues: string[]): any[] {
-  return uniqueValues.map(value => ({ label: value }));
+  return uniqueValues.map((value) => ({ label: value }));
 }

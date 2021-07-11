@@ -99,7 +99,7 @@ const PaletteButton = styled.button`
 class PalettePicker extends React.PureComponent<Props, State> {
   static defaultProps = {
     metadata: {},
-    height: 500
+    height: 500,
   };
 
   constructor(props: Props) {
@@ -108,14 +108,14 @@ class PalettePicker extends React.PureComponent<Props, State> {
       open: false,
       selectedColor: props.colors[0],
       selectedPosition: 0,
-      colors: props.colors.join(",\n")
+      colors: props.colors.join(",\n"),
     };
   }
 
   openClose = () => {
     this.setState({
       open: !this.state.open,
-      colors: this.props.colors.join(",\n")
+      colors: this.props.colors.join(",\n"),
     });
   };
 
@@ -132,7 +132,7 @@ class PalettePicker extends React.PureComponent<Props, State> {
 
   colorsFromTextarea = () => {
     const parsedTextValue = this.state.colors
-      .replace(/\"/g, "")
+      .replace(/"/g, "")
       .replace(/ /g, "")
       .replace(/\[/g, "")
       .replace(/\]/g, "")
@@ -214,7 +214,7 @@ class PalettePicker extends React.PureComponent<Props, State> {
         <PalettePickerWrapper>
           <a
             href={`http://projects.susielu.com/viz-palette?colors=[${colors
-              .map(d => `"${d}"`)
+              .map((d) => `"${d}"`)
               .join(",")}]&backgroundColor="white"&fontColor="black"`}
           >
             Evaluate This Palette with VIZ PALETTE

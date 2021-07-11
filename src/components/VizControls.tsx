@@ -1,9 +1,9 @@
-import * as React from "react"
+import * as React from "react";
 
-import { ChartOptionTypes, controlHelpText } from "../chartmeta/chart-docs"
+import { ChartOptionTypes, controlHelpText } from "../chartmeta/chart-docs";
 
-import styled, { css } from "styled-components"
-import * as Dx from "../utilities/types"
+import styled, { css } from "styled-components";
+import * as Dx from "../utilities/types";
 
 const commonCSS = css`
   h2 {
@@ -18,12 +18,12 @@ const commonCSS = css`
     background-color: #d8e1e8 !important;
     background-image: none !important;
   }
-`
+`;
 
 const ControlWrapper = styled.div`
   margin-right: 30px;
   ${commonCSS}
-`
+`;
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,7 +31,7 @@ const Wrapper = styled.div`
   justify-content: left;
   margin-bottom: 30px;
   ${commonCSS}
-`
+`;
 
 const metricDimSelector = (
   values: string[],
@@ -42,17 +42,17 @@ const metricDimSelector = (
   contextTooltip = "Help me help you help yourself",
   facetingFunction?: (
     onWhat: "dimension" | "metric" | "vizType",
-    which?: string
-  ) => void
+    which?: string,
+  ) => void,
 ) => {
-  const metricsList = required ? values : ["none", ...values]
-  let displayMetrics
+  const metricsList = required ? values : ["none", ...values];
+  let displayMetrics;
 
   if (metricsList.length > 1) {
     displayMetrics = (
       <select
         onChange={(event: { target: { value: string } }): void => {
-          selectionFunction(event.target.value)
+          selectionFunction(event.target.value);
         }}
         value={selectedValue}
       >
@@ -67,22 +67,22 @@ const metricDimSelector = (
           </option>
         ))}
       </select>
-    )
+    );
   } else {
-    displayMetrics = <p style={{ margin: 0 }}>{metricsList[0]}</p>
+    displayMetrics = <p style={{ margin: 0 }}>{metricsList[0]}</p>;
   }
 
-  let generateFacetButton
+  let generateFacetButton;
   if (facetingFunction) {
     generateFacetButton = (
       <button
         onClick={() => {
-          facetingFunction("metric", title)
+          facetingFunction("metric", title);
         }}
       >
         Facet
       </button>
-    )
+    );
   }
 
   return (
@@ -93,72 +93,72 @@ const metricDimSelector = (
       {displayMetrics}
       {generateFacetButton}
     </ControlWrapper>
-  )
-}
+  );
+};
 
 const availableLineTypes: Array<{
-  type: Dx.LineType
-  label: string
+  type: Dx.LineType;
+  label: string;
 }> = [
   {
     type: "line",
-    label: "Line Chart"
+    label: "Line Chart",
   },
   {
     type: "stackedarea",
-    label: "Stacked Area Chart"
+    label: "Stacked Area Chart",
   },
   {
     type: "stackedpercent",
-    label: "Stacked Area Chart (Percent)"
+    label: "Stacked Area Chart (Percent)",
   },
   {
     type: "bumparea",
-    label: "Ranked Area Chart"
-  }
-]
+    label: "Ranked Area Chart",
+  },
+];
 
 const availableAreaTypes = [
   {
     type: "hexbin",
-    label: "Hexbin"
+    label: "Hexbin",
   },
   {
     type: "heatmap",
-    label: "Heatmap"
+    label: "Heatmap",
   },
   {
     type: "contour",
-    label: "Contour Plot"
-  }
-]
+    label: "Contour Plot",
+  },
+];
 
-type ChartOptions = { [key in ChartOptionTypes]: string }
+type ChartOptions = { [key in ChartOptionTypes]: string };
 interface VizControlParams {
-  view: Dx.View
-  chart: Dx.Chart
-  metrics: Dx.Field[]
-  dimensions: Dx.Dimension[]
+  view: Dx.View;
+  chart: Dx.Chart;
+  metrics: Dx.Field[];
+  dimensions: Dx.Dimension[];
   // TODO: leave "options: any" for now and improve typedef later
-  updateChart: (options: any) => void
-  selectedDimensions: string[]
-  selectedMetrics: string[]
-  hierarchyType: Dx.HierarchyType
-  summaryType: Dx.SummaryType
-  networkType: string
-  setLineType: (lineType: Dx.LineType) => void
-  updateMetrics: (name: string) => void
+  updateChart: (options: any) => void;
+  selectedDimensions: string[];
+  selectedMetrics: string[];
+  hierarchyType: Dx.HierarchyType;
+  summaryType: Dx.SummaryType;
+  networkType: string;
+  setLineType: (lineType: Dx.LineType) => void;
+  updateMetrics: (name: string) => void;
   generateFacets: (
-    metricName: string
-  ) => (onWhat: "dimension" | "metric" | "vizType", which?: string) => void
-  updateDimensions: (name: string) => void
-  lineType: Dx.LineType
-  areaType: Dx.AreaType
-  setAreaType: (label: Dx.AreaType) => void
-  data: Dx.Datapoint[]
-  trendLine: Dx.TrendLineType
-  marginalGraphics: Dx.SummaryType
-  barGrouping: Dx.BarGroupingType
+    metricName: string,
+  ) => (onWhat: "dimension" | "metric" | "vizType", which?: string) => void;
+  updateDimensions: (name: string) => void;
+  lineType: Dx.LineType;
+  areaType: Dx.AreaType;
+  setAreaType: (label: Dx.AreaType) => void;
+  data: Dx.Datapoint[];
+  trendLine: Dx.TrendLineType;
+  marginalGraphics: Dx.SummaryType;
+  barGrouping: Dx.BarGroupingType;
 }
 export default ({
   view,
@@ -181,35 +181,35 @@ export default ({
   areaType,
   setAreaType,
   data,
-  generateFacets
+  generateFacets,
 }: VizControlParams) => {
-  const metricNames = metrics.map(metric => metric.name)
-  const dimensionNames = dimensions.map(dim => dim.name)
+  const metricNames = metrics.map((metric) => metric.name);
+  const dimensionNames = dimensions.map((dim) => dim.name);
 
   const updateChartGenerator = (chartProperty: string) => {
     return (metricOrDim: string) =>
-      updateChart({ chart: { ...chart, [chartProperty]: metricOrDim } })
-  }
+      updateChart({ chart: { ...chart, [chartProperty]: metricOrDim } });
+  };
 
   const getControlHelpText = (view: string, metricOrDim: string) => {
-    if (Object.keys(controlHelpText).find(mOrD => mOrD === metricOrDim)) {
-      const mOrD = metricOrDim as ChartOptionTypes
+    if (Object.keys(controlHelpText).find((mOrD) => mOrD === metricOrDim)) {
+      const mOrD = metricOrDim as ChartOptionTypes;
       const views =
-        controlHelpText[mOrD] !== undefined ? controlHelpText[mOrD] : null
+        controlHelpText[mOrD] !== undefined ? controlHelpText[mOrD] : null;
       if (views == null) {
-        return ""
+        return "";
       }
       if (typeof views === "string") {
-        return views
+        return views;
       }
       if (views[view] != null) {
-        return views[view]
+        return views[view];
       } else {
-        return views.default
+        return views.default;
       }
     }
-    return ""
-  }
+    return "";
+  };
 
   return (
     <React.Fragment>
@@ -227,7 +227,7 @@ export default ({
             true,
             chart.metric1,
             getControlHelpText(view, "metric1"),
-            generateFacets("metric1")
+            generateFacets("metric1"),
           )}
         {(view === "scatter" || view === "hexbin") &&
           metricDimSelector(
@@ -237,7 +237,7 @@ export default ({
             true,
             chart.metric2,
             getControlHelpText(view, "metric2"),
-            generateFacets("metric2")
+            generateFacets("metric2"),
           )}
         {((view === "scatter" && data.length < 1000) || view === "bar") &&
           metricDimSelector(
@@ -247,7 +247,7 @@ export default ({
             false,
             chart.metric3,
             getControlHelpText(view, "metric3"),
-            generateFacets("metric3")
+            generateFacets("metric3"),
           )}
         {view === "bar" &&
           metricDimSelector(
@@ -257,38 +257,38 @@ export default ({
             false,
             chart.metric4,
             getControlHelpText(view, "metric4"),
-            generateFacets("metric4")
+            generateFacets("metric4"),
           )}
         {view === "bar" &&
           metricDimSelector(
             ["Clustered", "Stacked"],
-            selectedBarGrouping =>
+            (selectedBarGrouping) =>
               updateChart({ barGrouping: selectedBarGrouping }),
             "Stack or Cluster",
             true,
             barGrouping,
-            controlHelpText.barGrouping as string
+            controlHelpText.barGrouping as string,
           )}
         {view === "scatter" &&
           metricDimSelector(
             ["boxplot", "violin", "heatmap", "ridgeline", "histogram"],
-            selectedMarginalGraphics =>
+            (selectedMarginalGraphics) =>
               updateChart({ marginalGraphics: selectedMarginalGraphics }),
             "Marginal Graphics",
             false,
             marginalGraphics,
-            controlHelpText.marginalGraphics as string
+            controlHelpText.marginalGraphics as string,
           )}
 
         {view === "scatter" &&
           metricDimSelector(
             ["linear", "polynomial", "power", "exponential", "logarithmic"],
-            selectedRegressionType =>
+            (selectedRegressionType) =>
               updateChart({ trendLine: selectedRegressionType }),
             "Trendline",
             false,
             trendLine,
-            controlHelpText.trendLine as string
+            controlHelpText.trendLine as string,
           )}
         {(view === "summary" ||
           view === "scatter" ||
@@ -301,7 +301,7 @@ export default ({
             view === "summary" ? "Category" : "Color",
             true,
             chart.dim1,
-            getControlHelpText(view, "dim1")
+            getControlHelpText(view, "dim1"),
           )}
         {view === "scatter" &&
           metricDimSelector(
@@ -310,7 +310,7 @@ export default ({
             "Labels",
             false,
             chart.dim2,
-            getControlHelpText(view, "dim2")
+            getControlHelpText(view, "dim2"),
           )}
         {view === "hexbin" &&
           areaType === "contour" &&
@@ -320,7 +320,7 @@ export default ({
             "Multiclass",
             false,
             chart.dim3,
-            getControlHelpText(view, "dim3")
+            getControlHelpText(view, "dim3"),
           )}
         {view === "network" &&
           metricDimSelector(
@@ -329,7 +329,7 @@ export default ({
             "SOURCE",
             true,
             chart.dim1,
-            getControlHelpText(view, "dim1")
+            getControlHelpText(view, "dim1"),
           )}
         {view === "network" &&
           metricDimSelector(
@@ -338,17 +338,17 @@ export default ({
             "TARGET",
             true,
             chart.dim2,
-            getControlHelpText(view, "dim2")
+            getControlHelpText(view, "dim2"),
           )}
         {view === "network" &&
           metricDimSelector(
             ["matrix", "arc", "force", "sankey"],
-            selectedNetworkType =>
+            (selectedNetworkType) =>
               updateChart({ networkType: selectedNetworkType }),
             "Type",
             true,
             networkType,
-            controlHelpText.networkType as string
+            controlHelpText.networkType as string,
           )}
         {view === "network" &&
           metricDimSelector(
@@ -357,27 +357,27 @@ export default ({
             "Show Labels",
             false,
             chart.networkLabel,
-            controlHelpText.networkLabel as string
+            controlHelpText.networkLabel as string,
           )}
         {view === "hierarchy" &&
           metricDimSelector(
             ["dendrogram", "treemap", "partition", "sunburst"],
-            selectedHierarchyType =>
+            (selectedHierarchyType) =>
               updateChart({ hierarchyType: selectedHierarchyType }),
             "Type",
             true,
             hierarchyType,
-            controlHelpText.hierarchyType as string
+            controlHelpText.hierarchyType as string,
           )}
         {view === "summary" &&
           metricDimSelector(
             ["violin", "boxplot", "ridgeline", "heatmap", "histogram"],
-            selectedSummaryType =>
+            (selectedSummaryType) =>
               updateChart({ summaryType: selectedSummaryType }),
             "Type",
             true,
             summaryType,
-            controlHelpText.summaryType as string
+            controlHelpText.summaryType as string,
           )}
         {view === "line" &&
           metricDimSelector(
@@ -386,7 +386,7 @@ export default ({
             "Sort by",
             true,
             chart.timeseriesSort,
-            controlHelpText.timeseriesSort as string
+            controlHelpText.timeseriesSort as string,
           )}
         {view === "line" && (
           <div
@@ -396,11 +396,12 @@ export default ({
             <div>
               <h3>Chart Type</h3>
             </div>
-            {availableLineTypes.map(lineTypeOption => (
+            {availableLineTypes.map((lineTypeOption) => (
               <button
                 key={lineTypeOption.type}
-                className={`button-text ${lineType === lineTypeOption.type &&
-                  "selected"}`}
+                className={`button-text ${
+                  lineType === lineTypeOption.type && "selected"
+                }`}
                 onClick={() => setLineType(lineTypeOption.type)}
               >
                 {lineTypeOption.label}
@@ -416,8 +417,8 @@ export default ({
             <div>
               <h3>Chart Type</h3>
             </div>
-            {availableAreaTypes.map(areaTypeOption => {
-              const areaTypeOptionType = areaTypeOption.type
+            {availableAreaTypes.map((areaTypeOption) => {
+              const areaTypeOptionType = areaTypeOption.type;
               if (
                 areaTypeOptionType === "contour" ||
                 areaTypeOptionType === "hexbin" ||
@@ -425,16 +426,17 @@ export default ({
               ) {
                 return (
                   <button
-                    className={`button-text ${areaType === areaTypeOptionType &&
-                      "selected"}`}
+                    className={`button-text ${
+                      areaType === areaTypeOptionType && "selected"
+                    }`}
                     key={areaTypeOptionType}
                     onClick={() => setAreaType(areaTypeOptionType)}
                   >
                     {areaTypeOption.label}
                   </button>
-                )
+                );
               } else {
-                return <div />
+                return <div />;
               }
             })}
           </div>
@@ -460,12 +462,12 @@ export default ({
             <div>
               <h3>Categories</h3>
             </div>
-            {dimensions.map(dim => (
+            {dimensions.map((dim) => (
               <button
                 key={`dimensions-select-${dim.name}`}
-                className={`button-text ${selectedDimensions.indexOf(
-                  dim.name
-                ) !== -1 && "selected"}`}
+                className={`button-text ${
+                  selectedDimensions.indexOf(dim.name) !== -1 && "selected"
+                }`}
                 onClick={() => updateDimensions(dim.name)}
               >
                 {dim.name}
@@ -481,12 +483,12 @@ export default ({
             <div>
               <h3>Metrics</h3>
             </div>
-            {metrics.map(metric => (
+            {metrics.map((metric) => (
               <button
                 key={`metrics-select-${metric.name}`}
-                className={`button-text ${selectedMetrics.indexOf(
-                  metric.name
-                ) !== -1 && "selected"}`}
+                className={`button-text ${
+                  selectedMetrics.indexOf(metric.name) !== -1 && "selected"
+                }`}
                 onClick={() => updateMetrics(metric.name)}
               >
                 {metric.name}
@@ -496,5 +498,5 @@ export default ({
         )}
       </Wrapper>
     </React.Fragment>
-  )
-}
+  );
+};

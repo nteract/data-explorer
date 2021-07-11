@@ -26,71 +26,68 @@ interface NetworkOptions {
   networkType: Dx.NetworkType;
 }
 
-const fontScale = scaleLinear()
-  .domain([5, 30])
-  .range([8, 16])
-  .clamp(true);
+const fontScale = scaleLinear().domain([5, 30]).range([8, 16]).clamp(true);
 
 const edgeStyles = {
   force: (colorHash: Dx.JSONObject) => (edge: EdgeObject) => ({
     fill: colorHash[edge.source.id],
     stroke: colorHash[edge.source.id],
-    strokeOpacity: 0.25
+    strokeOpacity: 0.25,
   }),
   sankey: (colorHash: Dx.JSONObject) => (edge: EdgeObject) => ({
     fill: colorHash[edge.source.id],
     stroke: colorHash[edge.source.id],
-    strokeOpacity: 0.25
+    strokeOpacity: 0.25,
   }),
   matrix: (colorHash: Dx.JSONObject) => (edge: EdgeObject) => ({
     fill: colorHash[edge.source.id],
-    stroke: "none"
+    stroke: "none",
   }),
   arc: (colorHash: Dx.JSONObject) => (edge: EdgeObject) => ({
     fill: "none",
     stroke: colorHash[edge.source.id],
     strokeWidth: edge.weight || 1,
-    strokeOpacity: 0.75
-  })
+    strokeOpacity: 0.75,
+  }),
 };
 
 const nodeStyles = {
   force: (colorHash: Dx.JSONObject) => (node: NodeObject) => ({
     fill: colorHash[node.id],
     stroke: colorHash[node.id],
-    strokeOpacity: 0.5
+    strokeOpacity: 0.5,
   }),
   sankey: (colorHash: Dx.JSONObject) => (node: NodeObject) => ({
     fill: colorHash[node.id],
     stroke: colorHash[node.id],
-    strokeOpacity: 0.5
+    strokeOpacity: 0.5,
   }),
   matrix: (colorHash: Dx.JSONObject) => (node: NodeObject) => ({
     fill: "none",
     stroke: "#666",
-    strokeOpacity: 1
+    strokeOpacity: 1,
   }),
   arc: (colorHash: Dx.JSONObject) => (node: NodeObject) => ({
     fill: colorHash[node.id],
     stroke: colorHash[node.id],
-    strokeOpacity: 0.5
-  })
+    strokeOpacity: 0.5,
+  }),
 };
 const nodeLinkHover = [
   { type: "frame-hover" },
   {
     type: "highlight",
-    style: { stroke: "red", strokeOpacity: 0.5, strokeWidth: 5, fill: "none" }
-  }
+    style: { stroke: "red", strokeOpacity: 0.5, strokeWidth: 5, fill: "none" },
+  },
 ];
 const hoverAnnotationSettings = {
   force: nodeLinkHover,
   sankey: nodeLinkHover,
   matrix: [
     { type: "frame-hover" },
-    { type: "highlight", style: { fill: "red", fillOpacity: 0.5 } }
+    { type: "highlight", style: { fill: "red", fillOpacity: 0.5 } },
   ],
-  arc: nodeLinkHover
+  arc: nodeLinkHover,
 };
 
 const nodeLabeling: {
@@ -111,7 +108,7 @@ const nodeLabeling: {
         {d.id}
       </text>
     );
-  }
+  },
 };
 
 export const semioticNetwork = (
@@ -119,14 +116,14 @@ export const semioticNetwork = (
   schema: Dx.DataProps["schema"],
   options: NetworkOptions,
   colorHashOverride?: { key?: string },
-  colorDimOverride?: string
+  colorDimOverride?: string,
 ) => {
   const { networkType = "force", chart, colors } = options;
   const {
     dim1: sourceDimension,
     dim2: targetDimension,
     metric1,
-    networkLabel
+    networkLabel,
   } = chart;
 
   if (
@@ -140,16 +137,16 @@ export const semioticNetwork = (
   const edgeHash: { [index: string]: EdgeObject } = {};
   const networkData: EdgeObject[] = [];
 
-  data.forEach(edge => {
+  data.forEach((edge) => {
     if (!edgeHash[`${edge[sourceDimension]}-${edge[targetDimension]}`]) {
       edgeHash[`${edge[sourceDimension]}-${edge[targetDimension]}`] = {
         source: edge[sourceDimension],
         target: edge[targetDimension],
         value: 0,
-        weight: 0
+        weight: 0,
       };
       networkData.push(
-        edgeHash[`${edge[sourceDimension]}-${edge[targetDimension]}`]
+        edgeHash[`${edge[sourceDimension]}-${edge[targetDimension]}`],
       );
     }
     edgeHash[`${edge[sourceDimension]}-${edge[targetDimension]}`].value +=
@@ -160,7 +157,7 @@ export const semioticNetwork = (
   const colorHash: any = colorHashOverride || {};
 
   if (!colorHashOverride) {
-    data.forEach(edge => {
+    data.forEach((edge) => {
       if (!colorHash[edge[sourceDimension]]) {
         colorHash[edge[sourceDimension]] =
           colors[Object.keys(colorHash).length % colors.length];
@@ -171,7 +168,7 @@ export const semioticNetwork = (
       }
     });
   }
-  networkData.forEach(edge => {
+  networkData.forEach((edge) => {
     edge.weight = Math.min(10, edge.weight);
   });
 
@@ -183,7 +180,7 @@ export const semioticNetwork = (
     nodeSizeAccessor: (node: NodeObject) => node.degree,
     networkType: {
       type: networkType,
-      iterations: 1000
+      iterations: 1000,
     },
     hoverAnnotation: hoverAnnotationSettings[networkType],
     tooltipContent: (hoveredNode: NodeObject) => {
@@ -196,8 +193,11 @@ export const semioticNetwork = (
       );
     },
     nodeLabels: networkType === "matrix" ? false : nodeLabeling[networkLabel],
-    margin: { left: 100, right: 100, top: 10, bottom: 10 }
-  }
-  return { frameSettings: networkSettings, colorDim: sourceDimension, colorHash }
-
+    margin: { left: 100, right: 100, top: 10, bottom: 10 },
+  };
+  return {
+    frameSettings: networkSettings,
+    colorDim: sourceDimension,
+    colorHash,
+  };
 };
