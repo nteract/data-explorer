@@ -8,6 +8,8 @@
     "commit": "cz",
     "clean": "yarn --force autoclean && yarn cache clean && rm -rf node_modules dist lib",
     "build": "tsc -b",
+    "format": "prettier --write ./src",
+    "lint": "eslint ./src",
     "type-check": "tsc --pretty -p tsconfig.json",
     "test": "jest",
     "styleguide": "styleguidist server",
@@ -67,6 +69,8 @@
     "@types/react-color": "^3.0.0",
     "@types/react-table": "^6.0.0",
     "@types/styled-components": "^5.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.28.1",
+    "@typescript-eslint/parser": "^4.28.1",
     "acorn": "^7.1.1",
     "acorn-jsx": "^5.1.0",
     "auto": "^10.29.3",
@@ -77,6 +81,7 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.4.3",
+    "eslint": "^7.30.0",
     "husky": "^6.0.0",
     "jest": "^24.9.0",
     "lint-staged": ">=10",
@@ -100,12 +105,12 @@
     "webpack-dev-server": "^3.10.1"
   },
   "lint-staged": {
-    "*.tsx,*.ts,*.js,!*js.snap": [
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --cache --fix",
       "prettier --write"
     ],
     "*.json,!package.json": [
       "prettier --write"
-    ],
-    "*.{js,jsx,ts,tsx}": "eslint --cache --fix"
+    ]
   }
 }
