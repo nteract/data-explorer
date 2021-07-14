@@ -1,3 +1,25 @@
+# v8.2.12 (Wed Jul 14 2021)
+
+#### 🐛 Bug Fix
+
+- fix: handle empty data in column cells gracefully to avoid viz-switching runtime errors [#71](https://github.com/nteract/data-explorer/pull/71) ([@hydrosquall](https://github.com/hydrosquall))
+- chore: apply eslint + prettier auto-fixes to whole codebase [#70](https://github.com/nteract/data-explorer/pull/70) ([@hydrosquall](https://github.com/hydrosquall))
+- chore: pre-commit hooks for code style and commit message quality [#66](https://github.com/nteract/data-explorer/pull/66) ([@hydrosquall](https://github.com/hydrosquall))
+
+#### 📝 Documentation
+
+- chore: set up + document commitizen-cli for authoring clear commit messages [#68](https://github.com/nteract/data-explorer/pull/68) ([@hydrosquall](https://github.com/hydrosquall))
+
+#### 🔩 Dependency Updates
+
+- chore: set up eslint [#69](https://github.com/nteract/data-explorer/pull/69) ([@hydrosquall](https://github.com/hydrosquall))
+
+#### Authors: 1
+
+- Cameron Yick ([@hydrosquall](https://github.com/hydrosquall))
+
+---
+
 # v8.2.11 (Thu Jul 01 2021)
 
 #### 🐛 Bug Fix
