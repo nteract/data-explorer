@@ -5,6 +5,7 @@ import HTMLLegend from "../components/HTMLLegend";
 import TooltipContent, { safeDisplayValue } from "../utilities/tooltip-content";
 import * as Dx from "../utilities/types";
 import { numeralFormatting } from "../utilities/utilities";
+import { getUniqueValues } from "./shared";
 
 interface SummaryOptions {
   chart: Dx.Chart;
@@ -37,14 +38,7 @@ export const semioticSummaryChart = (
 
   const rAccessor = metric1;
 
-  const uniqueValues = data.reduce(
-    (uniqueArray: string[], datapoint) =>
-      (!uniqueArray.find(
-        (dimValue: string) => dimValue === datapoint[dim1].toString(),
-      ) && [...uniqueArray, datapoint[dim1].toString()]) ||
-      uniqueArray,
-    [],
-  );
+  const uniqueValues = dim1 === "none" ? [] : getUniqueValues(data, dim1);
 
   if (!colorHashOverride && dim1 && dim1 !== "none") {
     uniqueValues.sort().forEach((dimValue, index) => {

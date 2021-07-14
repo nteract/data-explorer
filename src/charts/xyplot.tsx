@@ -7,7 +7,7 @@ import TooltipContent from "../utilities/tooltip-content";
 import { numeralFormatting } from "../utilities/utilities";
 
 import * as Dx from "../utilities/types";
-import { sortByOrdinalRange } from "./shared";
+import { sortByOrdinalRange, getUniqueValues } from "./shared";
 
 import styled from "styled-components";
 
@@ -253,14 +253,7 @@ export const semioticXYPlot = (
     dim1 &&
     dim1 !== "none"
   ) {
-    const uniqueValues = sortedData.reduce(
-      (uniqueArray, datapoint) =>
-        (!uniqueArray.find(
-          (uniqueDim: string) => uniqueDim === datapoint[dim1].toString(),
-        ) && [...uniqueArray, datapoint[dim1].toString()]) ||
-        uniqueArray,
-      [],
-    );
+    const uniqueValues = getUniqueValues(sortedData, dim1);
 
     if (!colorHashOverride) {
       uniqueValues.sort().forEach((dimValue: string, index: number) => {

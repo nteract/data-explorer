@@ -20,7 +20,7 @@ export const sortByOrdinalRange = (
   rAccessor: string | (() => void),
   secondarySort: string,
   data: Dx.DataProps["data"],
-): any[] => {
+): Dx.DataProps["data"] => {
   const subsortData: { [index: string]: SubsortObject } = {};
   let subsortArrays: SubsortObject[] = [];
   data.forEach((datapoint) => {
@@ -64,4 +64,23 @@ export const sortByOrdinalRange = (
     ],
     [],
   );
+};
+
+/*
+  Returns uniques values in a column as strings
+  Safely stringifies different data types, including null/undefined.
+*/
+export const getUniqueValues = (
+  points: Dx.DataProps["data"],
+  accessor: string,
+): string[] => {
+  return [
+    ...new Set(
+      points.map((d) => {
+        const value = d[accessor];
+        // Don't call stringify on a string, as it will add "quote" marks around your value.
+        return typeof value === "string" ? value : JSON.stringify(value);
+      }),
+    ),
+  ];
 };
