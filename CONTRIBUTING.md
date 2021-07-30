@@ -30,10 +30,10 @@ Consistent formatting allows us to keep the [changelog](./CHANGELOG.md) up to da
 
 ## Publishing
 
-Publishing is handled by a 2-branch [pre-release process](https://intuit.github.io/auto/docs/generated/shipit#next-branch-default), configured in `release.yml`. All changes should be based off of the default `next` branch. Changes are published when a `release` tag is included on the PR.
+Publishing is handled by a 2-branch [pre-release process](https://intuit.github.io/auto/docs/generated/shipit#next-branch-default), configured in `release.yml`. All changes should be based off of the default `next` branch. Changes are automatically published to the `next` channel on NPM unless set to ignore via a `skip-release` Github label.
 
-- To prevent a change from creating a release, use the `skip-release` label.
+
 - PRs made into the default branch are deployed to the `next` pre-release tag on NPM. The result can be installed with `npm install @nteract/data-explorer@next`.
   - When merging into `next`, please use the `create a merge commit` strategy. If `rebase` is used, auto won't be able to detect which PR introduced a particular set of commits..
-- To release a new stable version, open a PR from `next` into `stable` using this [compare link](https://github.com/nteract/data-explorer/compare/stable...next).
+- To release a new `stable` on NPM (aka the `latest` tag), open a PR from `next` into `stable` using this [compare link](https://github.com/nteract/data-explorer/compare/stable...next).
   - When merging from `next` into `stable`, please use the `create a merge commit` strategy.
